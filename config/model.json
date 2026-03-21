@@ -1,0 +1,14 @@
+{
+  "baseline_year": 2025,
+  "ranking_basis": "Top 10 economies by nominal GDP, using the 2025 IMF World Economic Outlook baseline already stored in the project.",
+  "base_day1_loss_share_of_daily_gdp": 0.075,
+  "log_escalation_strength": 0.20,
+  "linear_escalation_start_day": 7,
+  "linear_escalation_per_day_after_start": 0.012,
+  "max_loss_share_of_daily_gdp": 0.24,
+  "full_shutdown_threshold_pct": 5.0,
+  "default_current_connectivity_pct": 1.0,
+  "fallback_signal_days": 22,
+  "weight_method": "Country-specific digital sensitivity coefficients used to simulate the GDP effect of a same-length domestic internet blackout.",
+  "notes": "This package does not estimate how much Iran's blackout is hurting other economies right now. Instead, it uses Iran's outage duration as the clock and simulates what a same-length local internet blackout would cost for the world scenario and for each top-10 economy using a 2025 GDP baseline plus a day-by-day escalation curve."
+}
