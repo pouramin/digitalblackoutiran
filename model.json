@@ -1,0 +1,10 @@
+{
+  "baseline_year": 2025,
+  "ranking_basis": "Top 10 economies by nominal GDP, using IMF World Economic Outlook (October 2025) country projections.",
+  "base_annualized_shock_rate": 0.005,
+  "full_shutdown_threshold_pct": 5.0,
+  "default_current_connectivity_pct": 1.0,
+  "fallback_signal_days": 21,
+  "weight_method": "Heuristic country exposure score combining economy size, market contagion relevance, energy and shipping sensitivity, and regional linkage. This is a model-based exposure estimate, not an audited loss series.",
+  "notes": "GDP baseline updated to 2025 nominal GDP. World total aligned to IMF DataMapper. Country rows in this package were normalized from the IMF-sourced 2025 country ranking table used for implementation."
+}

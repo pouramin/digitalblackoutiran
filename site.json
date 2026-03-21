@@ -1,0 +1,11 @@
+{
+  "site_name": "DigitalBlackOutIran",
+  "site_url": "https://digitalblackoutiran.it",
+  "tagline": "Automated daily estimates of the global economic exposure linked to Iran's internet blackout.",
+  "author": "Pamin",
+  "timezone": "UTC",
+  "default_language": "en",
+  "cards_per_page": 12,
+  "x_handle": "@pouraminam",
+  "x_url": "https://x.com/pouraminam"
+}
