@@ -2,8 +2,8 @@
   "date": "2026-02-28",
   "title": "Internet blackout simulation update — day 1",
   "slug": "2026-02-28-internet-blackout-simulation-update-day-1",
-  "description": "Day 1 simulation: world scenario $25.39B/day; biggest country case: United States $7.42B/day.",
-  "excerpt": "Day 1 simulation: using Iran's blackout duration as the clock, we estimate how much GDP would be lost per day if each major economy's own internet were down.",
+  "description": "2026-02-28 internet blackout simulation: day 1, world scenario $25.39B/day. United States leads at $7.42B/day.",
+  "excerpt": "2026-02-28 / day 1: a same-length local internet blackout simulation for the world and top economies, with United States and China leading the modeled daily losses and the world scenario at $25.39B/day.",
   "body_paragraphs": [
     "This post does not say these economies are currently losing money because Iran is offline. It uses Iran's blackout duration as a time clock and simulates what a same-length domestic internet blackout would cost each economy on day 1.",
     "Under the world scenario, a blackout of this length implies $25.39B in daily GDP loss and $25.39B in cumulative loss since day 1.",

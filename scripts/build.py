@@ -345,6 +345,53 @@ def make_chart(signal: Signal, simulation: Dict[str, Any], chart_path: Path, tit
     plt.close(fig)
 
 
+
+
+def trim_meta_description(text: str, limit: int = 158) -> str:
+    text = re.sub(r'\s+', ' ', text).strip()
+    if len(text) <= limit:
+        return text
+    trimmed = text[: limit - 1]
+    if ' ' in trimmed:
+        trimmed = trimmed.rsplit(' ', 1)[0]
+    return trimmed.rstrip(' ,;:-') + '…'
+
+
+def build_seo_description(today: date, simulation: Dict[str, Any]) -> str:
+    day_num = simulation['reference_days']
+    world = simulation['world']
+    countries = simulation['countries'][:3]
+    top1 = countries[0] if len(countries) > 0 else None
+    top2 = countries[1] if len(countries) > 1 else None
+    top3 = countries[2] if len(countries) > 2 else None
+    world_daily = fmt_money(world['daily_loss_usd'])
+    world_cum = fmt_money(world['cumulative_loss_usd'])
+
+    templates = [
+        f"{today.isoformat()} internet blackout simulation: day {day_num}, world scenario {world_daily}/day. {top1['name']} leads at {fmt_money(top1['daily_loss_usd'])}/day.",
+        f"Day {day_num} economic impact simulation: if internet went dark locally, {top1['name']} would lose {fmt_money(top1['daily_loss_usd'])}/day; world {world_daily}/day.",
+        f"{today.isoformat()} update: simulated internet blackout losses put {top1['name']} first, {top2['name']} second, with world exposure at {world_daily}/day.",
+        f"Internet blackout day {day_num}: modeled daily loss reaches {world_daily} worldwide, with {top1['name']} and {top2['name']} leading the country ranking.",
+        f"SEO update for {today.isoformat()}: simulated blackout losses show {top1['name']} at {fmt_money(top1['daily_loss_usd'])}/day and world exposure at {world_daily}/day.",
+        f"Day {day_num} blackout simulation report: {top1['name']} {fmt_money(top1['daily_loss_usd'])}/day, {top2['name']} {fmt_money(top2['daily_loss_usd'])}/day, world {world_daily}/day.",
+        f"{today.isoformat()} blackout simulation archive: {top1['name']}, {top2['name']} and {top3['name']} top the loss table; world scenario totals {world_daily}/day.",
+        f"Internet outage simulation day {day_num}: world daily loss {world_daily}, cumulative world loss {world_cum}; {top1['name']} remains the largest economy case.",
+    ]
+    desc = templates[(day_num - 1) % len(templates)]
+    return trim_meta_description(desc)
+
+
+def build_excerpt(today: date, simulation: Dict[str, Any]) -> str:
+    day_num = simulation['reference_days']
+    world = simulation['world']
+    countries = simulation['countries'][:2]
+    names = ' and '.join(c['name'] for c in countries)
+    text = (
+        f"{today.isoformat()} / day {day_num}: a same-length local internet blackout simulation for the world and top economies, "
+        f"with {names} leading the modeled daily losses and the world scenario at {fmt_money(world['daily_loss_usd'])}/day."
+    )
+    return trim_meta_description(text, limit=220)
+
 def build_post(today: date, signal: Signal, simulation: Dict[str, Any], site_cfg: Dict[str, Any], model_cfg: Dict[str, Any]) -> Dict[str, Any]:
     day_num = simulation['reference_days']
     title = f"Internet blackout simulation update — day {day_num}"
@@ -353,13 +400,8 @@ def build_post(today: date, signal: Signal, simulation: Dict[str, Any], site_cfg
     bullet = '; '.join(f"{c['name']}: {fmt_money(c['daily_loss_usd'])}/day" for c in top3)
     biggest = top3[0] if top3 else None
     biggest_txt = f" biggest country case: {biggest['name']} {fmt_money(biggest['daily_loss_usd'])}/day." if biggest else ""
-    description = (
-        f"Day {day_num} simulation: world scenario {fmt_money(simulation['world']['daily_loss_usd'])}/day;"
-        f"{biggest_txt}"
-    )
-    excerpt = (
-        f"Day {day_num} simulation: using Iran's blackout duration as the clock, we estimate how much GDP would be lost per day if each major economy's own internet were down."
-    )
+    description = build_seo_description(today, simulation)
+    excerpt = build_excerpt(today, simulation)
     body = [
         f"This post does not say these economies are currently losing money because Iran is offline. It uses Iran's blackout duration as a time clock and simulates what a same-length domestic internet blackout would cost each economy on day {day_num}.",
         f"Under the world scenario, a blackout of this length implies {fmt_money(simulation['world']['daily_loss_usd'])} in daily GDP loss and {fmt_money(simulation['world']['cumulative_loss_usd'])} in cumulative loss since day 1.",
