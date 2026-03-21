@@ -1,0 +1,107 @@
+{
+  "date": "2026-02-28",
+  "title": "Iran outage economic impact update — day 1",
+  "slug": "2026-02-28-iran-outage-economic-impact-update-day-1",
+  "description": "Day 1 of the Iran outage: our model estimates $165.85M in daily global GDP exposure. Top exposed economies today: United States: $69.87M/day; China: $67.71M/day",
+  "excerpt": "Using a 2025 GDP baseline and configurable exposure weights, today's model estimates global exposure at $165.85M per day with Iran's connectivity at 2.0%.",
+  "body_paragraphs": [
+    "Update: Iran's outage is now at day 1, with current connectivity modeled at 2.0%.",
+    "This site does not claim audited economic losses. It publishes a transparent daily estimate based on a 2025 GDP baseline, outage severity, and configurable country exposure weights.",
+    "Today's estimated global GDP exposure is $165.85M per day, equal to 0.05% of annual world GDP on an annualized basis.",
+    "Most exposed major economies today: United States: $69.87M/day; China: $67.71M/day; India: $7.75M/day."
+  ],
+  "signal": {
+    "source": "fallback",
+    "summary": "Fallback signal used because no live signal source was available during build.",
+    "current_connectivity_pct": 2.0,
+    "days_since_drop": 1
+  },
+  "impact": {
+    "world_daily_loss_usd": 165846403.62739727,
+    "world_relative_pct_of_annual_gdp": 0.04898360359605114,
+    "countries": [
+      {
+        "code": "USA",
+        "name": "United States",
+        "gdp_usd": 30615743000000.0,
+        "weight": 0.17,
+        "daily_loss_usd": 69870997.03835617,
+        "relative_pct_of_annual_gdp": 0.08330000000000001
+      },
+      {
+        "code": "CHN",
+        "name": "China",
+        "gdp_usd": 19398577000000.0,
+        "weight": 0.26,
+        "daily_loss_usd": 67709005.7479452,
+        "relative_pct_of_annual_gdp": 0.12739999999999999
+      },
+      {
+        "code": "IND",
+        "name": "India",
+        "gdp_usd": 4125213000000.0,
+        "weight": 0.14,
+        "daily_loss_usd": 7753140.04931507,
+        "relative_pct_of_annual_gdp": 0.06860000000000001
+      },
+      {
+        "code": "DEU",
+        "name": "Germany",
+        "gdp_usd": 5013574000000.0,
+        "weight": 0.08,
+        "daily_loss_usd": 5384441.117808219,
+        "relative_pct_of_annual_gdp": 0.0392
+      },
+      {
+        "code": "JPN",
+        "name": "Japan",
+        "gdp_usd": 4279828000000.0,
+        "weight": 0.07,
+        "daily_loss_usd": 4021865.7643835624,
+        "relative_pct_of_annual_gdp": 0.034300000000000004
+      },
+      {
+        "code": "GBR",
+        "name": "United Kingdom",
+        "gdp_usd": 3958780000000.0,
+        "weight": 0.06,
+        "daily_loss_usd": 3188715.9452054794,
+        "relative_pct_of_annual_gdp": 0.0294
+      },
+      {
+        "code": "RUS",
+        "name": "Russia",
+        "gdp_usd": 2540656000000.0,
+        "weight": 0.09,
+        "daily_loss_usd": 3069669.304109589,
+        "relative_pct_of_annual_gdp": 0.0441
+      },
+      {
+        "code": "FRA",
+        "name": "France",
+        "gdp_usd": 3361557000000.0,
+        "weight": 0.05,
+        "daily_loss_usd": 2256387.5753424657,
+        "relative_pct_of_annual_gdp": 0.0245
+      },
+      {
+        "code": "ITA",
+        "name": "Italy",
+        "gdp_usd": 2543677000000.0,
+        "weight": 0.04,
+        "daily_loss_usd": 1365919.704109589,
+        "relative_pct_of_annual_gdp": 0.0196
+      },
+      {
+        "code": "CAN",
+        "name": "Canada",
+        "gdp_usd": 2283599000000.0,
+        "weight": 0.04,
+        "daily_loss_usd": 1226261.380821918,
+        "relative_pct_of_annual_gdp": 0.0196
+      }
+    ]
+  },
+  "chart_image": "/assets/img/2026-02-28-world.png",
+  "author": "Pamin"
+}

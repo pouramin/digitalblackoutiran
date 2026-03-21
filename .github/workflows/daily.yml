@@ -34,7 +34,8 @@ jobs:
       - name: Generate site
         env:
           BOOTSTRAP_DEMO: '1'
-          BOOTSTRAP_DAYS: '3'
+          BOOTSTRAP_DAYS: '0'
+          BACKFILL_MISSING_HISTORY: '1'
           NETBLOCKS_LATEST_URL: 'https://netblocks.org/reports/'
         run: python scripts/build.py
 
