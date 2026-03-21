@@ -5,7 +5,6 @@ import json
 import math
 import os
 import re
-import shutil
 from dataclasses import dataclass
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
@@ -15,6 +14,7 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
+from matplotlib.ticker import FuncFormatter
 from bs4 import BeautifulSoup
 import requests
 
@@ -97,7 +97,8 @@ def fetch_signal_from_netblocks() -> Optional[Signal]:
     iran_text = None
     for card in cards:
         text = ' '.join(card.get_text(' ', strip=True).split())
-        if 'iran' in text.lower() and ('blackout' in text.lower() or 'internet' in text.lower()):
+        low = text.lower()
+        if 'iran' in low and ('blackout' in low or 'internet' in low):
             iran_text = text
             break
     if iran_text is None:
@@ -121,16 +122,17 @@ def fetch_signal_from_netblocks() -> Optional[Signal]:
         connectivity = 1.0
 
     today = datetime.now(timezone.utc).date()
-    start = today - timedelta(days=27)
+    outage_start = today - timedelta(days=max(days - 1, 0))
+    start = outage_start - timedelta(days=4)
     series = []
-    pre_drop_days = max(3, 27 - max(days, 1))
-    for i in range(28):
-        d = start + timedelta(days=i)
-        if i < pre_drop_days:
-            pct = 96 - (i % 4)
+    current_date = start
+    while current_date <= today:
+        if current_date < outage_start:
+            pct = 96 - ((current_date - start).days % 4)
         else:
             pct = connectivity
-        series.append({'date': d.isoformat(), 'connectivity_pct': pct})
+        series.append({'date': current_date.isoformat(), 'connectivity_pct': pct})
+        current_date += timedelta(days=1)
 
     summary = re.sub(r'\s+', ' ', iran_text)[:240].strip()
     return Signal(
@@ -219,109 +221,150 @@ def backfill_history(site_cfg: Dict[str, Any], model_cfg: Dict[str, Any], base_s
         current_date += timedelta(days=1)
 
 
-def compute_daily_impact(signal: Signal, gdp: Dict[str, Any], weights: Dict[str, float], model: Dict[str, Any]) -> Dict[str, Any]:
-    severity = max(0.0, min(1.0, (100.0 - signal.current_connectivity_pct) / 100.0))
-    annualized_shock = model['base_annualized_shock_rate'] * severity
-    per_country = []
+def outage_share_for_day(day_number: int, sensitivity: float, model: Dict[str, Any]) -> float:
+    base = float(model['base_day1_loss_share_of_daily_gdp'])
+    log_strength = float(model['log_escalation_strength'])
+    linear_start = int(model['linear_escalation_start_day'])
+    linear_per_day = float(model['linear_escalation_per_day_after_start'])
+    cap = float(model['max_loss_share_of_daily_gdp'])
+    multiplier = 1.0 + log_strength * math.log1p(max(day_number - 1, 0))
+    if day_number > linear_start:
+        multiplier += linear_per_day * (day_number - linear_start)
+    share = base * sensitivity * multiplier
+    return min(cap, share)
+
+
+def compute_blackout_simulation(signal: Signal, gdp: Dict[str, Any], weights: Dict[str, float], model: Dict[str, Any]) -> Dict[str, Any]:
+    threshold = float(model.get('full_shutdown_threshold_pct', 5.0))
+    outage_start = first_outage_date(signal, threshold)
+    if outage_start is None:
+        outage_start = datetime.fromisoformat(signal.series[-1]['date']).date()
+    dates = [datetime.fromisoformat(x['date']).date() for x in signal.series if datetime.fromisoformat(x['date']).date() >= outage_start]
+    if not dates:
+        dates = [datetime.fromisoformat(signal.series[-1]['date']).date()]
+    day_count = len(dates)
+
+    entries = []
     for code, meta in gdp.items():
-        if code == 'WORLD':
-            continue
-        weight = float(weights.get(code, 0.0))
-        loss = float(meta['gdp_usd']) * annualized_shock * weight / 365.0
-        relative = annualized_shock * weight * 100.0
-        per_country.append({
+        sensitivity = float(weights.get(code, 1.0))
+        daily_gdp = float(meta['gdp_usd']) / 365.0
+        daily_series = []
+        cumulative = 0.0
+        for idx, current_date in enumerate(dates, start=1):
+            share = outage_share_for_day(idx, sensitivity, model)
+            daily_loss = daily_gdp * share
+            cumulative += daily_loss
+            daily_series.append({
+                'date': current_date.isoformat(),
+                'day': idx,
+                'loss_share_of_daily_gdp': share,
+                'daily_loss_usd': daily_loss,
+                'cumulative_loss_usd': cumulative,
+            })
+        entries.append({
             'code': code,
             'name': meta['name'],
+            'rank': int(meta.get('rank', 0)),
             'gdp_usd': float(meta['gdp_usd']),
-            'weight': weight,
-            'daily_loss_usd': loss,
-            'relative_pct_of_annual_gdp': relative,
+            'sensitivity': sensitivity,
+            'daily_loss_usd': daily_series[-1]['daily_loss_usd'],
+            'cumulative_loss_usd': daily_series[-1]['cumulative_loss_usd'],
+            'loss_share_of_daily_gdp': daily_series[-1]['loss_share_of_daily_gdp'],
+            'cumulative_pct_of_annual_gdp': (daily_series[-1]['cumulative_loss_usd'] / float(meta['gdp_usd'])) * 100.0,
+            'series': daily_series,
         })
 
-    per_country.sort(key=lambda x: x['daily_loss_usd'], reverse=True)
-    world_loss = sum(x['daily_loss_usd'] for x in per_country)
-    world_gdp = float(gdp['WORLD']['gdp_usd'])
-    world_relative = (world_loss * 365.0 / world_gdp) * 100.0
+    world = next(x for x in entries if x['code'] == 'WORLD')
+    countries = [x for x in entries if x['code'] != 'WORLD']
+    countries.sort(key=lambda x: x['daily_loss_usd'], reverse=True)
     return {
-        'severity': severity,
-        'annualized_shock_rate': annualized_shock,
-        'world_daily_loss_usd': world_loss,
-        'world_relative_pct_of_annual_gdp': world_relative,
-        'countries': per_country,
+        'reference_days': day_count,
+        'world': world,
+        'countries': countries,
+        'dates': [d.isoformat() for d in dates],
     }
 
 
-def make_chart(signal: Signal, impact: Dict[str, Any], chart_path: Path, title_date_end: Optional[str] = None) -> None:
+def _fmt_billions_tick(x: float, _pos: int) -> str:
+    if abs(x) >= 1_000:
+        return f"${x/1000:.1f}T"
+    return f"${x:.0f}B"
+
+
+def make_chart(signal: Signal, simulation: Dict[str, Any], chart_path: Path, title_date_end: Optional[str] = None) -> None:
     chart_path.parent.mkdir(parents=True, exist_ok=True)
-    dates = [datetime.fromisoformat(x['date']).date() for x in signal.series]
-    impact_pct = [((100 - float(x['connectivity_pct'])) / 100.0) * impact['world_relative_pct_of_annual_gdp'] * 100 for x in signal.series]
-    # keep within readable range and normalize against today's impact
-    today_pct = max(impact_pct[-1], 0.0001)
-    normalized = [min(100.0, (v / today_pct) * 100.0) for v in impact_pct]
+    world_series = simulation['world']['series']
+    dates = [datetime.fromisoformat(x['date']).date() for x in world_series]
+    billions = [x['daily_loss_usd'] / 1_000_000_000 for x in world_series]
 
     plt.rcParams['font.family'] = 'DejaVu Sans'
     fig, ax = plt.subplots(figsize=(12, 7), dpi=150)
     fig.patch.set_facecolor('#0b0f14')
     ax.set_facecolor('#0b0f14')
 
-    ax.plot(dates, normalized, linewidth=2.6, color='#98d08b')
-    ax.fill_between(dates, normalized, 0, color='#98d08b', alpha=0.18)
+    ax.plot(dates, billions, linewidth=2.8, color='#98d08b', marker='o' if len(dates) == 1 else None)
+    ax.fill_between(dates, billions, 0, color='#98d08b', alpha=0.18)
 
-    ax.set_ylim(0, 120)
-    ax.set_yticks([0, 20, 40, 60, 80, 100])
-    ax.set_yticklabels([f'{v}%' for v in [0, 20, 40, 60, 80, 100]], color='#cbd5e1', fontsize=11)
+    ymax = max(billions) * 1.18 if billions else 1
+    ax.set_ylim(0, ymax)
     ax.tick_params(axis='x', colors='#cbd5e1', labelsize=10)
-
-    ax.xaxis.set_major_locator(mdates.AutoDateLocator(minticks=6, maxticks=7))
-    ax.xaxis.set_major_formatter(mdates.DateFormatter('%-m/%-d'))
+    ax.tick_params(axis='y', colors='#cbd5e1', labelsize=11)
+    ax.yaxis.set_major_formatter(FuncFormatter(_fmt_billions_tick))
+    if len(dates) <= 4:
+        ax.xaxis.set_major_locator(mdates.DayLocator(interval=1))
+        if len(dates) == 1:
+            ax.set_xlim(dates[0] - timedelta(days=1), dates[0] + timedelta(days=1))
+    else:
+        ax.xaxis.set_major_locator(mdates.AutoDateLocator(minticks=6, maxticks=7))
+    try:
+        ax.xaxis.set_major_formatter(mdates.DateFormatter('%-m/%-d'))
+    except Exception:
+        ax.xaxis.set_major_formatter(mdates.DateFormatter('%m/%d'))
 
     for spine in ax.spines.values():
         spine.set_visible(False)
     ax.grid(True, axis='both', color='white', alpha=0.12, linewidth=0.8)
 
-    start_outage = None
-    for item in signal.series:
-        if float(item['connectivity_pct']) <= 5.0:
-            start_outage = datetime.fromisoformat(item['date']).date()
-            break
-    if start_outage:
-        y_level = 63
-        ax.annotate('', xy=(dates[-1], y_level), xytext=(start_outage, y_level), arrowprops=dict(arrowstyle='<->', color='#ff2d2d', linewidth=1.8))
-        ax.text(start_outage + (dates[-1] - start_outage) / 2, y_level + 6, 'ESTIMATED SHOCK WINDOW', color='#ffb000', ha='center', va='bottom', fontsize=12, fontweight='bold')
+    if dates:
+        y_level = max(billions) * 0.64
+        ax.annotate('', xy=(dates[-1], y_level), xytext=(dates[0], y_level), arrowprops=dict(arrowstyle='<->', color='#ff2d2d', linewidth=1.8))
+        ax.text(dates[0] + (dates[-1] - dates[0]) / 2, y_level + max(billions) * 0.08, 'SIMULATION WINDOW', color='#ffb000', ha='center', va='bottom', fontsize=12, fontweight='bold')
 
     end_txt = title_date_end or dates[-1].isoformat()
-    ax.set_title(f'Estimated Economic Exposure - Iran: {dates[0].isoformat()} to {end_txt} UTC', color='#e5e7eb', fontsize=18, pad=22)
-    ax.set_ylabel('Daily shock index (normalized)', color='#cbd5e1', fontsize=13, labelpad=16)
+    ax.set_title(f'Simulated Blackout Loss - World: {dates[0].isoformat()} to {end_txt} UTC', color='#e5e7eb', fontsize=18, pad=22)
+    ax.set_ylabel('Daily loss if the local internet were blacked out', color='#cbd5e1', fontsize=13, labelpad=16)
 
-    fig.text(0.055, 0.09, '■ Iran-linked global exposure', color='#98d08b', fontsize=11)
-    fig.text(0.80, 0.09, 'min', color='#38bdf8', fontsize=12, fontweight='bold')
-    fig.text(0.865, 0.09, f"{min(normalized):.0f}%", color='#e5e7eb', fontsize=12)
-    fig.text(0.91, 0.09, 'current', color='#38bdf8', fontsize=12, fontweight='bold')
-    fig.text(0.985, 0.09, f"{normalized[-1]:.0f}%", color='#e5e7eb', fontsize=12, ha='right')
+    fig.text(0.055, 0.09, '■ World scenario', color='#98d08b', fontsize=11)
+    fig.text(0.74, 0.09, 'min', color='#38bdf8', fontsize=12, fontweight='bold')
+    fig.text(0.79, 0.09, fmt_money(min(x['daily_loss_usd'] for x in world_series)) if world_series else '$0', color='#e5e7eb', fontsize=12)
+    fig.text(0.865, 0.09, 'current', color='#38bdf8', fontsize=12, fontweight='bold')
+    fig.text(0.985, 0.09, fmt_money(world_series[-1]['daily_loss_usd']) if world_series else '$0', color='#e5e7eb', fontsize=12, ha='right')
 
     plt.tight_layout(rect=[0.03, 0.12, 0.98, 0.94])
     fig.savefig(chart_path, facecolor=fig.get_facecolor(), bbox_inches='tight')
     plt.close(fig)
 
 
-def build_post(today: date, signal: Signal, impact: Dict[str, Any], site_cfg: Dict[str, Any]) -> Dict[str, Any]:
-    title = f"Iran outage economic impact update — day {signal.days_since_drop}"
+def build_post(today: date, signal: Signal, simulation: Dict[str, Any], site_cfg: Dict[str, Any], model_cfg: Dict[str, Any]) -> Dict[str, Any]:
+    day_num = simulation['reference_days']
+    title = f"Internet blackout simulation update — day {day_num}"
     slug = f"{today.isoformat()}-{slugify(title)}"
-    top3 = impact['countries'][:3]
+    top3 = simulation['countries'][:3]
     bullet = '; '.join(f"{c['name']}: {fmt_money(c['daily_loss_usd'])}/day" for c in top3)
+    biggest = top3[0] if top3 else None
+    biggest_txt = f" biggest country case: {biggest['name']} {fmt_money(biggest['daily_loss_usd'])}/day." if biggest else ""
     description = (
-        f"Day {signal.days_since_drop} of the Iran outage: our model estimates {fmt_money(impact['world_daily_loss_usd'])} in daily global GDP exposure. "
-        f"Top exposed economies today: {bullet}."
+        f"Day {day_num} simulation: world scenario {fmt_money(simulation['world']['daily_loss_usd'])}/day;"
+        f"{biggest_txt}"
     )
     excerpt = (
-        f"Using a {2025} GDP baseline and configurable exposure weights, today's model estimates global exposure at "
-        f"{fmt_money(impact['world_daily_loss_usd'])} per day with Iran's connectivity at {signal.current_connectivity_pct:.1f}%."
+        f"Day {day_num} simulation: using Iran's blackout duration as the clock, we estimate how much GDP would be lost per day if each major economy's own internet were down."
     )
     body = [
-        f"Update: Iran's outage is now at day {signal.days_since_drop}, with current connectivity modeled at {signal.current_connectivity_pct:.1f}%.",
-        f"This site does not claim audited economic losses. It publishes a transparent daily estimate based on a 2025 GDP baseline, outage severity, and configurable country exposure weights.",
-        f"Today's estimated global GDP exposure is {fmt_money(impact['world_daily_loss_usd'])} per day, equal to {fmt_pct(impact['world_relative_pct_of_annual_gdp'])} of annual world GDP on an annualized basis.",
-        f"Most exposed major economies today: {bullet}."
+        f"This post does not say these economies are currently losing money because Iran is offline. It uses Iran's blackout duration as a time clock and simulates what a same-length domestic internet blackout would cost each economy on day {day_num}.",
+        f"Under the world scenario, a blackout of this length implies {fmt_money(simulation['world']['daily_loss_usd'])} in daily GDP loss and {fmt_money(simulation['world']['cumulative_loss_usd'])} in cumulative loss since day 1.",
+        f"For the large-economy scenarios, the biggest simulated daily losses today are: {bullet}.",
+        f"Method: 2025 nominal GDP baseline × country-specific digital sensitivity coefficient × an outage-duration escalation curve that gets harsher as the blackout continues."
     ]
     return {
         'date': today.isoformat(),
@@ -336,13 +379,10 @@ def build_post(today: date, signal: Signal, impact: Dict[str, Any], site_cfg: Di
             'current_connectivity_pct': signal.current_connectivity_pct,
             'days_since_drop': signal.days_since_drop,
         },
-        'impact': {
-            'world_daily_loss_usd': impact['world_daily_loss_usd'],
-            'world_relative_pct_of_annual_gdp': impact['world_relative_pct_of_annual_gdp'],
-            'countries': impact['countries']
-        },
+        'simulation': simulation,
         'chart_image': f"/assets/img/{today.isoformat()}-world.png",
-        'author': site_cfg['author']
+        'author': site_cfg['author'],
+        'model_note': model_cfg.get('notes', ''),
     }
 
 
@@ -361,9 +401,23 @@ def save_post(post: Dict[str, Any]) -> None:
     save_json(CONTENT / f"{post['slug']}.json", post)
 
 
+def footer_html(site_cfg: Dict[str, Any]) -> str:
+    x_url = site_cfg.get('x_url', '').strip()
+    if not x_url:
+        return ''
+    return f"""
+    <footer class=\"site-footer\">
+      <a class=\"x-link\" href=\"{x_url}\" target=\"_blank\" rel=\"noopener noreferrer\" aria-label=\"Follow on X\">
+        <svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.637 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932 6.064-6.932Zm-1.298 19.479h2.039L6.486 3.26H4.298l13.305 17.372Z\"></path></svg>
+      </a>
+    </footer>
+    """
+
+
 def render_page(title: str, description: str, canonical: str, body: str, site_cfg: Dict[str, Any], article_json_ld: Optional[str] = None, og_image: Optional[str] = None) -> str:
     json_ld = f'<script type="application/ld+json">{article_json_ld}</script>' if article_json_ld else ''
     og = og_image or f"{site_cfg['site_url'].rstrip('/')}/assets/img/social-card.png"
+    footer = footer_html(site_cfg)
     return f"""<!doctype html>
 <html lang=\"en\">
 <head>
@@ -389,17 +443,19 @@ def render_page(title: str, description: str, canonical: str, body: str, site_cf
 </head>
 <body>
   {body}
+  {footer}
 </body>
 </html>"""
 
 
 def render_index(posts: List[Dict[str, Any]], site_cfg: Dict[str, Any]) -> None:
     cards = []
-    for post in posts[: site_cfg['cards_per_page']]:
+    cards_to_render = posts[: int(site_cfg.get('cards_per_page', len(posts)))]
+    for post in cards_to_render:
         cards.append(f"""
         <article class=\"card\">
           <div class=\"card-head\">
-            <span class=\"badge\">Daily Report</span>
+            <span class=\"badge\">Daily Simulation</span>
             <time datetime=\"{post['date']}\">{post['date']}</time>
           </div>
           <h2><a href=\"/posts/{post['slug']}/\">{post['title']}</a></h2>
@@ -410,10 +466,9 @@ def render_index(posts: List[Dict[str, Any]], site_cfg: Dict[str, Any]) -> None:
     body = f"""
     <main class=\"shell\">
       <header class=\"hero\">
-        <p class=\"eyebrow\">NEW REPORTS AND UPDATES</p>
+        <p class=\"eyebrow\">DAILY BLACKOUT SIMULATION</p>
         <h1>{site_cfg['site_name']}</h1>
         <p class=\"lead\">{site_cfg['tagline']}</p>
-        <p class=\"micro\">One automated post per day. Charts, SEO tags, RSS feed, archive, and deployment can all run without admin intervention.</p>
       </header>
       <section class=\"grid\">
         {''.join(cards)}
@@ -434,39 +489,40 @@ def render_index(posts: List[Dict[str, Any]], site_cfg: Dict[str, Any]) -> None:
 
 def render_post(post: Dict[str, Any], site_cfg: Dict[str, Any]) -> None:
     top_rows = []
-    for c in post['impact']['countries'][:10]:
+    for c in post['simulation']['countries'][:10]:
         top_rows.append(
-            f"<tr><td>{c['name']}</td><td>{fmt_money(c['daily_loss_usd'])}/day</td><td>{fmt_pct(c['relative_pct_of_annual_gdp'])}</td></tr>"
+            f"<tr><td>{c['name']}</td><td>{fmt_money(c['daily_loss_usd'])}/day</td><td>{fmt_money(c['cumulative_loss_usd'])}</td><td>{fmt_pct(c['cumulative_pct_of_annual_gdp'])}</td></tr>"
         )
     paras = ''.join(f'<p>{p}</p>' for p in post['body_paragraphs'])
     body = f"""
     <main class=\"shell article-shell\">
       <article class=\"article\">
         <a class=\"back-link\" href=\"/\">← Back to archive</a>
-        <p class=\"eyebrow\">AUTOMATED DAILY UPDATE</p>
+        <p class=\"eyebrow\">DAILY BLACKOUT SIMULATION</p>
         <h1>{post['title']}</h1>
         <div class=\"meta-row\">
           <time datetime=\"{post['date']}\">{post['date']}</time>
-          <span>Source: {post['signal']['source']}</span>
-          <span>Connectivity: {post['signal']['current_connectivity_pct']:.1f}%</span>
+          <span>Reference clock: Iran blackout day {post['simulation']['reference_days']}</span>
+          <span>Scenario: local internet outage in each economy</span>
         </div>
         <img class=\"hero-chart\" src=\"{post['chart_image']}\" alt=\"{post['title']} chart\">
         <div class=\"stat-grid\">
-          <section class=\"stat\"><span>Estimated global exposure</span><strong>{fmt_money(post['impact']['world_daily_loss_usd'])}/day</strong></section>
-          <section class=\"stat\"><span>Annualized world GDP effect</span><strong>{fmt_pct(post['impact']['world_relative_pct_of_annual_gdp'])}</strong></section>
-          <section class=\"stat\"><span>Outage day counter</span><strong>{post['signal']['days_since_drop']}</strong></section>
+          <section class=\"stat\"><span>World scenario daily loss</span><strong>{fmt_money(post['simulation']['world']['daily_loss_usd'])}/day</strong></section>
+          <section class=\"stat\"><span>World scenario cumulative loss</span><strong>{fmt_money(post['simulation']['world']['cumulative_loss_usd'])}</strong></section>
+          <section class=\"stat\"><span>Reference outage day</span><strong>{post['simulation']['reference_days']}</strong></section>
         </div>
         <div class=\"prose\">{paras}</div>
         <section class=\"table-wrap\">
-          <h2>Top 10 exposed economies</h2>
+          <h2>Top 10 economy simulations</h2>
           <table>
-            <thead><tr><th>Economy</th><th>Estimated exposure</th><th>Annualized GDP effect</th></tr></thead>
+            <thead><tr><th>Economy</th><th>Simulated loss today</th><th>Cumulative simulated loss</th><th>Loss vs 2025 GDP</th></tr></thead>
             <tbody>{''.join(top_rows)}</tbody>
           </table>
         </section>
         <section class=\"note\">
           <h2>Method note</h2>
-          <p>This is a model-based exposure estimate, not a verified macroeconomic loss statement. The daily figure is derived from a 2025 nominal GDP baseline, outage severity, and configurable country exposure weights designed to approximate market, energy, shipping, and regional sensitivity.</p>
+          <p>This is a simulation, not a claim that these losses are happening right now. The model uses the length of Iran's blackout as a day counter, then asks what the same-duration domestic internet blackout would cost for the world scenario and the top 10 economies by 2025 GDP.</p>
+          <p>{post['model_note']}</p>
           <p>Signal summary: {post['signal']['summary']}</p>
         </section>
       </article>
@@ -534,12 +590,13 @@ def write_css() -> None:
     CSS.mkdir(parents=True, exist_ok=True)
     (CSS / 'styles.css').write_text(
         """
-:root{--bg:#f2f4f7;--card:#dfe5ec;--text:#1f2937;--muted:#5b6472;--accent:#5b5cf6;--surface:#ffffff;--stroke:#ccd4dd;}
+:root{--bg:#f2f4f7;--card:#dfe5ec;--text:#1f2937;--muted:#5b6472;--accent:#5b5cf6;--surface:#ffffff;--stroke:#ccd4dd;--dark:#111827;}
 *{box-sizing:border-box}html,body{margin:0;padding:0}body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text)}
 a{color:inherit;text-decoration:none}img{max-width:100%;display:block}
-.shell{max-width:1200px;margin:0 auto;padding:40px 24px 80px}.hero{padding:16px 0 24px;text-align:center}.eyebrow{letter-spacing:.18em;font-size:.78rem;font-weight:700;color:#8a93a3;margin:0 0 10px}.hero h1{font-size:clamp(2.2rem,5vw,3.6rem);margin:.1em 0}.lead{max-width:850px;margin:0 auto 12px;font-size:1.08rem;color:var(--muted)}.micro{color:#7b8494;font-size:.95rem}
-.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}.card{background:var(--card);border-radius:10px;padding:18px;box-shadow:0 1px 0 rgba(15,23,42,.05)}.card-head{display:flex;justify-content:space-between;gap:12px;align-items:center;font-size:.85rem;color:var(--muted);margin-bottom:12px}.badge{display:inline-flex;padding:4px 8px;border-radius:999px;background:#111827;color:#fff;font-size:.75rem;font-weight:600}.card h2{font-size:1.25rem;line-height:1.3;margin:0 0 10px}.card p{color:#364152;line-height:1.6;min-height:96px}.thumb-link img{border-radius:10px;border:1px solid rgba(15,23,42,.08);margin-top:10px}
-.article-shell{max-width:900px}.article{background:var(--surface);padding:28px;border-radius:18px;box-shadow:0 10px 30px rgba(15,23,42,.06)}.back-link{display:inline-block;margin-bottom:16px;color:var(--accent);font-weight:600}.article h1{font-size:clamp(2rem,4vw,3rem);line-height:1.15;margin:.1em 0 .25em}.meta-row{display:flex;flex-wrap:wrap;gap:16px;color:var(--muted);font-size:.95rem;margin-bottom:20px}.hero-chart{border-radius:16px;border:1px solid var(--stroke);margin:16px 0 20px}.stat-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:18px 0 24px}.stat{background:#f8fafc;border:1px solid var(--stroke);border-radius:16px;padding:16px}.stat span{display:block;color:var(--muted);font-size:.9rem;margin-bottom:6px}.stat strong{font-size:1.25rem}.prose p,.note p{line-height:1.8;color:#344054}.table-wrap{margin-top:28px}.table-wrap h2,.note h2{font-size:1.3rem}table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--stroke);border-radius:12px;overflow:hidden}th,td{text-align:left;padding:14px;border-bottom:1px solid var(--stroke)}th{background:#f8fafc;font-size:.92rem}.note{margin-top:28px;padding:18px;border-radius:16px;background:#fafbfc;border:1px solid var(--stroke)}
+.shell{max-width:1200px;margin:0 auto;padding:40px 24px 80px}.hero{padding:16px 0 24px;text-align:center}.eyebrow{letter-spacing:.18em;font-size:.78rem;font-weight:700;color:#8a93a3;margin:0 0 10px}.hero h1{font-size:clamp(2.2rem,5vw,3.6rem);margin:.1em 0}.lead{max-width:900px;margin:0 auto 12px;font-size:1.08rem;color:var(--muted);line-height:1.7}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}.card{background:var(--card);border-radius:10px;padding:18px;box-shadow:0 1px 0 rgba(15,23,42,.05)}.card-head{display:flex;justify-content:space-between;gap:12px;align-items:center;font-size:.85rem;color:var(--muted);margin-bottom:12px}.badge{display:inline-flex;padding:4px 8px;border-radius:999px;background:var(--dark);color:#fff;font-size:.75rem;font-weight:600}.card h2{font-size:1.25rem;line-height:1.3;margin:0 0 10px}.card p{color:#364152;line-height:1.6;min-height:96px}.thumb-link img{border-radius:10px;border:1px solid rgba(15,23,42,.08);margin-top:10px}
+.article-shell{max-width:940px}.article{background:var(--surface);padding:28px;border-radius:18px;box-shadow:0 10px 30px rgba(15,23,42,.06)}.back-link{display:inline-block;margin-bottom:16px;color:var(--accent);font-weight:600}.article h1{font-size:clamp(2rem,4vw,3rem);line-height:1.15;margin:.1em 0 .25em}.meta-row{display:flex;flex-wrap:wrap;gap:16px;color:var(--muted);font-size:.95rem;margin-bottom:20px}.hero-chart{border-radius:16px;border:1px solid var(--stroke);margin:16px 0 20px}.stat-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:18px 0 24px}.stat{background:#f8fafc;border:1px solid var(--stroke);border-radius:16px;padding:16px}.stat span{display:block;color:var(--muted);font-size:.9rem;margin-bottom:6px}.stat strong{font-size:1.25rem}.prose p,.note p{line-height:1.8;color:#344054}.table-wrap{margin-top:28px}.table-wrap h2,.note h2{font-size:1.3rem}table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--stroke);border-radius:12px;overflow:hidden}th,td{text-align:left;padding:14px;border-bottom:1px solid var(--stroke)}th{background:#f8fafc;font-size:.92rem}.note{margin-top:28px;padding:18px;border-radius:16px;background:#fafbfc;border:1px solid var(--stroke)}
+.site-footer{display:flex;justify-content:center;padding:0 0 34px}.x-link{display:inline-flex;align-items:center;justify-content:center;width:52px;height:52px;border-radius:999px;background:#111827;box-shadow:0 10px 24px rgba(15,23,42,.14)}.x-link svg{width:22px;height:22px;fill:#fff}
 @media (max-width: 960px){.grid{grid-template-columns:1fr 1fr}.stat-grid{grid-template-columns:1fr}}@media (max-width: 680px){.grid{grid-template-columns:1fr}.shell{padding:24px 16px 60px}.article{padding:20px}.card p{min-height:auto}}
         """.strip(),
         encoding='utf-8'
@@ -548,15 +605,13 @@ a{color:inherit;text-decoration:none}img{max-width:100%;display:block}
 
 def ensure_social_card(site_cfg: Dict[str, Any]) -> None:
     target = IMG / 'social-card.png'
-    import matplotlib.pyplot as plt
     fig = plt.figure(figsize=(12, 6.3), dpi=120)
     fig.patch.set_facecolor('#0b0f14')
     ax = fig.add_axes([0, 0, 1, 1])
     ax.set_axis_off()
-    ax.text(0.05, 0.74, f"{site_cfg['site_name']}", color='white', fontsize=28, fontweight='bold', va='top')
-    ax.text(0.05, 0.56, 'Iran internet blackout', color='#98d08b', fontsize=19, va='top')
-    ax.text(0.05, 0.36, 'Automated daily charts and model-based exposure estimates.', color='#94a3b8', fontsize=17)
-    ax.text(0.05, 0.18, 'World + Top 10 economies • SEO ready • admin-free publishing', color='#98d08b', fontsize=16)
+    ax.text(0.05, 0.74, site_cfg['site_name'], color='white', fontsize=28, fontweight='bold', va='top')
+    ax.text(0.05, 0.54, 'Daily blackout simulation for the world and top 10 economies', color='#98d08b', fontsize=18, va='top')
+    ax.text(0.05, 0.35, 'Uses Iran blackout duration as the clock for same-length domestic outage scenarios.', color='#94a3b8', fontsize=16)
     fig.savefig(target, facecolor=fig.get_facecolor())
     plt.close(fig)
 
@@ -567,10 +622,10 @@ def build_one(for_date: date, site_cfg: Dict[str, Any], model_cfg: Dict[str, Any
     signal = align_signal_to_date(raw_signal, for_date, threshold)
     gdp = read_gdp()
     weights = read_weights()
-    impact = compute_daily_impact(signal, gdp, weights, model_cfg)
-    post = build_post(for_date, signal, impact, site_cfg)
+    simulation = compute_blackout_simulation(signal, gdp, weights, model_cfg)
+    post = build_post(for_date, signal, simulation, site_cfg, model_cfg)
     chart_path = IMG / f"{for_date.isoformat()}-world.png"
-    make_chart(signal, impact, chart_path, title_date_end=for_date.isoformat())
+    make_chart(signal, simulation, chart_path, title_date_end=for_date.isoformat())
     save_post(post)
     return post
 
