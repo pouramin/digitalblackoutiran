@@ -6,6 +6,13 @@
 <description>Daily simulation of how much GDP the world and the top 10 economies would lose if their own internet were blacked out for as many days as Iran's.</description>
 
         <item>
+          <title>Internet blackout simulation update — day 26</title>
+          <link>https://digitalblackoutiran.it/posts/2026-03-25-internet-blackout-simulation-update-day-26/</link>
+          <guid>https://digitalblackoutiran.it/posts/2026-03-25-internet-blackout-simulation-update-day-26/</guid>
+          <pubDate>Wed, 25 Mar 2026 00:00:00 +0000</pubDate>
+          <description><![CDATA[Day 26 economic impact simulation: if internet went dark locally, United States would lose $13.95B/day; world $47.73B/day.]]></description>
+        </item>
+        <item>
           <title>Internet blackout simulation update — day 25</title>
           <link>https://digitalblackoutiran.it/posts/2026-03-24-internet-blackout-simulation-update-day-25/</link>
           <guid>https://digitalblackoutiran.it/posts/2026-03-24-internet-blackout-simulation-update-day-25/</guid>
@@ -137,13 +144,6 @@
           <guid>https://digitalblackoutiran.it/posts/2026-03-06-internet-blackout-simulation-update-day-7/</guid>
           <pubDate>Fri, 06 Mar 2026 00:00:00 +0000</pubDate>
           <description><![CDATA[2026-03-06 blackout simulation archive: United States, China and Germany top the loss table; world scenario totals $35.28B/day.]]></description>
-        </item>
-        <item>
-          <title>Internet blackout simulation update — day 6</title>
-          <link>https://digitalblackoutiran.it/posts/2026-03-05-internet-blackout-simulation-update-day-6/</link>
-          <guid>https://digitalblackoutiran.it/posts/2026-03-05-internet-blackout-simulation-update-day-6/</guid>
-          <pubDate>Thu, 05 Mar 2026 00:00:00 +0000</pubDate>
-          <description><![CDATA[Day 6 blackout simulation report: United States $10.08B/day, China $5.41B/day, world $34.49B/day.]]></description>
         </item>
 </channel>
 </rss>
