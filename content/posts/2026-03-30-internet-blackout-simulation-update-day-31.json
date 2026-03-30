@@ -1,0 +1,2590 @@
+{
+  "date": "2026-03-30",
+  "title": "Internet blackout simulation update — day 31",
+  "slug": "2026-03-30-internet-blackout-simulation-update-day-31",
+  "description": "2026-03-30 blackout simulation archive: United States, China and Germany top the loss table; world scenario totals $50.15B/day.",
+  "excerpt": "2026-03-30 / day 31: a same-length local internet blackout simulation for the world and top economies, with United States and China leading the modeled daily losses and the world scenario at $50.15B/day.",
+  "body_paragraphs": [
+    "This post does not say these economies are currently losing money because Iran is offline. It uses Iran's blackout duration as a time clock and simulates what a same-length domestic internet blackout would cost each economy on day 31.",
+    "Under the world scenario, a blackout of this length implies $50.15B in daily GDP loss and $1.28T in cumulative loss since day 1.",
+    "For the large-economy scenarios, the biggest simulated daily losses today are: United States: $14.66B/day; China: $7.87B/day; Germany: $2.14B/day.",
+    "Method: 2025 nominal GDP baseline × country-specific digital sensitivity coefficient × an outage-duration escalation curve that gets harsher as the blackout continues."
+  ],
+  "signal": {
+    "source": "fallback",
+    "summary": "Fallback signal used because no live signal source was available during build.",
+    "current_connectivity_pct": 1.0,
+    "days_since_drop": 31
+  },
+  "simulation": {
+    "reference_days": 31,
+    "world": {
+      "code": "WORLD",
+      "name": "World",
+      "rank": 0,
+      "gdp_usd": 123580000000000.0,
+      "sensitivity": 1.0,
+      "daily_loss_usd": 50146328988.91538,
+      "cumulative_loss_usd": 1275204533700.7686,
+      "loss_share_of_daily_gdp": 0.1481098080672772,
+      "cumulative_pct_of_annual_gdp": 1.031885850219104,
+      "series": [
+        {
+          "date": "2026-02-28",
+          "day": 1,
+          "loss_share_of_daily_gdp": 0.075,
+          "daily_loss_usd": 25393150684.931507,
+          "cumulative_loss_usd": 25393150684.931507
+        },
+        {
+          "date": "2026-03-01",
+          "day": 2,
+          "loss_share_of_daily_gdp": 0.08539720770839918,
+          "daily_loss_usd": 28913388845.49033,
+          "cumulative_loss_usd": 54306539530.42184
+        },
+        {
+          "date": "2026-03-02",
+          "day": 3,
+          "loss_share_of_daily_gdp": 0.09147918433002164,
+          "daily_loss_usd": 30972596163.02486,
+          "cumulative_loss_usd": 85279135693.4467
+        },
+        {
+          "date": "2026-03-03",
+          "day": 4,
+          "loss_share_of_daily_gdp": 0.09579441541679835,
+          "daily_loss_usd": 32433627006.049152,
+          "cumulative_loss_usd": 117712762699.49585
+        },
+        {
+          "date": "2026-03-04",
+          "day": 5,
+          "loss_share_of_daily_gdp": 0.09914156868651151,
+          "daily_loss_usd": 33566890570.62765,
+          "cumulative_loss_usd": 151279653270.1235
+        },
+        {
+          "date": "2026-03-05",
+          "day": 6,
+          "loss_share_of_daily_gdp": 0.10187639203842082,
+          "daily_loss_usd": 34492834323.58369,
+          "cumulative_loss_usd": 185772487593.70718
+        },
+        {
+          "date": "2026-03-06",
+          "day": 7,
+          "loss_share_of_daily_gdp": 0.1041886522358297,
+          "daily_loss_usd": 35275708611.79133,
+          "cumulative_loss_usd": 221048196205.4985
+        },
+        {
+          "date": "2026-03-07",
+          "day": 8,
+          "loss_share_of_daily_gdp": 0.10709162312519754,
+          "daily_loss_usd": 36258582974.827156,
+          "cumulative_loss_usd": 257306779180.32565
+        },
+        {
+          "date": "2026-03-08",
+          "day": 9,
+          "loss_share_of_daily_gdp": 0.10975836866004329,
+          "daily_loss_usd": 37161477257.55657,
+          "cumulative_loss_usd": 294468256437.8822
+        },
+        {
+          "date": "2026-03-09",
+          "day": 10,
+          "loss_share_of_daily_gdp": 0.11223877639491069,
+          "daily_loss_usd": 38001282155.84401,
+          "cumulative_loss_usd": 332469538593.7262
+        },
+        {
+          "date": "2026-03-10",
+          "day": 11,
+          "loss_share_of_daily_gdp": 0.11456842909197555,
+          "daily_loss_usd": 38790045115.57901,
+          "cumulative_loss_usd": 371259583709.3052
+        },
+        {
+          "date": "2026-03-11",
+          "day": 12,
+          "loss_share_of_daily_gdp": 0.11677359974682,
+          "daily_loss_usd": 39536661525.238396,
+          "cumulative_loss_usd": 410796245234.5436
+        },
+        {
+          "date": "2026-03-12",
+          "day": 13,
+          "loss_share_of_daily_gdp": 0.11887424036192305,
+          "daily_loss_usd": 40247886640.89439,
+          "cumulative_loss_usd": 451044131875.438
+        },
+        {
+          "date": "2026-03-13",
+          "day": 14,
+          "loss_share_of_daily_gdp": 0.1208858599442289,
+          "daily_loss_usd": 40928971429.88441,
+          "cumulative_loss_usd": 491973103305.3224
+        },
+        {
+          "date": "2026-03-14",
+          "day": 15,
+          "loss_share_of_daily_gdp": 0.12282075301653315,
+          "daily_loss_usd": 41584078514.47443,
+          "cumulative_loss_usd": 533557181819.7968
+        },
+        {
+          "date": "2026-03-15",
+          "day": 16,
+          "loss_share_of_daily_gdp": 0.12468883083359672,
+          "daily_loss_usd": 42216563601.139404,
+          "cumulative_loss_usd": 575773745420.9363
+        },
+        {
+          "date": "2026-03-16",
+          "day": 17,
+          "loss_share_of_daily_gdp": 0.12649820016084323,
+          "daily_loss_usd": 42829171440.75892,
+          "cumulative_loss_usd": 618602916861.6952
+        },
+        {
+          "date": "2026-03-17",
+          "day": 18,
+          "loss_share_of_daily_gdp": 0.12825557636844245,
+          "daily_loss_usd": 43424175692.088,
+          "cumulative_loss_usd": 662027092553.7832
+        },
+        {
+          "date": "2026-03-18",
+          "day": 19,
+          "loss_share_of_daily_gdp": 0.12996658468749658,
+          "daily_loss_usd": 44003480919.6735,
+          "cumulative_loss_usd": 706030573473.4567
+        },
+        {
+          "date": "2026-03-19",
+          "day": 20,
+          "loss_share_of_daily_gdp": 0.13163598410330984,
+          "daily_loss_usd": 44568698398.594604,
+          "cumulative_loss_usd": 750599271872.0513
+        },
+        {
+          "date": "2026-03-20",
+          "day": 21,
+          "loss_share_of_daily_gdp": 0.13326783656585134,
+          "daily_loss_usd": 45121203404.95317,
+          "cumulative_loss_usd": 795720475277.0044
+        },
+        {
+          "date": "2026-03-21",
+          "day": 22,
+          "loss_share_of_daily_gdp": 0.13486563680037475,
+          "daily_loss_usd": 45662179166.5488,
+          "cumulative_loss_usd": 841382654443.5532
+        },
+        {
+          "date": "2026-03-22",
+          "day": 23,
+          "loss_share_of_daily_gdp": 0.13643241323893723,
+          "daily_loss_usd": 46192651035.80236,
+          "cumulative_loss_usd": 887575305479.3556
+        },
+        {
+          "date": "2026-03-23",
+          "day": 24,
+          "loss_share_of_daily_gdp": 0.1379708074552192,
+          "daily_loss_usd": 46713513384.42736,
+          "cumulative_loss_usd": 934288818863.783
+        },
+        {
+          "date": "2026-03-24",
+          "day": 25,
+          "loss_share_of_daily_gdp": 0.139483137373023,
+          "daily_loss_usd": 47225551004.269,
+          "cumulative_loss_usd": 981514369868.052
+        },
+        {
+          "date": "2026-03-25",
+          "day": 26,
+          "loss_share_of_daily_gdp": 0.14097144807032222,
+          "daily_loss_usd": 47729456308.30252,
+          "cumulative_loss_usd": 1029243826176.3545
+        },
+        {
+          "date": "2026-03-26",
+          "day": 27,
+          "loss_share_of_daily_gdp": 0.14243755299006494,
+          "daily_loss_usd": 48225843283.59514,
+          "cumulative_loss_usd": 1077469669459.9496
+        },
+        {
+          "date": "2026-03-27",
+          "day": 28,
+          "loss_share_of_daily_gdp": 0.14388306765262807,
+          "daily_loss_usd": 48715258905.51172,
+          "cumulative_loss_usd": 1126184928365.4614
+        },
+        {
+          "date": "2026-03-28",
+          "day": 29,
+          "loss_share_of_daily_gdp": 0.1453094374497971,
+          "daily_loss_usd": 49198192548.07103,
+          "cumulative_loss_usd": 1175383120913.5325
+        },
+        {
+          "date": "2026-03-29",
+          "day": 30,
+          "loss_share_of_daily_gdp": 0.14671796072493232,
+          "daily_loss_usd": 49675083798.320915,
+          "cumulative_loss_usd": 1225058204711.8533
+        },
+        {
+          "date": "2026-03-30",
+          "day": 31,
+          "loss_share_of_daily_gdp": 0.1481098080672772,
+          "daily_loss_usd": 50146328988.91538,
+          "cumulative_loss_usd": 1275204533700.7686
+        }
+      ]
+    },
+    "countries": [
+      {
+        "code": "USA",
+        "name": "United States",
+        "rank": 1,
+        "gdp_usd": 30615743000000.0,
+        "sensitivity": 1.18,
+        "daily_loss_usd": 14659453005.723728,
+        "cumulative_loss_usd": 372785033548.60596,
+        "loss_share_of_daily_gdp": 0.1747695735193871,
+        "cumulative_pct_of_annual_gdp": 1.2176253032585425,
+        "series": [
+          {
+            "date": "2026-02-28",
+            "day": 1,
+            "loss_share_of_daily_gdp": 0.0885,
+            "daily_loss_usd": 7423269193.150684,
+            "cumulative_loss_usd": 7423269193.150684
+          },
+          {
+            "date": "2026-03-01",
+            "day": 2,
+            "loss_share_of_daily_gdp": 0.10076870509591103,
+            "daily_loss_usd": 8452352815.504663,
+            "cumulative_loss_usd": 15875622008.655348
+          },
+          {
+            "date": "2026-03-02",
+            "day": 3,
+            "loss_share_of_daily_gdp": 0.10794543750942553,
+            "daily_loss_usd": 9054328144.688032,
+            "cumulative_loss_usd": 24929950153.34338
+          },
+          {
+            "date": "2026-03-03",
+            "day": 4,
+            "loss_share_of_daily_gdp": 0.11303741019182206,
+            "daily_loss_usd": 9481436437.858643,
+            "cumulative_loss_usd": 34411386591.20203
+          },
+          {
+            "date": "2026-03-04",
+            "day": 5,
+            "loss_share_of_daily_gdp": 0.11698705105008357,
+            "daily_loss_usd": 9812727367.882845,
+            "cumulative_loss_usd": 44224113959.08487
+          },
+          {
+            "date": "2026-03-05",
+            "day": 6,
+            "loss_share_of_daily_gdp": 0.12021414260533657,
+            "daily_loss_usd": 10083411767.042013,
+            "cumulative_loss_usd": 54307525726.126884
+          },
+          {
+            "date": "2026-03-06",
+            "day": 7,
+            "loss_share_of_daily_gdp": 0.12294260963827904,
+            "daily_loss_usd": 10312272165.574997,
+            "cumulative_loss_usd": 64619797891.70188
+          },
+          {
+            "date": "2026-03-07",
+            "day": 8,
+            "loss_share_of_daily_gdp": 0.1263681152877331,
+            "daily_loss_usd": 10599599290.53043,
+            "cumulative_loss_usd": 75219397182.23232
+          },
+          {
+            "date": "2026-03-08",
+            "day": 9,
+            "loss_share_of_daily_gdp": 0.1295148750188511,
+            "daily_loss_usd": 10863545556.861,
+            "cumulative_loss_usd": 86082942739.09332
+          },
+          {
+            "date": "2026-03-09",
+            "day": 10,
+            "loss_share_of_daily_gdp": 0.1324417561459946,
+            "daily_loss_usd": 11109048681.190248,
+            "cumulative_loss_usd": 97191991420.28357
+          },
+          {
+            "date": "2026-03-10",
+            "day": 11,
+            "loss_share_of_daily_gdp": 0.13519074632853115,
+            "daily_loss_usd": 11339630535.815077,
+            "cumulative_loss_usd": 108531621956.09865
+          },
+          {
+            "date": "2026-03-11",
+            "day": 12,
+            "loss_share_of_daily_gdp": 0.1377928477012476,
+            "daily_loss_usd": 11557891540.985035,
+            "cumulative_loss_usd": 120089513497.08368
+          },
+          {
+            "date": "2026-03-12",
+            "day": 13,
+            "loss_share_of_daily_gdp": 0.1402716036270692,
+            "daily_loss_usd": 11765806484.504707,
+            "cumulative_loss_usd": 131855319981.58838
+          },
+          {
+            "date": "2026-03-13",
+            "day": 14,
+            "loss_share_of_daily_gdp": 0.1426453147341901,
+            "daily_loss_usd": 11964910400.153635,
+            "cumulative_loss_usd": 143820230381.742
+          },
+          {
+            "date": "2026-03-14",
+            "day": 15,
+            "loss_share_of_daily_gdp": 0.14492848855950913,
+            "daily_loss_usd": 12156420161.962662,
+            "cumulative_loss_usd": 155976650543.70465
+          },
+          {
+            "date": "2026-03-15",
+            "day": 16,
+            "loss_share_of_daily_gdp": 0.14713282038364414,
+            "daily_loss_usd": 12341316755.426878,
+            "cumulative_loss_usd": 168317967299.13153
+          },
+          {
+            "date": "2026-03-16",
+            "day": 17,
+            "loss_share_of_daily_gdp": 0.149267876189795,
+            "daily_loss_usd": 12520402563.239954,
+            "cumulative_loss_usd": 180838369862.3715
+          },
+          {
+            "date": "2026-03-17",
+            "day": 18,
+            "loss_share_of_daily_gdp": 0.15134158011476212,
+            "daily_loss_usd": 12694342252.075253,
+            "cumulative_loss_usd": 193532712114.44675
+          },
+          {
+            "date": "2026-03-18",
+            "day": 19,
+            "loss_share_of_daily_gdp": 0.15336056993124597,
+            "daily_loss_usd": 12863692589.996038,
+            "cumulative_loss_usd": 206396404704.44278
+          },
+          {
+            "date": "2026-03-19",
+            "day": 20,
+            "loss_share_of_daily_gdp": 0.1553304612419056,
+            "daily_loss_usd": 13028924606.72231,
+            "cumulative_loss_usd": 219425329311.1651
+          },
+          {
+            "date": "2026-03-20",
+            "day": 21,
+            "loss_share_of_daily_gdp": 0.15725604714770455,
+            "daily_loss_usd": 13190440341.561659,
+            "cumulative_loss_usd": 232615769652.72675
+          },
+          {
+            "date": "2026-03-21",
+            "day": 22,
+            "loss_share_of_daily_gdp": 0.1591414514244422,
+            "daily_loss_usd": 13348585691.664948,
+            "cumulative_loss_usd": 245964355344.3917
+          },
+          {
+            "date": "2026-03-22",
+            "day": 23,
+            "loss_share_of_daily_gdp": 0.16099024762194594,
+            "daily_loss_usd": 13503660401.91742,
+            "cumulative_loss_usd": 259468015746.3091
+          },
+          {
+            "date": "2026-03-23",
+            "day": 24,
+            "loss_share_of_daily_gdp": 0.16280555279715864,
+            "daily_loss_usd": 13655925927.152712,
+            "cumulative_loss_usd": 273123941673.46182
+          },
+          {
+            "date": "2026-03-24",
+            "day": 25,
+            "loss_share_of_daily_gdp": 0.16459010210016714,
+            "daily_loss_usd": 13805611688.335554,
+            "cumulative_loss_usd": 286929553361.79736
+          },
+          {
+            "date": "2026-03-25",
+            "day": 26,
+            "loss_share_of_daily_gdp": 0.16634630872298023,
+            "daily_loss_usd": 13952920100.990194,
+            "cumulative_loss_usd": 300882473462.78754
+          },
+          {
+            "date": "2026-03-26",
+            "day": 27,
+            "loss_share_of_daily_gdp": 0.16807631252827662,
+            "daily_loss_usd": 14098030654.118896,
+            "cumulative_loss_usd": 314980504116.90643
+          },
+          {
+            "date": "2026-03-27",
+            "day": 28,
+            "loss_share_of_daily_gdp": 0.1697820198301011,
+            "daily_loss_usd": 14241103246.956928,
+            "cumulative_loss_usd": 329221607363.86334
+          },
+          {
+            "date": "2026-03-28",
+            "day": 29,
+            "loss_share_of_daily_gdp": 0.1714651361907606,
+            "daily_loss_usd": 14382280939.935137,
+            "cumulative_loss_usd": 343603888303.79846
+          },
+          {
+            "date": "2026-03-29",
+            "day": 30,
+            "loss_share_of_daily_gdp": 0.17312719365542015,
+            "daily_loss_usd": 14521692239.083763,
+            "cumulative_loss_usd": 358125580542.8822
+          },
+          {
+            "date": "2026-03-30",
+            "day": 31,
+            "loss_share_of_daily_gdp": 0.1747695735193871,
+            "daily_loss_usd": 14659453005.723728,
+            "cumulative_loss_usd": 372785033548.60596
+          }
+        ]
+      },
+      {
+        "code": "CHN",
+        "name": "China",
+        "rank": 2,
+        "gdp_usd": 19398577000000.0,
+        "sensitivity": 1.0,
+        "daily_loss_usd": 7871560318.488487,
+        "cumulative_loss_usd": 200171171206.85764,
+        "loss_share_of_daily_gdp": 0.1481098080672772,
+        "cumulative_pct_of_annual_gdp": 1.0318858502191044,
+        "series": [
+          {
+            "date": "2026-02-28",
+            "day": 1,
+            "loss_share_of_daily_gdp": 0.075,
+            "daily_loss_usd": 3986008972.60274,
+            "cumulative_loss_usd": 3986008972.60274
+          },
+          {
+            "date": "2026-03-01",
+            "day": 2,
+            "loss_share_of_daily_gdp": 0.08539720770839918,
+            "daily_loss_usd": 4538587148.811986,
+            "cumulative_loss_usd": 8524596121.414726
+          },
+          {
+            "date": "2026-03-02",
+            "day": 3,
+            "loss_share_of_daily_gdp": 0.09147918433002164,
+            "daily_loss_usd": 4861824660.611283,
+            "cumulative_loss_usd": 13386420782.026009
+          },
+          {
+            "date": "2026-03-03",
+            "day": 4,
+            "loss_share_of_daily_gdp": 0.09579441541679835,
+            "daily_loss_usd": 5091165325.021233,
+            "cumulative_loss_usd": 18477586107.04724
+          },
+          {
+            "date": "2026-03-04",
+            "day": 5,
+            "loss_share_of_daily_gdp": 0.09914156868651151,
+            "daily_loss_usd": 5269055764.56461,
+            "cumulative_loss_usd": 23746641871.61185
+          },
+          {
+            "date": "2026-03-05",
+            "day": 6,
+            "loss_share_of_daily_gdp": 0.10187639203842082,
+            "daily_loss_usd": 5414402836.82053,
+            "cumulative_loss_usd": 29161044708.43238
+          },
+          {
+            "date": "2026-03-06",
+            "day": 7,
+            "loss_share_of_daily_gdp": 0.1041886522358297,
+            "daily_loss_usd": 5537292035.405382,
+            "cumulative_loss_usd": 34698336743.83776
+          },
+          {
+            "date": "2026-03-07",
+            "day": 8,
+            "loss_share_of_daily_gdp": 0.10709162312519754,
+            "daily_loss_usd": 5691575608.901713,
+            "cumulative_loss_usd": 40389912352.73947
+          },
+          {
+            "date": "2026-03-08",
+            "day": 9,
+            "loss_share_of_daily_gdp": 0.10975836866004329,
+            "daily_loss_usd": 5833304563.962293,
+            "cumulative_loss_usd": 46223216916.70177
+          },
+          {
+            "date": "2026-03-09",
+            "day": 10,
+            "loss_share_of_daily_gdp": 0.11223877639491069,
+            "daily_loss_usd": 5965130263.787555,
+            "cumulative_loss_usd": 52188347180.48932
+          },
+          {
+            "date": "2026-03-10",
+            "day": 11,
+            "loss_share_of_daily_gdp": 0.11456842909197555,
+            "daily_loss_usd": 6088943817.834871,
+            "cumulative_loss_usd": 58277290998.32419
+          },
+          {
+            "date": "2026-03-11",
+            "day": 12,
+            "loss_share_of_daily_gdp": 0.11677359974682,
+            "daily_loss_usd": 6206141551.385941,
+            "cumulative_loss_usd": 64483432549.71013
+          },
+          {
+            "date": "2026-03-12",
+            "day": 13,
+            "loss_share_of_daily_gdp": 0.11887424036192305,
+            "daily_loss_usd": 6317783849.252801,
+            "cumulative_loss_usd": 70801216398.96294
+          },
+          {
+            "date": "2026-03-13",
+            "day": 14,
+            "loss_share_of_daily_gdp": 0.1208858599442289,
+            "daily_loss_usd": 6424694965.313261,
+            "cumulative_loss_usd": 77225911364.2762
+          },
+          {
+            "date": "2026-03-14",
+            "day": 15,
+            "loss_share_of_daily_gdp": 0.12282075301653315,
+            "daily_loss_usd": 6527528313.943016,
+            "cumulative_loss_usd": 83753439678.21921
+          },
+          {
+            "date": "2026-03-15",
+            "day": 16,
+            "loss_share_of_daily_gdp": 0.12468883083359672,
+            "daily_loss_usd": 6626810646.480823,
+            "cumulative_loss_usd": 90380250324.70003
+          },
+          {
+            "date": "2026-03-16",
+            "day": 17,
+            "loss_share_of_daily_gdp": 0.12649820016084323,
+            "daily_loss_usd": 6722972811.456246,
+            "cumulative_loss_usd": 97103223136.15628
+          },
+          {
+            "date": "2026-03-17",
+            "day": 18,
+            "loss_share_of_daily_gdp": 0.12825557636844245,
+            "daily_loss_usd": 6816371709.212634,
+            "cumulative_loss_usd": 103919594845.36891
+          },
+          {
+            "date": "2026-03-18",
+            "day": 19,
+            "loss_share_of_daily_gdp": 0.12996658468749658,
+            "daily_loss_usd": 6907306302.70527,
+            "cumulative_loss_usd": 110826901148.07419
+          },
+          {
+            "date": "2026-03-19",
+            "day": 20,
+            "loss_share_of_daily_gdp": 0.13163598410330984,
+            "daily_loss_usd": 6996029516.709129,
+            "cumulative_loss_usd": 117822930664.78333
+          },
+          {
+            "date": "2026-03-20",
+            "day": 21,
+            "loss_share_of_daily_gdp": 0.13326783656585134,
+            "daily_loss_usd": 7082757230.811186,
+            "cumulative_loss_usd": 124905687895.59451
+          },
+          {
+            "date": "2026-03-21",
+            "day": 22,
+            "loss_share_of_daily_gdp": 0.13486563680037475,
+            "daily_loss_usd": 7167675178.42768,
+            "cumulative_loss_usd": 132073363074.02219
+          },
+          {
+            "date": "2026-03-22",
+            "day": 23,
+            "loss_share_of_daily_gdp": 0.13643241323893723,
+            "daily_loss_usd": 7250944310.989982,
+            "cumulative_loss_usd": 139324307385.01218
+          },
+          {
+            "date": "2026-03-23",
+            "day": 24,
+            "loss_share_of_daily_gdp": 0.1379708074552192,
+            "daily_loss_usd": 7332705019.649982,
+            "cumulative_loss_usd": 146657012404.66217
+          },
+          {
+            "date": "2026-03-24",
+            "day": 25,
+            "loss_share_of_daily_gdp": 0.139483137373023,
+            "daily_loss_usd": 7413080494.60867,
+            "cumulative_loss_usd": 154070092899.27084
+          },
+          {
+            "date": "2026-03-25",
+            "day": 26,
+            "loss_share_of_daily_gdp": 0.14097144807032222,
+            "daily_loss_usd": 7492179425.188074,
+            "cumulative_loss_usd": 161562272324.45892
+          },
+          {
+            "date": "2026-03-26",
+            "day": 27,
+            "loss_share_of_daily_gdp": 0.14243755299006494,
+            "daily_loss_usd": 7570098190.053028,
+            "cumulative_loss_usd": 169132370514.51196
+          },
+          {
+            "date": "2026-03-27",
+            "day": 28,
+            "loss_share_of_daily_gdp": 0.14388306765262807,
+            "daily_loss_usd": 7646922648.919766,
+            "cumulative_loss_usd": 176779293163.43173
+          },
+          {
+            "date": "2026-03-28",
+            "day": 29,
+            "loss_share_of_daily_gdp": 0.1453094374497971,
+            "daily_loss_usd": 7722729619.716638,
+            "cumulative_loss_usd": 184502022783.14838
+          },
+          {
+            "date": "2026-03-29",
+            "day": 30,
+            "loss_share_of_daily_gdp": 0.14671796072493232,
+            "daily_loss_usd": 7797588105.220755,
+            "cumulative_loss_usd": 192299610888.36914
+          },
+          {
+            "date": "2026-03-30",
+            "day": 31,
+            "loss_share_of_daily_gdp": 0.1481098080672772,
+            "daily_loss_usd": 7871560318.488487,
+            "cumulative_loss_usd": 200171171206.85764
+          }
+        ]
+      },
+      {
+        "code": "DEU",
+        "name": "Germany",
+        "rank": 3,
+        "gdp_usd": 5013574000000.0,
+        "sensitivity": 1.05,
+        "daily_loss_usd": 2136130019.2182078,
+        "cumulative_loss_usd": 54321078731.07714,
+        "loss_share_of_daily_gdp": 0.15551529847064108,
+        "cumulative_pct_of_annual_gdp": 1.0834801427300593,
+        "series": [
+          {
+            "date": "2026-02-28",
+            "day": 1,
+            "loss_share_of_daily_gdp": 0.07875,
+            "daily_loss_usd": 1081695760.2739725,
+            "cumulative_loss_usd": 1081695760.2739725
+          },
+          {
+            "date": "2026-03-01",
+            "day": 2,
+            "loss_share_of_daily_gdp": 0.08966706809381914,
+            "daily_loss_usd": 1231650633.5654826,
+            "cumulative_loss_usd": 2313346393.839455
+          },
+          {
+            "date": "2026-03-02",
+            "day": 3,
+            "loss_share_of_daily_gdp": 0.09605314354652272,
+            "daily_loss_usd": 1319368611.2414086,
+            "cumulative_loss_usd": 3632715005.080864
+          },
+          {
+            "date": "2026-03-03",
+            "day": 4,
+            "loss_share_of_daily_gdp": 0.10058413618763828,
+            "daily_loss_usd": 1381605506.856993,
+            "cumulative_loss_usd": 5014320511.937857
+          },
+          {
+            "date": "2026-03-04",
+            "day": 5,
+            "loss_share_of_daily_gdp": 0.10409864712083709,
+            "daily_loss_usd": 1429880193.5348046,
+            "cumulative_loss_usd": 6444200705.472661
+          },
+          {
+            "date": "2026-03-05",
+            "day": 6,
+            "loss_share_of_daily_gdp": 0.10697021164034186,
+            "daily_loss_usd": 1469323484.5329187,
+            "cumulative_loss_usd": 7913524190.00558
+          },
+          {
+            "date": "2026-03-06",
+            "day": 7,
+            "loss_share_of_daily_gdp": 0.10939808484762119,
+            "daily_loss_usd": 1502672311.895418,
+            "cumulative_loss_usd": 9416196501.900997
+          },
+          {
+            "date": "2026-03-07",
+            "day": 8,
+            "loss_share_of_daily_gdp": 0.11244620428145742,
+            "daily_loss_usd": 1544540729.2717907,
+            "cumulative_loss_usd": 10960737231.172789
+          },
+          {
+            "date": "2026-03-08",
+            "day": 9,
+            "loss_share_of_daily_gdp": 0.11524628709304546,
+            "daily_loss_usd": 1583002160.45542,
+            "cumulative_loss_usd": 12543739391.628208
+          },
+          {
+            "date": "2026-03-09",
+            "day": 10,
+            "loss_share_of_daily_gdp": 0.11785071521465623,
+            "daily_loss_usd": 1618776114.1961777,
+            "cumulative_loss_usd": 14162515505.824387
+          },
+          {
+            "date": "2026-03-10",
+            "day": 11,
+            "loss_share_of_daily_gdp": 0.12029685054657434,
+            "daily_loss_usd": 1652375786.800523,
+            "cumulative_loss_usd": 15814891292.62491
+          },
+          {
+            "date": "2026-03-11",
+            "day": 12,
+            "loss_share_of_daily_gdp": 0.122612279734161,
+            "daily_loss_usd": 1684180103.4408672,
+            "cumulative_loss_usd": 17499071396.065777
+          },
+          {
+            "date": "2026-03-12",
+            "day": 13,
+            "loss_share_of_daily_gdp": 0.1248179523800192,
+            "daily_loss_usd": 1714476824.0704176,
+            "cumulative_loss_usd": 19213548220.136196
+          },
+          {
+            "date": "2026-03-13",
+            "day": 14,
+            "loss_share_of_daily_gdp": 0.12693015294144036,
+            "daily_loss_usd": 1743489629.0499423,
+            "cumulative_loss_usd": 20957037849.18614
+          },
+          {
+            "date": "2026-03-14",
+            "day": 15,
+            "loss_share_of_daily_gdp": 0.12896179066735983,
+            "daily_loss_usd": 1771395837.488542,
+            "cumulative_loss_usd": 22728433686.67468
+          },
+          {
+            "date": "2026-03-15",
+            "day": 16,
+            "loss_share_of_daily_gdp": 0.13092327237527657,
+            "daily_loss_usd": 1798338395.5496023,
+            "cumulative_loss_usd": 24526772082.22428
+          },
+          {
+            "date": "2026-03-16",
+            "day": 17,
+            "loss_share_of_daily_gdp": 0.1328231101688854,
+            "daily_loss_usd": 1824434223.9502997,
+            "cumulative_loss_usd": 26351206306.17458
+          },
+          {
+            "date": "2026-03-17",
+            "day": 18,
+            "loss_share_of_daily_gdp": 0.1346683551868646,
+            "daily_loss_usd": 1849780175.856519,
+            "cumulative_loss_usd": 28200986482.031097
+          },
+          {
+            "date": "2026-03-18",
+            "day": 19,
+            "loss_share_of_daily_gdp": 0.13646491392187143,
+            "daily_loss_usd": 1874457381.7833772,
+            "cumulative_loss_usd": 30075443863.814476
+          },
+          {
+            "date": "2026-03-19",
+            "day": 20,
+            "loss_share_of_daily_gdp": 0.13821778330847534,
+            "daily_loss_usd": 1898534478.7205641,
+            "cumulative_loss_usd": 31973978342.53504
+          },
+          {
+            "date": "2026-03-20",
+            "day": 21,
+            "loss_share_of_daily_gdp": 0.1399312283941439,
+            "daily_loss_usd": 1922070050.588881,
+            "cumulative_loss_usd": 33896048393.123924
+          },
+          {
+            "date": "2026-03-21",
+            "day": 22,
+            "loss_share_of_daily_gdp": 0.1416089186403935,
+            "daily_loss_usd": 1945114500.4481976,
+            "cumulative_loss_usd": 35841162893.57212
+          },
+          {
+            "date": "2026-03-22",
+            "day": 23,
+            "loss_share_of_daily_gdp": 0.14325403390088412,
+            "daily_loss_usd": 1967711506.1934006,
+            "cumulative_loss_usd": 37808874399.76552
+          },
+          {
+            "date": "2026-03-23",
+            "day": 24,
+            "loss_share_of_daily_gdp": 0.14486934782798017,
+            "daily_loss_usd": 1989899166.2118297,
+            "cumulative_loss_usd": 39798773565.97735
+          },
+          {
+            "date": "2026-03-24",
+            "day": 25,
+            "loss_share_of_daily_gdp": 0.14645729424167417,
+            "daily_loss_usd": 2011710911.0148146,
+            "cumulative_loss_usd": 41810484476.992165
+          },
+          {
+            "date": "2026-03-25",
+            "day": 26,
+            "loss_share_of_daily_gdp": 0.14802002047383833,
+            "daily_loss_usd": 2033176235.964667,
+            "cumulative_loss_usd": 43843660712.95683
+          },
+          {
+            "date": "2026-03-26",
+            "day": 27,
+            "loss_share_of_daily_gdp": 0.1495594306395682,
+            "daily_loss_usd": 2054321295.642034,
+            "cumulative_loss_usd": 45897982008.59887
+          },
+          {
+            "date": "2026-03-27",
+            "day": 28,
+            "loss_share_of_daily_gdp": 0.15107722103525947,
+            "daily_loss_usd": 2075169390.0674794,
+            "cumulative_loss_usd": 47973151398.66635
+          },
+          {
+            "date": "2026-03-28",
+            "day": 29,
+            "loss_share_of_daily_gdp": 0.15257490932228698,
+            "daily_loss_usd": 2095741365.563221,
+            "cumulative_loss_usd": 50068892764.22957
+          },
+          {
+            "date": "2026-03-29",
+            "day": 30,
+            "loss_share_of_daily_gdp": 0.15405385876117894,
+            "daily_loss_usd": 2116055947.6293669,
+            "cumulative_loss_usd": 52184948711.85893
+          },
+          {
+            "date": "2026-03-30",
+            "day": 31,
+            "loss_share_of_daily_gdp": 0.15551529847064108,
+            "daily_loss_usd": 2136130019.2182078,
+            "cumulative_loss_usd": 54321078731.07714
+          }
+        ]
+      },
+      {
+        "code": "JPN",
+        "name": "Japan",
+        "rank": 4,
+        "gdp_usd": 4279828000000.0,
+        "sensitivity": 1.12,
+        "daily_loss_usd": 1945070257.7476,
+        "cumulative_loss_usd": 49462492291.20111,
+        "loss_share_of_daily_gdp": 0.16588298503535048,
+        "cumulative_pct_of_annual_gdp": 1.1557121522453966,
+        "series": [
+          {
+            "date": "2026-02-28",
+            "day": 1,
+            "loss_share_of_daily_gdp": 0.084,
+            "daily_loss_usd": 984946717.8082193,
+            "cumulative_loss_usd": 984946717.8082193
+          },
+          {
+            "date": "2026-03-01",
+            "day": 2,
+            "loss_share_of_daily_gdp": 0.09564487263340708,
+            "daily_loss_usd": 1121489325.898327,
+            "cumulative_loss_usd": 2106436043.7065463
+          },
+          {
+            "date": "2026-03-02",
+            "day": 3,
+            "loss_share_of_daily_gdp": 0.10245668644962425,
+            "daily_loss_usd": 1201361631.3817053,
+            "cumulative_loss_usd": 3307797675.0882516
+          },
+          {
+            "date": "2026-03-03",
+            "day": 4,
+            "loss_share_of_daily_gdp": 0.10728974526681417,
+            "daily_loss_usd": 1258031933.988435,
+            "cumulative_loss_usd": 4565829609.076687
+          },
+          {
+            "date": "2026-03-04",
+            "day": 5,
+            "loss_share_of_daily_gdp": 0.1110385569288929,
+            "daily_loss_usd": 1301988835.6818352,
+            "cumulative_loss_usd": 5867818444.758522
+          },
+          {
+            "date": "2026-03-05",
+            "day": 6,
+            "loss_share_of_daily_gdp": 0.11410155908303132,
+            "daily_loss_usd": 1337904239.4718132,
+            "cumulative_loss_usd": 7205722684.230335
+          },
+          {
+            "date": "2026-03-06",
+            "day": 7,
+            "loss_share_of_daily_gdp": 0.11669129050412927,
+            "daily_loss_usd": 1368270280.700566,
+            "cumulative_loss_usd": 8573992964.930902
+          },
+          {
+            "date": "2026-03-07",
+            "day": 8,
+            "loss_share_of_daily_gdp": 0.11994261790022126,
+            "daily_loss_usd": 1406393902.6922417,
+            "cumulative_loss_usd": 9980386867.623142
+          },
+          {
+            "date": "2026-03-08",
+            "day": 9,
+            "loss_share_of_daily_gdp": 0.1229293728992485,
+            "daily_loss_usd": 1441415266.1825888,
+            "cumulative_loss_usd": 11421802133.80573
+          },
+          {
+            "date": "2026-03-09",
+            "day": 10,
+            "loss_share_of_daily_gdp": 0.1257074295623,
+            "daily_loss_usd": 1473989525.613039,
+            "cumulative_loss_usd": 12895791659.41877
+          },
+          {
+            "date": "2026-03-10",
+            "day": 11,
+            "loss_share_of_daily_gdp": 0.12831664058301265,
+            "daily_loss_usd": 1504583975.981134,
+            "cumulative_loss_usd": 14400375635.399904
+          },
+          {
+            "date": "2026-03-11",
+            "day": 12,
+            "loss_share_of_daily_gdp": 0.13078643171643842,
+            "daily_loss_usd": 1533543650.6304142,
+            "cumulative_loss_usd": 15933919286.03032
+          },
+          {
+            "date": "2026-03-12",
+            "day": 13,
+            "loss_share_of_daily_gdp": 0.13313914920535383,
+            "daily_loss_usd": 1561130571.6856194,
+            "cumulative_loss_usd": 17495049857.71594
+          },
+          {
+            "date": "2026-03-13",
+            "day": 14,
+            "loss_share_of_daily_gdp": 0.13539216313753638,
+            "daily_loss_usd": 1587548413.0865645,
+            "cumulative_loss_usd": 19082598270.8025
+          },
+          {
+            "date": "2026-03-14",
+            "day": 15,
+            "loss_share_of_daily_gdp": 0.13755924337851713,
+            "daily_loss_usd": 1612958634.1649103,
+            "cumulative_loss_usd": 20695556904.96741
+          },
+          {
+            "date": "2026-03-15",
+            "day": 16,
+            "loss_share_of_daily_gdp": 0.13965149053362835,
+            "daily_loss_usd": 1637491395.6919386,
+            "cumulative_loss_usd": 22333048300.65935
+          },
+          {
+            "date": "2026-03-16",
+            "day": 17,
+            "loss_share_of_daily_gdp": 0.14167798418014443,
+            "daily_loss_usd": 1661253160.7609293,
+            "cumulative_loss_usd": 23994301461.42028
+          },
+          {
+            "date": "2026-03-17",
+            "day": 18,
+            "loss_share_of_daily_gdp": 0.14364624553265556,
+            "daily_loss_usd": 1684332119.7959843,
+            "cumulative_loss_usd": 25678633581.216263
+          },
+          {
+            "date": "2026-03-18",
+            "day": 19,
+            "loss_share_of_daily_gdp": 0.1455625748499962,
+            "daily_loss_usd": 1706802146.8359168,
+            "cumulative_loss_usd": 27385435728.05218
+          },
+          {
+            "date": "2026-03-19",
+            "day": 20,
+            "loss_share_of_daily_gdp": 0.14743230219570705,
+            "daily_loss_usd": 1728725739.840133,
+            "cumulative_loss_usd": 29114161467.892315
+          },
+          {
+            "date": "2026-03-20",
+            "day": 21,
+            "loss_share_of_daily_gdp": 0.1492599769537535,
+            "daily_loss_usd": 1750156242.8658328,
+            "cumulative_loss_usd": 30864317710.75815
+          },
+          {
+            "date": "2026-03-21",
+            "day": 22,
+            "loss_share_of_daily_gdp": 0.15104951321641974,
+            "daily_loss_usd": 1771139550.8219268,
+            "cumulative_loss_usd": 32635457261.580074
+          },
+          {
+            "date": "2026-03-22",
+            "day": 23,
+            "loss_share_of_daily_gdp": 0.15280430282760973,
+            "daily_loss_usd": 1791715434.9646118,
+            "cumulative_loss_usd": 34427172696.544685
+          },
+          {
+            "date": "2026-03-23",
+            "day": 24,
+            "loss_share_of_daily_gdp": 0.15452730434984552,
+            "daily_loss_usd": 1811918586.0849059,
+            "cumulative_loss_usd": 36239091282.62959
+          },
+          {
+            "date": "2026-03-24",
+            "day": 25,
+            "loss_share_of_daily_gdp": 0.15622111385778578,
+            "daily_loss_usd": 1831779444.6020265,
+            "cumulative_loss_usd": 38070870727.23162
+          },
+          {
+            "date": "2026-03-25",
+            "day": 26,
+            "loss_share_of_daily_gdp": 0.1578880218387609,
+            "daily_loss_usd": 1851324867.7538095,
+            "cumulative_loss_usd": 39922195594.98543
+          },
+          {
+            "date": "2026-03-26",
+            "day": 27,
+            "loss_share_of_daily_gdp": 0.15953005934887274,
+            "daily_loss_usd": 1870578670.8026502,
+            "cumulative_loss_usd": 41792774265.78808
+          },
+          {
+            "date": "2026-03-27",
+            "day": 28,
+            "loss_share_of_daily_gdp": 0.16114903577094344,
+            "daily_loss_usd": 1889562069.7684531,
+            "cumulative_loss_usd": 43682336335.55653
+          },
+          {
+            "date": "2026-03-28",
+            "day": 29,
+            "loss_share_of_daily_gdp": 0.1627465699437728,
+            "daily_loss_usd": 1908294046.4364855,
+            "cumulative_loss_usd": 45590630381.99302
+          },
+          {
+            "date": "2026-03-29",
+            "day": 30,
+            "loss_share_of_daily_gdp": 0.16432411601192423,
+            "daily_loss_usd": 1926791651.4604979,
+            "cumulative_loss_usd": 47517422033.453514
+          },
+          {
+            "date": "2026-03-30",
+            "day": 31,
+            "loss_share_of_daily_gdp": 0.16588298503535048,
+            "daily_loss_usd": 1945070257.7476,
+            "cumulative_loss_usd": 49462492291.20111
+          }
+        ]
+      },
+      {
+        "code": "GBR",
+        "name": "United Kingdom",
+        "rank": 6,
+        "gdp_usd": 3958780000000.0,
+        "sensitivity": 1.1,
+        "daily_loss_usd": 1767034412.5442007,
+        "cumulative_loss_usd": 44935099727.434235,
+        "loss_share_of_daily_gdp": 0.16292078887400493,
+        "cumulative_pct_of_annual_gdp": 1.1350744352410145,
+        "series": [
+          {
+            "date": "2026-02-28",
+            "day": 1,
+            "loss_share_of_daily_gdp": 0.0825,
+            "daily_loss_usd": 894792739.7260274,
+            "cumulative_loss_usd": 894792739.7260274
+          },
+          {
+            "date": "2026-03-01",
+            "day": 2,
+            "loss_share_of_daily_gdp": 0.09393692847923911,
+            "daily_loss_usd": 1018837352.6713485,
+            "cumulative_loss_usd": 1913630092.3973758
+          },
+          {
+            "date": "2026-03-02",
+            "day": 3,
+            "loss_share_of_daily_gdp": 0.1006271027630238,
+            "daily_loss_usd": 1091398799.6608312,
+            "cumulative_loss_usd": 3005028892.058207
+          },
+          {
+            "date": "2026-03-03",
+            "day": 4,
+            "loss_share_of_daily_gdp": 0.1053738569584782,
+            "daily_loss_usd": 1142881965.6166694,
+            "cumulative_loss_usd": 4147910857.674876
+          },
+          {
+            "date": "2026-03-04",
+            "day": 5,
+            "loss_share_of_daily_gdp": 0.10905572555516267,
+            "daily_loss_usd": 1182815411.543197,
+            "cumulative_loss_usd": 5330726269.218073
+          },
+          {
+            "date": "2026-03-05",
+            "day": 6,
+            "loss_share_of_daily_gdp": 0.11206403124226291,
+            "daily_loss_usd": 1215443412.606152,
+            "cumulative_loss_usd": 6546169681.824224
+          },
+          {
+            "date": "2026-03-06",
+            "day": 7,
+            "loss_share_of_daily_gdp": 0.11460751745941268,
+            "daily_loss_usd": 1243029994.4328046,
+            "cumulative_loss_usd": 7789199676.257029
+          },
+          {
+            "date": "2026-03-07",
+            "day": 8,
+            "loss_share_of_daily_gdp": 0.1178007854377173,
+            "daily_loss_usd": 1277664091.4387026,
+            "cumulative_loss_usd": 9066863767.695732
+          },
+          {
+            "date": "2026-03-08",
+            "day": 9,
+            "loss_share_of_daily_gdp": 0.12073420552604763,
+            "daily_loss_usd": 1309479885.3490598,
+            "cumulative_loss_usd": 10376343653.044792
+          },
+          {
+            "date": "2026-03-09",
+            "day": 10,
+            "loss_share_of_daily_gdp": 0.12346265403440176,
+            "daily_loss_usd": 1339072563.1186547,
+            "cumulative_loss_usd": 11715416216.163446
+          },
+          {
+            "date": "2026-03-10",
+            "day": 11,
+            "loss_share_of_daily_gdp": 0.1260252720011731,
+            "daily_loss_usd": 1366866647.3775454,
+            "cumulative_loss_usd": 13082282863.540993
+          },
+          {
+            "date": "2026-03-11",
+            "day": 12,
+            "loss_share_of_daily_gdp": 0.128450959721502,
+            "daily_loss_usd": 1393175589.9350348,
+            "cumulative_loss_usd": 14475458453.476028
+          },
+          {
+            "date": "2026-03-12",
+            "day": 13,
+            "loss_share_of_daily_gdp": 0.13076166439811537,
+            "daily_loss_usd": 1418237429.5506058,
+            "cumulative_loss_usd": 15893695883.026634
+          },
+          {
+            "date": "2026-03-13",
+            "day": 14,
+            "loss_share_of_daily_gdp": 0.1329744459386518,
+            "daily_loss_usd": 1442237197.5151122,
+            "cumulative_loss_usd": 17335933080.541748
+          },
+          {
+            "date": "2026-03-14",
+            "day": 15,
+            "loss_share_of_daily_gdp": 0.13510282831818649,
+            "daily_loss_usd": 1465321574.4916992,
+            "cumulative_loss_usd": 18801254655.033447
+          },
+          {
+            "date": "2026-03-15",
+            "day": 16,
+            "loss_share_of_daily_gdp": 0.13715771391695641,
+            "daily_loss_usd": 1487608807.3977225,
+            "cumulative_loss_usd": 20288863462.43117
+          },
+          {
+            "date": "2026-03-16",
+            "day": 17,
+            "loss_share_of_daily_gdp": 0.13914802017692757,
+            "daily_loss_usd": 1509195614.564431,
+            "cumulative_loss_usd": 21798059076.9956
+          },
+          {
+            "date": "2026-03-17",
+            "day": 18,
+            "loss_share_of_daily_gdp": 0.1410811340052867,
+            "daily_loss_usd": 1530162114.1847916,
+            "cumulative_loss_usd": 23328221191.180393
+          },
+          {
+            "date": "2026-03-18",
+            "day": 19,
+            "loss_share_of_daily_gdp": 0.14296324315624626,
+            "daily_loss_usd": 1550575418.4714644,
+            "cumulative_loss_usd": 24878796609.65186
+          },
+          {
+            "date": "2026-03-19",
+            "day": 20,
+            "loss_share_of_daily_gdp": 0.14479958251364083,
+            "daily_loss_usd": 1570492304.8310986,
+            "cumulative_loss_usd": 26449288914.482956
+          },
+          {
+            "date": "2026-03-20",
+            "day": 21,
+            "loss_share_of_daily_gdp": 0.14659462022243647,
+            "daily_loss_usd": 1589961234.6415808,
+            "cumulative_loss_usd": 28039250149.12454
+          },
+          {
+            "date": "2026-03-21",
+            "day": 22,
+            "loss_share_of_daily_gdp": 0.14835220048041223,
+            "daily_loss_usd": 1609023901.9667022,
+            "cumulative_loss_usd": 29648274051.09124
+          },
+          {
+            "date": "2026-03-22",
+            "day": 23,
+            "loss_share_of_daily_gdp": 0.15007565456283098,
+            "daily_loss_usd": 1627716437.7266958,
+            "cumulative_loss_usd": 31275990488.817936
+          },
+          {
+            "date": "2026-03-23",
+            "day": 24,
+            "loss_share_of_daily_gdp": 0.15176788820074114,
+            "daily_loss_usd": 1646070357.400904,
+            "cumulative_loss_usd": 32922060846.21884
+          },
+          {
+            "date": "2026-03-24",
+            "day": 25,
+            "loss_share_of_daily_gdp": 0.15343145111032533,
+            "daily_loss_usd": 1664113315.1411881,
+            "cumulative_loss_usd": 34586174161.36003
+          },
+          {
+            "date": "2026-03-25",
+            "day": 26,
+            "loss_share_of_daily_gdp": 0.15506859287735447,
+            "daily_loss_usd": 1681869709.893187,
+            "cumulative_loss_usd": 36268043871.25322
+          },
+          {
+            "date": "2026-03-26",
+            "day": 27,
+            "loss_share_of_daily_gdp": 0.15668130828907142,
+            "daily_loss_usd": 1699361177.0646853,
+            "cumulative_loss_usd": 37967405048.3179
+          },
+          {
+            "date": "2026-03-27",
+            "day": 28,
+            "loss_share_of_daily_gdp": 0.15827137441789088,
+            "daily_loss_usd": 1716606990.7344055,
+            "cumulative_loss_usd": 39684012039.05231
+          },
+          {
+            "date": "2026-03-28",
+            "day": 29,
+            "loss_share_of_daily_gdp": 0.15984038119477684,
+            "daily_loss_usd": 1733624395.2500236,
+            "cumulative_loss_usd": 41417636434.30233
+          },
+          {
+            "date": "2026-03-29",
+            "day": 30,
+            "loss_share_of_daily_gdp": 0.16138975679742557,
+            "daily_loss_usd": 1750428880.587705,
+            "cumulative_loss_usd": 43168065314.89004
+          },
+          {
+            "date": "2026-03-30",
+            "day": 31,
+            "loss_share_of_daily_gdp": 0.16292078887400493,
+            "daily_loss_usd": 1767034412.5442007,
+            "cumulative_loss_usd": 44935099727.434235
+          }
+        ]
+      },
+      {
+        "code": "FRA",
+        "name": "France",
+        "rank": 7,
+        "gdp_usd": 3361557000000.0,
+        "sensitivity": 1.03,
+        "daily_loss_usd": 1404975202.574051,
+        "cumulative_loss_usd": 35728053960.951294,
+        "loss_share_of_daily_gdp": 0.15255310230929553,
+        "cumulative_pct_of_annual_gdp": 1.0628424257256768,
+        "series": [
+          {
+            "date": "2026-02-28",
+            "day": 1,
+            "loss_share_of_daily_gdp": 0.07725,
+            "daily_loss_usd": 711452817.1232877,
+            "cumulative_loss_usd": 711452817.1232877
+          },
+          {
+            "date": "2026-03-01",
+            "day": 2,
+            "loss_share_of_daily_gdp": 0.08795912393965115,
+            "daily_loss_usd": 810081119.9813751,
+            "cumulative_loss_usd": 1521533937.104663
+          },
+          {
+            "date": "2026-03-02",
+            "day": 3,
+            "loss_share_of_daily_gdp": 0.09422355985992228,
+            "daily_loss_usd": 867774978.6631254,
+            "cumulative_loss_usd": 2389308915.7677884
+          },
+          {
+            "date": "2026-03-03",
+            "day": 4,
+            "loss_share_of_daily_gdp": 0.09866824787930231,
+            "daily_loss_usd": 908709422.8394626,
+            "cumulative_loss_usd": 3298018338.607251
+          },
+          {
+            "date": "2026-03-04",
+            "day": 5,
+            "loss_share_of_daily_gdp": 0.10211581574710686,
+            "daily_loss_usd": 940460644.4805405,
+            "cumulative_loss_usd": 4238478983.0877914
+          },
+          {
+            "date": "2026-03-05",
+            "day": 6,
+            "loss_share_of_daily_gdp": 0.10493268379957345,
+            "daily_loss_usd": 966403281.5212129,
+            "cumulative_loss_usd": 5204882264.609004
+          },
+          {
+            "date": "2026-03-06",
+            "day": 7,
+            "loss_share_of_daily_gdp": 0.10731431180290459,
+            "daily_loss_usd": 988337468.6061275,
+            "cumulative_loss_usd": 6193219733.215132
+          },
+          {
+            "date": "2026-03-07",
+            "day": 8,
+            "loss_share_of_daily_gdp": 0.11030437181895347,
+            "daily_loss_usd": 1015875159.5030296,
+            "cumulative_loss_usd": 7209094892.718162
+          },
+          {
+            "date": "2026-03-08",
+            "day": 9,
+            "loss_share_of_daily_gdp": 0.11305111971984459,
+            "daily_loss_usd": 1041172007.8139223,
+            "cumulative_loss_usd": 8250266900.5320835
+          },
+          {
+            "date": "2026-03-09",
+            "day": 10,
+            "loss_share_of_daily_gdp": 0.11560593968675802,
+            "daily_loss_usd": 1064701248.7550664,
+            "cumulative_loss_usd": 9314968149.28715
+          },
+          {
+            "date": "2026-03-10",
+            "day": 11,
+            "loss_share_of_daily_gdp": 0.11800548196473483,
+            "daily_loss_usd": 1086800421.7450085,
+            "cumulative_loss_usd": 10401768571.032158
+          },
+          {
+            "date": "2026-03-11",
+            "day": 12,
+            "loss_share_of_daily_gdp": 0.12027680773922461,
+            "daily_loss_usd": 1107718753.4066978,
+            "cumulative_loss_usd": 11509487324.438856
+          },
+          {
+            "date": "2026-03-12",
+            "day": 13,
+            "loss_share_of_daily_gdp": 0.12244046757278075,
+            "daily_loss_usd": 1127645509.1850798,
+            "cumulative_loss_usd": 12637132833.623936
+          },
+          {
+            "date": "2026-03-13",
+            "day": 14,
+            "loss_share_of_daily_gdp": 0.12451243574255577,
+            "daily_loss_usd": 1146727808.1025715,
+            "cumulative_loss_usd": 13783860641.726507
+          },
+          {
+            "date": "2026-03-14",
+            "day": 15,
+            "loss_share_of_daily_gdp": 0.12650537560702915,
+            "daily_loss_usd": 1165082276.464214,
+            "cumulative_loss_usd": 14948942918.190722
+          },
+          {
+            "date": "2026-03-15",
+            "day": 16,
+            "loss_share_of_daily_gdp": 0.12842949575860463,
+            "daily_loss_usd": 1182802932.8049526,
+            "cumulative_loss_usd": 16131745850.995674
+          },
+          {
+            "date": "2026-03-16",
+            "day": 17,
+            "loss_share_of_daily_gdp": 0.13029314616566853,
+            "daily_loss_usd": 1199966678.2060993,
+            "cumulative_loss_usd": 17331712529.201775
+          },
+          {
+            "date": "2026-03-17",
+            "day": 18,
+            "loss_share_of_daily_gdp": 0.13210324365949574,
+            "daily_loss_usd": 1216637214.9213247,
+            "cumulative_loss_usd": 18548349744.1231
+          },
+          {
+            "date": "2026-03-18",
+            "day": 19,
+            "loss_share_of_daily_gdp": 0.1338655822281215,
+            "daily_loss_usd": 1232867904.1041574,
+            "cumulative_loss_usd": 19781217648.227257
+          },
+          {
+            "date": "2026-03-19",
+            "day": 20,
+            "loss_share_of_daily_gdp": 0.13558506362640915,
+            "daily_loss_usd": 1248703889.6679482,
+            "cumulative_loss_usd": 21029921537.895206
+          },
+          {
+            "date": "2026-03-20",
+            "day": 21,
+            "loss_share_of_daily_gdp": 0.13726587166282686,
+            "daily_loss_usd": 1264183703.4226775,
+            "cumulative_loss_usd": 22294105241.317883
+          },
+          {
+            "date": "2026-03-21",
+            "day": 22,
+            "loss_share_of_daily_gdp": 0.138911605904386,
+            "daily_loss_usd": 1279340496.46337,
+            "cumulative_loss_usd": 23573445737.781254
+          },
+          {
+            "date": "2026-03-22",
+            "day": 23,
+            "loss_share_of_daily_gdp": 0.14052538563610537,
+            "daily_loss_usd": 1294202996.6102724,
+            "cumulative_loss_usd": 24867648734.391525
+          },
+          {
+            "date": "2026-03-23",
+            "day": 24,
+            "loss_share_of_daily_gdp": 0.14210993167887578,
+            "daily_loss_usd": 1308796261.9305387,
+            "cumulative_loss_usd": 26176444996.322063
+          },
+          {
+            "date": "2026-03-24",
+            "day": 25,
+            "loss_share_of_daily_gdp": 0.14366763149421372,
+            "daily_loss_usd": 1323142280.3364234,
+            "cumulative_loss_usd": 27499587276.658485
+          },
+          {
+            "date": "2026-03-25",
+            "day": 26,
+            "loss_share_of_daily_gdp": 0.1452005915124319,
+            "daily_loss_usd": 1337260451.5144,
+            "cumulative_loss_usd": 28836847728.172886
+          },
+          {
+            "date": "2026-03-26",
+            "day": 27,
+            "loss_share_of_daily_gdp": 0.14671067957976688,
+            "daily_loss_usd": 1351167977.8523903,
+            "cumulative_loss_usd": 30188015706.025276
+          },
+          {
+            "date": "2026-03-27",
+            "day": 28,
+            "loss_share_of_daily_gdp": 0.1481995596822069,
+            "daily_loss_usd": 1364880184.237371,
+            "cumulative_loss_usd": 31552895890.262646
+          },
+          {
+            "date": "2026-03-28",
+            "day": 29,
+            "loss_share_of_daily_gdp": 0.14966872057329103,
+            "daily_loss_usd": 1378410781.710111,
+            "cumulative_loss_usd": 32931306671.972755
+          },
+          {
+            "date": "2026-03-29",
+            "day": 30,
+            "loss_share_of_daily_gdp": 0.1511194995466803,
+            "daily_loss_usd": 1391772086.404493,
+            "cumulative_loss_usd": 34323078758.377247
+          },
+          {
+            "date": "2026-03-30",
+            "day": 31,
+            "loss_share_of_daily_gdp": 0.15255310230929553,
+            "daily_loss_usd": 1404975202.574051,
+            "cumulative_loss_usd": 35728053960.951294
+          }
+        ]
+      },
+      {
+        "code": "IND",
+        "name": "India",
+        "rank": 5,
+        "gdp_usd": 4125213000000.0,
+        "sensitivity": 0.82,
+        "daily_loss_usd": 1372622725.0592935,
+        "cumulative_loss_usd": 34905341175.48718,
+        "loss_share_of_daily_gdp": 0.1214500426151673,
+        "cumulative_pct_of_annual_gdp": 0.8461463971796652,
+        "series": [
+          {
+            "date": "2026-02-28",
+            "day": 1,
+            "loss_share_of_daily_gdp": 0.06149999999999999,
+            "daily_loss_usd": 695070135.6164383,
+            "cumulative_loss_usd": 695070135.6164383
+          },
+          {
+            "date": "2026-03-01",
+            "day": 2,
+            "loss_share_of_daily_gdp": 0.07002571032088732,
+            "daily_loss_usd": 791427316.5752288,
+            "cumulative_loss_usd": 1486497452.191667
+          },
+          {
+            "date": "2026-03-02",
+            "day": 3,
+            "loss_share_of_daily_gdp": 0.07501293115061773,
+            "daily_loss_usd": 847792654.1113238,
+            "cumulative_loss_usd": 2334290106.302991
+          },
+          {
+            "date": "2026-03-03",
+            "day": 4,
+            "loss_share_of_daily_gdp": 0.07855142064177464,
+            "daily_loss_usd": 887784497.5340195,
+            "cumulative_loss_usd": 3222074603.8370104
+          },
+          {
+            "date": "2026-03-04",
+            "day": 5,
+            "loss_share_of_daily_gdp": 0.08129608632293943,
+            "daily_loss_usd": 918804581.2287997,
+            "cumulative_loss_usd": 4140879185.06581
+          },
+          {
+            "date": "2026-03-05",
+            "day": 6,
+            "loss_share_of_daily_gdp": 0.08353864147150507,
+            "daily_loss_usd": 944149835.0701146,
+            "cumulative_loss_usd": 5085029020.135925
+          },
+          {
+            "date": "2026-03-06",
+            "day": 7,
+            "loss_share_of_daily_gdp": 0.08543469483338034,
+            "daily_loss_usd": 965578941.8566942,
+            "cumulative_loss_usd": 6050607961.9926195
+          },
+          {
+            "date": "2026-03-07",
+            "day": 8,
+            "loss_share_of_daily_gdp": 0.08781513096266197,
+            "daily_loss_usd": 992482520.1202073,
+            "cumulative_loss_usd": 7043090482.112827
+          },
+          {
+            "date": "2026-03-08",
+            "day": 9,
+            "loss_share_of_daily_gdp": 0.0900018623012355,
+            "daily_loss_usd": 1017196855.8610044,
+            "cumulative_loss_usd": 8060287337.973831
+          },
+          {
+            "date": "2026-03-09",
+            "day": 10,
+            "loss_share_of_daily_gdp": 0.09203579664382676,
+            "daily_loss_usd": 1040184287.0697821,
+            "cumulative_loss_usd": 9100471625.043613
+          },
+          {
+            "date": "2026-03-10",
+            "day": 11,
+            "loss_share_of_daily_gdp": 0.09394611185541994,
+            "daily_loss_usd": 1061774580.6176231,
+            "cumulative_loss_usd": 10162246205.661236
+          },
+          {
+            "date": "2026-03-11",
+            "day": 12,
+            "loss_share_of_daily_gdp": 0.09575435179239239,
+            "daily_loss_usd": 1082211224.1658914,
+            "cumulative_loss_usd": 11244457429.827127
+          },
+          {
+            "date": "2026-03-12",
+            "day": 13,
+            "loss_share_of_daily_gdp": 0.0974768770967769,
+            "daily_loss_usd": 1101679124.9288392,
+            "cumulative_loss_usd": 12346136554.755966
+          },
+          {
+            "date": "2026-03-13",
+            "day": 14,
+            "loss_share_of_daily_gdp": 0.09912640515426768,
+            "daily_loss_usd": 1120322014.2072659,
+            "cumulative_loss_usd": 13466458568.963232
+          },
+          {
+            "date": "2026-03-14",
+            "day": 15,
+            "loss_share_of_daily_gdp": 0.10071301747355718,
+            "daily_loss_usd": 1138253832.7428637,
+            "cumulative_loss_usd": 14604712401.706097
+          },
+          {
+            "date": "2026-03-15",
+            "day": 16,
+            "loss_share_of_daily_gdp": 0.10224484128354931,
+            "daily_loss_usd": 1155566434.0981762,
+            "cumulative_loss_usd": 15760278835.804274
+          },
+          {
+            "date": "2026-03-16",
+            "day": 17,
+            "loss_share_of_daily_gdp": 0.10372852413189144,
+            "daily_loss_usd": 1172334948.5471022,
+            "cumulative_loss_usd": 16932613784.351376
+          },
+          {
+            "date": "2026-03-17",
+            "day": 18,
+            "loss_share_of_daily_gdp": 0.10516957262212281,
+            "daily_loss_usd": 1188621611.46637,
+            "cumulative_loss_usd": 18121235395.817745
+          },
+          {
+            "date": "2026-03-18",
+            "day": 19,
+            "loss_share_of_daily_gdp": 0.1065725994437472,
+            "daily_loss_usd": 1204478555.257914,
+            "cumulative_loss_usd": 19325713951.07566
+          },
+          {
+            "date": "2026-03-19",
+            "day": 20,
+            "loss_share_of_daily_gdp": 0.10794150696471407,
+            "daily_loss_usd": 1219949884.302545,
+            "cumulative_loss_usd": 20545663835.378204
+          },
+          {
+            "date": "2026-03-20",
+            "day": 21,
+            "loss_share_of_daily_gdp": 0.10927962598399808,
+            "daily_loss_usd": 1235073243.1351416,
+            "cumulative_loss_usd": 21780737078.513348
+          },
+          {
+            "date": "2026-03-21",
+            "day": 22,
+            "loss_share_of_daily_gdp": 0.11058982217630728,
+            "daily_loss_usd": 1249881019.4777837,
+            "cumulative_loss_usd": 23030618097.99113
+          },
+          {
+            "date": "2026-03-22",
+            "day": 23,
+            "loss_share_of_daily_gdp": 0.11187457885592852,
+            "daily_loss_usd": 1264401279.6328807,
+            "cumulative_loss_usd": 24295019377.624012
+          },
+          {
+            "date": "2026-03-23",
+            "day": 24,
+            "loss_share_of_daily_gdp": 0.11313606211327973,
+            "daily_loss_usd": 1278658504.6534493,
+            "cumulative_loss_usd": 25573677882.277462
+          },
+          {
+            "date": "2026-03-24",
+            "day": 25,
+            "loss_share_of_daily_gdp": 0.11437617264587886,
+            "daily_loss_usd": 1292674176.134312,
+            "cumulative_loss_usd": 26866352058.411774
+          },
+          {
+            "date": "2026-03-25",
+            "day": 26,
+            "loss_share_of_daily_gdp": 0.11559658741766421,
+            "daily_loss_usd": 1306467247.043794,
+            "cumulative_loss_usd": 28172819305.455566
+          },
+          {
+            "date": "2026-03-26",
+            "day": 27,
+            "loss_share_of_daily_gdp": 0.11679879345185323,
+            "daily_loss_usd": 1320054523.6490405,
+            "cumulative_loss_usd": 29492873829.104607
+          },
+          {
+            "date": "2026-03-27",
+            "day": 28,
+            "loss_share_of_daily_gdp": 0.117984115475155,
+            "daily_loss_usd": 1333450977.9496179,
+            "cumulative_loss_usd": 30826324807.054226
+          },
+          {
+            "date": "2026-03-28",
+            "day": 29,
+            "loss_share_of_daily_gdp": 0.11915373870883361,
+            "daily_loss_usd": 1346670005.261051,
+            "cumulative_loss_usd": 32172994812.315277
+          },
+          {
+            "date": "2026-03-29",
+            "day": 30,
+            "loss_share_of_daily_gdp": 0.1203087277944445,
+            "daily_loss_usd": 1359723638.112613,
+            "cumulative_loss_usd": 33532718450.42789
+          },
+          {
+            "date": "2026-03-30",
+            "day": 31,
+            "loss_share_of_daily_gdp": 0.1214500426151673,
+            "daily_loss_usd": 1372622725.0592935,
+            "cumulative_loss_usd": 34905341175.48718
+          }
+        ]
+      },
+      {
+        "code": "ITA",
+        "name": "Italy",
+        "rank": 8,
+        "gdp_usd": 2543677000000.0,
+        "sensitivity": 0.96,
+        "daily_loss_usd": 990887045.9313469,
+        "cumulative_loss_usd": 25197929316.74669,
+        "loss_share_of_daily_gdp": 0.14218541574458612,
+        "cumulative_pct_of_annual_gdp": 0.99061041621034,
+        "series": [
+          {
+            "date": "2026-02-28",
+            "day": 1,
+            "loss_share_of_daily_gdp": 0.072,
+            "daily_loss_usd": 501766421.9178082,
+            "cumulative_loss_usd": 501766421.9178082
+          },
+          {
+            "date": "2026-03-01",
+            "day": 2,
+            "loss_share_of_daily_gdp": 0.0819813194000632,
+            "daily_loss_usd": 571326018.0482043,
+            "cumulative_loss_usd": 1073092439.9660125
+          },
+          {
+            "date": "2026-03-02",
+            "day": 3,
+            "loss_share_of_daily_gdp": 0.08782001695682076,
+            "daily_loss_usd": 612015773.3497944,
+            "cumulative_loss_usd": 1685108213.3158069
+          },
+          {
+            "date": "2026-03-03",
+            "day": 4,
+            "loss_share_of_daily_gdp": 0.09196263880012642,
+            "daily_loss_usd": 640885614.1786005,
+            "cumulative_loss_usd": 2325993827.4944077
+          },
+          {
+            "date": "2026-03-04",
+            "day": 5,
+            "loss_share_of_daily_gdp": 0.09517590593905104,
+            "daily_loss_usd": 663278802.4419932,
+            "cumulative_loss_usd": 2989272629.936401
+          },
+          {
+            "date": "2026-03-05",
+            "day": 6,
+            "loss_share_of_daily_gdp": 0.09780133635688398,
+            "daily_loss_usd": 681575369.4801906,
+            "cumulative_loss_usd": 3670847999.4165916
+          },
+          {
+            "date": "2026-03-06",
+            "day": 7,
+            "loss_share_of_daily_gdp": 0.1000211061463965,
+            "daily_loss_usd": 697044896.4908149,
+            "cumulative_loss_usd": 4367892895.907407
+          },
+          {
+            "date": "2026-03-07",
+            "day": 8,
+            "loss_share_of_daily_gdp": 0.10280795820018963,
+            "daily_loss_usd": 716466407.3720104,
+            "cumulative_loss_usd": 5084359303.279417
+          },
+          {
+            "date": "2026-03-08",
+            "day": 9,
+            "loss_share_of_daily_gdp": 0.10536803391364157,
+            "daily_loss_usd": 734307518.9078083,
+            "cumulative_loss_usd": 5818666822.187225
+          },
+          {
+            "date": "2026-03-09",
+            "day": 10,
+            "loss_share_of_daily_gdp": 0.10774922533911425,
+            "daily_loss_usd": 750901989.7614305,
+            "cumulative_loss_usd": 6569568811.948656
+          },
+          {
+            "date": "2026-03-10",
+            "day": 11,
+            "loss_share_of_daily_gdp": 0.10998569192829653,
+            "daily_loss_usd": 766487876.4029961,
+            "cumulative_loss_usd": 7336056688.351652
+          },
+          {
+            "date": "2026-03-11",
+            "day": 12,
+            "loss_share_of_daily_gdp": 0.1121026557569472,
+            "daily_loss_usd": 781240950.9256552,
+            "cumulative_loss_usd": 8117297639.2773075
+          },
+          {
+            "date": "2026-03-12",
+            "day": 13,
+            "loss_share_of_daily_gdp": 0.11411927074744613,
+            "daily_loss_usd": 795294696.5946617,
+            "cumulative_loss_usd": 8912592335.87197
+          },
+          {
+            "date": "2026-03-13",
+            "day": 14,
+            "loss_share_of_daily_gdp": 0.11605042554645974,
+            "daily_loss_usd": 808752872.062307,
+            "cumulative_loss_usd": 9721345207.934277
+          },
+          {
+            "date": "2026-03-14",
+            "day": 15,
+            "loss_share_of_daily_gdp": 0.11790792289587182,
+            "daily_loss_usd": 821697730.3780892,
+            "cumulative_loss_usd": 10543042938.312366
+          },
+          {
+            "date": "2026-03-15",
+            "day": 16,
+            "loss_share_of_daily_gdp": 0.11970127760025286,
+            "daily_loss_usd": 834195580.0065161,
+            "cumulative_loss_usd": 11377238518.318882
+          },
+          {
+            "date": "2026-03-16",
+            "day": 17,
+            "loss_share_of_daily_gdp": 0.1214382721544095,
+            "daily_loss_usd": 846300656.9833202,
+            "cumulative_loss_usd": 12223539175.302202
+          },
+          {
+            "date": "2026-03-17",
+            "day": 18,
+            "loss_share_of_daily_gdp": 0.12312535331370476,
+            "daily_loss_usd": 858057888.6053277,
+            "cumulative_loss_usd": 13081597063.90753
+          },
+          {
+            "date": "2026-03-18",
+            "day": 19,
+            "loss_share_of_daily_gdp": 0.12476792129999673,
+            "daily_loss_usd": 869504908.9003062,
+            "cumulative_loss_usd": 13951101972.807837
+          },
+          {
+            "date": "2026-03-19",
+            "day": 20,
+            "loss_share_of_daily_gdp": 0.12637054473917744,
+            "daily_loss_usd": 880673556.5219635,
+            "cumulative_loss_usd": 14831775529.3298
+          },
+          {
+            "date": "2026-03-20",
+            "day": 21,
+            "loss_share_of_daily_gdp": 0.12793712310321728,
+            "daily_loss_usd": 891591006.804993,
+            "cumulative_loss_usd": 15723366536.134792
+          },
+          {
+            "date": "2026-03-21",
+            "day": 22,
+            "loss_share_of_daily_gdp": 0.12947101132835975,
+            "daily_loss_usd": 902280640.226543,
+            "cumulative_loss_usd": 16625647176.361336
+          },
+          {
+            "date": "2026-03-22",
+            "day": 23,
+            "loss_share_of_daily_gdp": 0.13097511670937975,
+            "daily_loss_usd": 912762717.660178,
+            "cumulative_loss_usd": 17538409894.021515
+          },
+          {
+            "date": "2026-03-23",
+            "day": 24,
+            "loss_share_of_daily_gdp": 0.13245197515701043,
+            "daily_loss_usd": 923054911.812216,
+            "cumulative_loss_usd": 18461464805.833733
+          },
+          {
+            "date": "2026-03-24",
+            "day": 25,
+            "loss_share_of_daily_gdp": 0.13390381187810207,
+            "daily_loss_usd": 933172730.1004249,
+            "cumulative_loss_usd": 19394637535.93416
+          },
+          {
+            "date": "2026-03-25",
+            "day": 26,
+            "loss_share_of_daily_gdp": 0.13533259014750934,
+            "daily_loss_usd": 943129854.544236,
+            "cumulative_loss_usd": 20337767390.478394
+          },
+          {
+            "date": "2026-03-26",
+            "day": 27,
+            "loss_share_of_daily_gdp": 0.13674005087046232,
+            "daily_loss_usd": 952938417.4740411,
+            "cumulative_loss_usd": 21290705807.952435
+          },
+          {
+            "date": "2026-03-27",
+            "day": 28,
+            "loss_share_of_daily_gdp": 0.13812774494652294,
+            "daily_loss_usd": 962609227.0748949,
+            "cumulative_loss_usd": 22253315035.02733
+          },
+          {
+            "date": "2026-03-28",
+            "day": 29,
+            "loss_share_of_daily_gdp": 0.13949705995180522,
+            "daily_loss_usd": 972151953.3343235,
+            "cumulative_loss_usd": 23225466988.361652
+          },
+          {
+            "date": "2026-03-29",
+            "day": 30,
+            "loss_share_of_daily_gdp": 0.14084924229593504,
+            "daily_loss_usd": 981575282.4536909,
+            "cumulative_loss_usd": 24207042270.815342
+          },
+          {
+            "date": "2026-03-30",
+            "day": 31,
+            "loss_share_of_daily_gdp": 0.14218541574458612,
+            "daily_loss_usd": 990887045.9313469,
+            "cumulative_loss_usd": 25197929316.74669
+          }
+        ]
+      },
+      {
+        "code": "CAN",
+        "name": "Canada",
+        "rank": 10,
+        "gdp_usd": 2283599000000.0,
+        "sensitivity": 1.02,
+        "daily_loss_usd": 945172267.9026814,
+        "cumulative_loss_usd": 24035417655.87986,
+        "loss_share_of_daily_gdp": 0.15107200422862274,
+        "cumulative_pct_of_annual_gdp": 1.0525235672234863,
+        "series": [
+          {
+            "date": "2026-02-28",
+            "day": 1,
+            "loss_share_of_daily_gdp": 0.0765,
+            "daily_loss_usd": 478617324.65753424,
+            "cumulative_loss_usd": 478617324.65753424
+          },
+          {
+            "date": "2026-03-01",
+            "day": 2,
+            "loss_share_of_daily_gdp": 0.08710515186256716,
+            "daily_loss_usd": 544967774.488237,
+            "cumulative_loss_usd": 1023585099.1457713
+          },
+          {
+            "date": "2026-03-02",
+            "day": 3,
+            "loss_share_of_daily_gdp": 0.09330876801662207,
+            "daily_loss_usd": 583780299.5451784,
+            "cumulative_loss_usd": 1607365398.6909497
+          },
+          {
+            "date": "2026-03-03",
+            "day": 4,
+            "loss_share_of_daily_gdp": 0.09771030372513433,
+            "daily_loss_usd": 611318224.3189398,
+            "cumulative_loss_usd": 2218683623.0098896
+          },
+          {
+            "date": "2026-03-04",
+            "day": 5,
+            "loss_share_of_daily_gdp": 0.10112440006024175,
+            "daily_loss_usd": 632678298.2278575,
+            "cumulative_loss_usd": 2851361921.237747
+          },
+          {
+            "date": "2026-03-05",
+            "day": 6,
+            "loss_share_of_daily_gdp": 0.10391391987918923,
+            "daily_loss_usd": 650130749.3758812,
+            "cumulative_loss_usd": 3501492670.6136284
+          },
+          {
+            "date": "2026-03-06",
+            "day": 7,
+            "loss_share_of_daily_gdp": 0.10627242528054628,
+            "daily_loss_usd": 664886586.5704938,
+            "cumulative_loss_usd": 4166379257.184122
+          },
+          {
+            "date": "2026-03-07",
+            "day": 8,
+            "loss_share_of_daily_gdp": 0.10923345558770149,
+            "daily_loss_usd": 683412082.0455331,
+            "cumulative_loss_usd": 4849791339.229655
+          },
+          {
+            "date": "2026-03-08",
+            "day": 9,
+            "loss_share_of_daily_gdp": 0.11195353603324416,
+            "daily_loss_usd": 700430090.2246037,
+            "cumulative_loss_usd": 5550221429.454259
+          },
+          {
+            "date": "2026-03-09",
+            "day": 10,
+            "loss_share_of_daily_gdp": 0.1144835519228089,
+            "daily_loss_usd": 716258971.7462314,
+            "cumulative_loss_usd": 6266480401.20049
+          },
+          {
+            "date": "2026-03-10",
+            "day": 11,
+            "loss_share_of_daily_gdp": 0.11685979767381507,
+            "daily_loss_usd": 731125800.2962369,
+            "cumulative_loss_usd": 6997606201.496727
+          },
+          {
+            "date": "2026-03-11",
+            "day": 12,
+            "loss_share_of_daily_gdp": 0.1191090717417564,
+            "daily_loss_usd": 745198238.6860361,
+            "cumulative_loss_usd": 7742804440.182763
+          },
+          {
+            "date": "2026-03-12",
+            "day": 13,
+            "loss_share_of_daily_gdp": 0.12125172516916151,
+            "daily_loss_usd": 758603611.9029372,
+            "cumulative_loss_usd": 8501408052.0857
+          },
+          {
+            "date": "2026-03-13",
+            "day": 14,
+            "loss_share_of_daily_gdp": 0.12330357714311348,
+            "daily_loss_usd": 771440891.6724296,
+            "cumulative_loss_usd": 9272848943.75813
+          },
+          {
+            "date": "2026-03-14",
+            "day": 15,
+            "loss_share_of_daily_gdp": 0.12527716807686382,
+            "daily_loss_usd": 783788536.2826251,
+            "cumulative_loss_usd": 10056637480.040754
+          },
+          {
+            "date": "2026-03-15",
+            "day": 16,
+            "loss_share_of_daily_gdp": 0.12718260745026866,
+            "daily_loss_usd": 795709795.043359,
+            "cumulative_loss_usd": 10852347275.084114
+          },
+          {
+            "date": "2026-03-16",
+            "day": 17,
+            "loss_share_of_daily_gdp": 0.1290281641640601,
+            "daily_loss_usd": 807256401.7996808,
+            "cumulative_loss_usd": 11659603676.883795
+          },
+          {
+            "date": "2026-03-17",
+            "day": 18,
+            "loss_share_of_daily_gdp": 0.1308206878958113,
+            "daily_loss_usd": 818471211.11832,
+            "cumulative_loss_usd": 12478074888.002115
+          },
+          {
+            "date": "2026-03-18",
+            "day": 19,
+            "loss_share_of_daily_gdp": 0.13256591638124654,
+            "daily_loss_usd": 829390120.7734199,
+            "cumulative_loss_usd": 13307465008.775536
+          },
+          {
+            "date": "2026-03-19",
+            "day": 20,
+            "loss_share_of_daily_gdp": 0.13426870378537603,
+            "daily_loss_usd": 840043500.5358381,
+            "cumulative_loss_usd": 14147508509.311375
+          },
+          {
+            "date": "2026-03-20",
+            "day": 21,
+            "loss_share_of_daily_gdp": 0.13593319329716835,
+            "daily_loss_usd": 850457272.0006038,
+            "cumulative_loss_usd": 14997965781.31198
+          },
+          {
+            "date": "2026-03-21",
+            "day": 22,
+            "loss_share_of_daily_gdp": 0.13756294953638223,
+            "daily_loss_usd": 860653736.981734,
+            "cumulative_loss_usd": 15858619518.293713
+          },
+          {
+            "date": "2026-03-22",
+            "day": 23,
+            "loss_share_of_daily_gdp": 0.139161061503716,
+            "daily_loss_usd": 870652221.6132174,
+            "cumulative_loss_usd": 16729271739.906929
+          },
+          {
+            "date": "2026-03-23",
+            "day": 24,
+            "loss_share_of_daily_gdp": 0.14073022360432358,
+            "daily_loss_usd": 880469583.2674239,
+            "cumulative_loss_usd": 17609741323.174355
+          },
+          {
+            "date": "2026-03-24",
+            "day": 25,
+            "loss_share_of_daily_gdp": 0.1422728001204835,
+            "daily_loss_usd": 890120613.9242082,
+            "cumulative_loss_usd": 18499861937.098564
+          },
+          {
+            "date": "2026-03-25",
+            "day": 26,
+            "loss_share_of_daily_gdp": 0.14379087703172866,
+            "daily_loss_usd": 899618364.3802152,
+            "cumulative_loss_usd": 19399480301.47878
+          },
+          {
+            "date": "2026-03-26",
+            "day": 27,
+            "loss_share_of_daily_gdp": 0.14528630404986623,
+            "daily_loss_usd": 908974407.2382753,
+            "cumulative_loss_usd": 20308454708.717052
+          },
+          {
+            "date": "2026-03-27",
+            "day": 28,
+            "loss_share_of_daily_gdp": 0.14676072900568063,
+            "daily_loss_usd": 918199052.045598,
+            "cumulative_loss_usd": 21226653760.76265
+          },
+          {
+            "date": "2026-03-28",
+            "day": 29,
+            "loss_share_of_daily_gdp": 0.14821562619879305,
+            "daily_loss_usd": 927301522.6628429,
+            "cumulative_loss_usd": 22153955283.42549
+          },
+          {
+            "date": "2026-03-29",
+            "day": 30,
+            "loss_share_of_daily_gdp": 0.14965231993943098,
+            "daily_loss_usd": 936290104.551684,
+            "cumulative_loss_usd": 23090245387.977177
+          },
+          {
+            "date": "2026-03-30",
+            "day": 31,
+            "loss_share_of_daily_gdp": 0.15107200422862274,
+            "daily_loss_usd": 945172267.9026814,
+            "cumulative_loss_usd": 24035417655.87986
+          }
+        ]
+      },
+      {
+        "code": "RUS",
+        "name": "Russia",
+        "rank": 9,
+        "gdp_usd": 2540656000000.0,
+        "sensitivity": 0.78,
+        "daily_loss_usd": 804139552.2451546,
+        "cumulative_loss_usd": 20449002418.059288,
+        "loss_share_of_daily_gdp": 0.11552565029247622,
+        "cumulative_pct_of_annual_gdp": 0.8048709631709011,
+        "series": [
+          {
+            "date": "2026-02-28",
+            "day": 1,
+            "loss_share_of_daily_gdp": 0.058499999999999996,
+            "daily_loss_usd": 407201030.13698626,
+            "cumulative_loss_usd": 407201030.13698626
+          },
+          {
+            "date": "2026-03-01",
+            "day": 2,
+            "loss_share_of_daily_gdp": 0.06660982201255136,
+            "daily_loss_usd": 463651079.32909775,
+            "cumulative_loss_usd": 870852109.466084
+          },
+          {
+            "date": "2026-03-02",
+            "day": 3,
+            "loss_share_of_daily_gdp": 0.07135376377741688,
+            "daily_loss_usd": 496672241.27034754,
+            "cumulative_loss_usd": 1367524350.7364316
+          },
+          {
+            "date": "2026-03-03",
+            "day": 4,
+            "loss_share_of_daily_gdp": 0.07471964402510271,
+            "daily_loss_usd": 520101128.5212092,
+            "cumulative_loss_usd": 1887625479.2576408
+          },
+          {
+            "date": "2026-03-04",
+            "day": 5,
+            "loss_share_of_daily_gdp": 0.07733042357547898,
+            "daily_loss_usd": 538273985.3139236,
+            "cumulative_loss_usd": 2425899464.5715647
+          },
+          {
+            "date": "2026-03-05",
+            "day": 6,
+            "loss_share_of_daily_gdp": 0.07946358578996823,
+            "daily_loss_usd": 553122290.462459,
+            "cumulative_loss_usd": 2979021755.034024
+          },
+          {
+            "date": "2026-03-06",
+            "day": 7,
+            "loss_share_of_daily_gdp": 0.08126714874394717,
+            "daily_loss_usd": 565676353.5868543,
+            "cumulative_loss_usd": 3544698108.620878
+          },
+          {
+            "date": "2026-03-07",
+            "day": 8,
+            "loss_share_of_daily_gdp": 0.08353146603765407,
+            "daily_loss_usd": 581437590.0749645,
+            "cumulative_loss_usd": 4126135698.6958427
+          },
+          {
+            "date": "2026-03-08",
+            "day": 9,
+            "loss_share_of_daily_gdp": 0.08561152755483377,
+            "daily_loss_usd": 595916277.1269965,
+            "cumulative_loss_usd": 4722051975.82284
+          },
+          {
+            "date": "2026-03-09",
+            "day": 10,
+            "loss_share_of_daily_gdp": 0.08754624558803034,
+            "daily_loss_usd": 609383271.5909666,
+            "cumulative_loss_usd": 5331435247.413806
+          },
+          {
+            "date": "2026-03-10",
+            "day": 11,
+            "loss_share_of_daily_gdp": 0.08936337469174094,
+            "daily_loss_usd": 622031764.6323829,
+            "cumulative_loss_usd": 5953467012.046188
+          },
+          {
+            "date": "2026-03-11",
+            "day": 12,
+            "loss_share_of_daily_gdp": 0.0910834078025196,
+            "daily_loss_usd": 634004401.4627897,
+            "cumulative_loss_usd": 6587471413.508978
+          },
+          {
+            "date": "2026-03-12",
+            "day": 13,
+            "loss_share_of_daily_gdp": 0.09272190748229998,
+            "daily_loss_usd": 645409508.4283571,
+            "cumulative_loss_usd": 7232880921.937335
+          },
+          {
+            "date": "2026-03-13",
+            "day": 14,
+            "loss_share_of_daily_gdp": 0.09429097075649853,
+            "daily_loss_usd": 656331289.3104726,
+            "cumulative_loss_usd": 7889212211.2478075
+          },
+          {
+            "date": "2026-03-14",
+            "day": 15,
+            "loss_share_of_daily_gdp": 0.09580018735289586,
+            "daily_loss_usd": 666836495.3404355,
+            "cumulative_loss_usd": 8556048706.5882435
+          },
+          {
+            "date": "2026-03-15",
+            "day": 16,
+            "loss_share_of_daily_gdp": 0.09725728805020545,
+            "daily_loss_usd": 676978938.1602267,
+            "cumulative_loss_usd": 9233027644.74847
+          },
+          {
+            "date": "2026-03-16",
+            "day": 17,
+            "loss_share_of_daily_gdp": 0.09866859612545772,
+            "daily_loss_usd": 686802632.212934,
+            "cumulative_loss_usd": 9919830276.961405
+          },
+          {
+            "date": "2026-03-17",
+            "day": 18,
+            "loss_share_of_daily_gdp": 0.10003934956738512,
+            "daily_loss_usd": 696344037.5739025,
+            "cumulative_loss_usd": 10616174314.535307
+          },
+          {
+            "date": "2026-03-18",
+            "day": 19,
+            "loss_share_of_daily_gdp": 0.10137393605624734,
+            "daily_loss_usd": 705633695.5751264,
+            "cumulative_loss_usd": 11321808010.110434
+          },
+          {
+            "date": "2026-03-19",
+            "day": 20,
+            "loss_share_of_daily_gdp": 0.10267606760058168,
+            "daily_loss_usd": 714697444.3995162,
+            "cumulative_loss_usd": 12036505454.50995
+          },
+          {
+            "date": "2026-03-20",
+            "day": 21,
+            "loss_share_of_daily_gdp": 0.10394891252136404,
+            "daily_loss_usd": 723557337.7832292,
+            "cumulative_loss_usd": 12760062792.29318
+          },
+          {
+            "date": "2026-03-21",
+            "day": 22,
+            "loss_share_of_daily_gdp": 0.1051951967042923,
+            "daily_loss_usd": 732232349.8025765,
+            "cumulative_loss_usd": 13492295142.095757
+          },
+          {
+            "date": "2026-03-22",
+            "day": 23,
+            "loss_share_of_daily_gdp": 0.10641728232637104,
+            "daily_loss_usd": 740738922.86627,
+            "cumulative_loss_usd": 14233034064.962027
+          },
+          {
+            "date": "2026-03-23",
+            "day": 24,
+            "loss_share_of_daily_gdp": 0.10761722981507096,
+            "daily_loss_usd": 749091398.9946271,
+            "cumulative_loss_usd": 14982125463.956654
+          },
+          {
+            "date": "2026-03-24",
+            "day": 25,
+            "loss_share_of_daily_gdp": 0.10879684715095794,
+            "daily_loss_usd": 757302363.0004498,
+            "cumulative_loss_usd": 15739427826.957104
+          },
+          {
+            "date": "2026-03-25",
+            "day": 26,
+            "loss_share_of_daily_gdp": 0.10995772949485133,
+            "daily_loss_usd": 765382918.3218383,
+            "cumulative_loss_usd": 16504810745.278942
+          },
+          {
+            "date": "2026-03-26",
+            "day": 27,
+            "loss_share_of_daily_gdp": 0.11110129133225065,
+            "daily_loss_usd": 773342910.7699468,
+            "cumulative_loss_usd": 17278153656.04889
+          },
+          {
+            "date": "2026-03-27",
+            "day": 28,
+            "loss_share_of_daily_gdp": 0.11222879276904989,
+            "daily_loss_usd": 781191111.5655978,
+            "cumulative_loss_usd": 18059344767.614487
+          },
+          {
+            "date": "2026-03-28",
+            "day": 29,
+            "loss_share_of_daily_gdp": 0.11334136121084173,
+            "daily_loss_usd": 788935368.2424446,
+            "cumulative_loss_usd": 18848280135.85693
+          },
+          {
+            "date": "2026-03-29",
+            "day": 30,
+            "loss_share_of_daily_gdp": 0.11444000936544721,
+            "daily_loss_usd": 796582729.9572045,
+            "cumulative_loss_usd": 19644862865.814133
+          },
+          {
+            "date": "2026-03-30",
+            "day": 31,
+            "loss_share_of_daily_gdp": 0.11552565029247622,
+            "daily_loss_usd": 804139552.2451546,
+            "cumulative_loss_usd": 20449002418.059288
+          }
+        ]
+      }
+    ],
+    "dates": [
+      "2026-02-28",
+      "2026-03-01",
+      "2026-03-02",
+      "2026-03-03",
+      "2026-03-04",
+      "2026-03-05",
+      "2026-03-06",
+      "2026-03-07",
+      "2026-03-08",
+      "2026-03-09",
+      "2026-03-10",
+      "2026-03-11",
+      "2026-03-12",
+      "2026-03-13",
+      "2026-03-14",
+      "2026-03-15",
+      "2026-03-16",
+      "2026-03-17",
+      "2026-03-18",
+      "2026-03-19",
+      "2026-03-20",
+      "2026-03-21",
+      "2026-03-22",
+      "2026-03-23",
+      "2026-03-24",
+      "2026-03-25",
+      "2026-03-26",
+      "2026-03-27",
+      "2026-03-28",
+      "2026-03-29",
+      "2026-03-30"
+    ]
+  },
+  "chart_image": "/assets/img/2026-03-30-world.png",
+  "author": "Pamin",
+  "model_note": "This package does not estimate how much Iran's blackout is hurting other economies right now. Instead, it uses Iran's outage duration as the clock and simulates what a same-length local internet blackout would cost for the world scenario and for each top-10 economy using a 2025 GDP baseline plus a day-by-day escalation curve."
+}
