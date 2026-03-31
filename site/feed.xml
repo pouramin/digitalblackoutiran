@@ -6,6 +6,13 @@
 <description>Daily simulation of how much GDP the world and the top 10 economies would lose if their own internet were blacked out for as many days as Iran's.</description>
 
         <item>
+          <title>Internet blackout simulation update — day 32</title>
+          <link>https://digitalblackoutiran.it/posts/2026-03-31-internet-blackout-simulation-update-day-32/</link>
+          <guid>https://digitalblackoutiran.it/posts/2026-03-31-internet-blackout-simulation-update-day-32/</guid>
+          <pubDate>Tue, 31 Mar 2026 00:00:00 +0000</pubDate>
+          <description><![CDATA[Internet outage simulation day 32: world daily loss $50.61B, cumulative world loss $1.33T; United States remains the largest economy case.]]></description>
+        </item>
+        <item>
           <title>Internet blackout simulation update — day 31</title>
           <link>https://digitalblackoutiran.it/posts/2026-03-30-internet-blackout-simulation-update-day-31/</link>
           <guid>https://digitalblackoutiran.it/posts/2026-03-30-internet-blackout-simulation-update-day-31/</guid>
@@ -137,13 +144,6 @@
           <guid>https://digitalblackoutiran.it/posts/2026-03-12-internet-blackout-simulation-update-day-13/</guid>
           <pubDate>Thu, 12 Mar 2026 00:00:00 +0000</pubDate>
           <description><![CDATA[Day 13 simulation: world scenario $40.25B/day; biggest country case: United States $11.77B/day.]]></description>
-        </item>
-        <item>
-          <title>Internet blackout simulation update — day 12</title>
-          <link>https://digitalblackoutiran.it/posts/2026-03-11-internet-blackout-simulation-update-day-12/</link>
-          <guid>https://digitalblackoutiran.it/posts/2026-03-11-internet-blackout-simulation-update-day-12/</guid>
-          <pubDate>Wed, 11 Mar 2026 00:00:00 +0000</pubDate>
-          <description><![CDATA[Day 12 simulation: world scenario $39.54B/day; biggest country case: United States $11.56B/day.]]></description>
         </item>
 </channel>
 </rss>
