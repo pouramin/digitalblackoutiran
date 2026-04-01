@@ -295,7 +295,7 @@ def make_chart(signal: Signal, simulation: Dict[str, Any], chart_path: Path, tit
     chart_path.parent.mkdir(parents=True, exist_ok=True)
     world_series = sorted(simulation['world']['series'], key=lambda x: x['date'])
     dates = [datetime.fromisoformat(x['date']).date() for x in world_series]
-    billions = [x['daily_loss_usd'] / 1_000_000_000 for x in world_series]
+    billions = [x['cumulative_loss_usd'] / 1_000_000_000 for x in world_series]
 
     plt.rcParams['font.family'] = 'DejaVu Sans'
     fig, ax = plt.subplots(figsize=(12, 7), dpi=150)
@@ -305,7 +305,7 @@ def make_chart(signal: Signal, simulation: Dict[str, Any], chart_path: Path, tit
     ax.plot(dates, billions, linewidth=2.8, color='#98d08b', marker='o' if len(dates) == 1 else None)
     ax.fill_between(dates, billions, 0, color='#98d08b', alpha=0.18)
 
-    ymax = max(billions) * 1.18 if billions else 1
+    ymax = max(billions) * 1.14 if billions else 1
     ax.set_ylim(0, ymax)
     ax.tick_params(axis='x', colors='#cbd5e1', labelsize=10)
     ax.tick_params(axis='y', colors='#cbd5e1', labelsize=11)
@@ -325,25 +325,19 @@ def make_chart(signal: Signal, simulation: Dict[str, Any], chart_path: Path, tit
         spine.set_visible(False)
     ax.grid(True, axis='both', color='white', alpha=0.12, linewidth=0.8)
 
-    if dates:
-        y_level = max(billions) * 0.64
-        ax.annotate('', xy=(dates[-1], y_level), xytext=(dates[0], y_level), arrowprops=dict(arrowstyle='<->', color='#ff2d2d', linewidth=1.8))
-        ax.text(dates[0] + (dates[-1] - dates[0]) / 2, y_level + max(billions) * 0.08, 'SIMULATION WINDOW', color='#ffb000', ha='center', va='bottom', fontsize=12, fontweight='bold')
-
     end_txt = title_date_end or dates[-1].isoformat()
-    ax.set_title(f'Simulated Blackout Loss - World: {dates[0].isoformat()} to {end_txt} UTC', color='#e5e7eb', fontsize=18, pad=22)
-    ax.set_ylabel('Daily loss if the local internet were blacked out', color='#cbd5e1', fontsize=13, labelpad=16)
+    ax.set_title(f'Simulated Cumulative Blackout Loss - World: {dates[0].isoformat()} to {end_txt} UTC', color='#e5e7eb', fontsize=18, pad=22)
+    ax.set_ylabel('Cumulative loss if the local internet were blacked out', color='#cbd5e1', fontsize=13, labelpad=16)
 
-    fig.text(0.055, 0.09, '■ World scenario', color='#98d08b', fontsize=11)
-    fig.text(0.74, 0.09, 'min', color='#38bdf8', fontsize=12, fontweight='bold')
-    fig.text(0.79, 0.09, fmt_money(min(x['daily_loss_usd'] for x in world_series)) if world_series else '$0', color='#e5e7eb', fontsize=12)
-    fig.text(0.865, 0.09, 'current', color='#38bdf8', fontsize=12, fontweight='bold')
-    fig.text(0.985, 0.09, fmt_money(world_series[-1]['daily_loss_usd']) if world_series else '$0', color='#e5e7eb', fontsize=12, ha='right')
+    fig.text(0.055, 0.09, '■ World cumulative scenario', color='#98d08b', fontsize=11)
+    fig.text(0.73, 0.09, 'day 1', color='#38bdf8', fontsize=12, fontweight='bold')
+    fig.text(0.80, 0.09, fmt_money(world_series[0]['cumulative_loss_usd']) if world_series else '$0', color='#e5e7eb', fontsize=12)
+    fig.text(0.875, 0.09, 'current', color='#38bdf8', fontsize=12, fontweight='bold')
+    fig.text(0.985, 0.09, fmt_money(world_series[-1]['cumulative_loss_usd']) if world_series else '$0', color='#e5e7eb', fontsize=12, ha='right')
 
     plt.tight_layout(rect=[0.03, 0.12, 0.98, 0.94])
     fig.savefig(chart_path, facecolor=fig.get_facecolor(), bbox_inches='tight')
     plt.close(fig)
-
 
 
 
@@ -548,10 +542,10 @@ def render_post(post: Dict[str, Any], site_cfg: Dict[str, Any]) -> None:
           <span>Scenario: local internet outage in each economy</span>
         </div>
         <img class=\"hero-chart\" src=\"{post['chart_image']}\" alt=\"{post['title']} chart\">
-        <div class=\"stat-grid\">
-          <section class=\"stat\"><span>World scenario daily loss</span><strong>{fmt_money(post['simulation']['world']['daily_loss_usd'])}/day</strong></section>
-          <section class=\"stat\"><span>World scenario cumulative loss</span><strong>{fmt_money(post['simulation']['world']['cumulative_loss_usd'])}</strong></section>
-          <section class=\"stat\"><span>Reference outage day</span><strong>{post['simulation']['reference_days']}</strong></section>
+        <div class="stat-grid">
+          <section class="stat stat-primary"><span>World scenario cumulative loss</span><strong>{fmt_money(post['simulation']['world']['cumulative_loss_usd'])}</strong></section>
+          <section class="stat"><span>World scenario daily loss</span><strong>{fmt_money(post['simulation']['world']['daily_loss_usd'])}/day</strong></section>
+          <section class="stat"><span>Reference outage day</span><strong>{post['simulation']['reference_days']}</strong></section>
         </div>
         <div class=\"prose\">{paras}</div>
         <section class=\"table-wrap\">
@@ -637,7 +631,7 @@ def write_css() -> None:
 a{color:inherit;text-decoration:none}img{max-width:100%;display:block}
 .shell{max-width:1200px;margin:0 auto;padding:40px 24px 80px}.hero{padding:16px 0 24px;text-align:center}.eyebrow{letter-spacing:.18em;font-size:.78rem;font-weight:700;color:#8a93a3;margin:0 0 10px}.hero h1{font-size:clamp(2.2rem,5vw,3.6rem);margin:.1em 0}.lead{max-width:900px;margin:0 auto 12px;font-size:1.08rem;color:var(--muted);line-height:1.7}
 .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}.card{background:var(--card);border-radius:10px;padding:18px;box-shadow:0 1px 0 rgba(15,23,42,.05)}.card-head{display:flex;justify-content:space-between;gap:12px;align-items:center;font-size:.85rem;color:var(--muted);margin-bottom:12px}.badge{display:inline-flex;padding:4px 8px;border-radius:999px;background:var(--dark);color:#fff;font-size:.75rem;font-weight:600}.card h2{font-size:1.25rem;line-height:1.3;margin:0 0 10px}.card p{color:#364152;line-height:1.6;min-height:96px}.thumb-link img{border-radius:10px;border:1px solid rgba(15,23,42,.08);margin-top:10px}
-.article-shell{max-width:940px}.article{background:var(--surface);padding:28px;border-radius:18px;box-shadow:0 10px 30px rgba(15,23,42,.06)}.back-link{display:inline-block;margin-bottom:16px;color:var(--accent);font-weight:600}.article h1{font-size:clamp(2rem,4vw,3rem);line-height:1.15;margin:.1em 0 .25em}.meta-row{display:flex;flex-wrap:wrap;gap:16px;color:var(--muted);font-size:.95rem;margin-bottom:20px}.hero-chart{border-radius:16px;border:1px solid var(--stroke);margin:16px 0 20px}.stat-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:18px 0 24px}.stat{background:#f8fafc;border:1px solid var(--stroke);border-radius:16px;padding:16px}.stat span{display:block;color:var(--muted);font-size:.9rem;margin-bottom:6px}.stat strong{font-size:1.25rem}.prose p,.note p{line-height:1.8;color:#344054}.table-wrap{margin-top:28px}.table-wrap h2,.note h2{font-size:1.3rem}table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--stroke);border-radius:12px;overflow:hidden}th,td{text-align:left;padding:14px;border-bottom:1px solid var(--stroke)}th{background:#f8fafc;font-size:.92rem}.note{margin-top:28px;padding:18px;border-radius:16px;background:#fafbfc;border:1px solid var(--stroke)}
+.article-shell{max-width:940px}.article{background:var(--surface);padding:28px;border-radius:18px;box-shadow:0 10px 30px rgba(15,23,42,.06)}.back-link{display:inline-block;margin-bottom:16px;color:var(--accent);font-weight:600}.article h1{font-size:clamp(2rem,4vw,3rem);line-height:1.15;margin:.1em 0 .25em}.meta-row{display:flex;flex-wrap:wrap;gap:16px;color:var(--muted);font-size:.95rem;margin-bottom:20px}.hero-chart{border-radius:16px;border:1px solid var(--stroke);margin:16px 0 20px}.stat-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:18px 0 24px}.stat{background:#f8fafc;border:1px solid var(--stroke);border-radius:16px;padding:16px}.stat-primary{background:#eef6ff;border-color:#bfd7ff}.stat span{display:block;color:var(--muted);font-size:.9rem;margin-bottom:6px}.stat strong{font-size:1.25rem}.prose p,.note p{line-height:1.8;color:#344054}.table-wrap{margin-top:28px}.table-wrap h2,.note h2{font-size:1.3rem}table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--stroke);border-radius:12px;overflow:hidden}th,td{text-align:left;padding:14px;border-bottom:1px solid var(--stroke)}th{background:#f8fafc;font-size:.92rem}.note{margin-top:28px;padding:18px;border-radius:16px;background:#fafbfc;border:1px solid var(--stroke)}
 .site-footer{display:flex;justify-content:center;padding:0 0 34px}.x-link{display:inline-flex;align-items:center;justify-content:center;width:52px;height:52px;border-radius:999px;background:#111827;box-shadow:0 10px 24px rgba(15,23,42,.14)}.x-link svg{width:22px;height:22px;fill:#fff}
 @media (max-width: 960px){.grid{grid-template-columns:1fr 1fr}.stat-grid{grid-template-columns:1fr}}@media (max-width: 680px){.grid{grid-template-columns:1fr}.shell{padding:24px 16px 60px}.article{padding:20px}.card p{min-height:auto}}
         """.strip(),
@@ -714,6 +708,9 @@ def main() -> None:
         build_one(today, site_cfg, model_cfg)
 
     posts = load_existing_posts()
+    for post in posts:
+        chart_path = IMG / f"{post['date']}-world.png"
+        make_chart(read_fallback_signal(), post['simulation'], chart_path, title_date_end=post['date'])
     render_index(posts, site_cfg)
     for post in posts:
         render_post(post, site_cfg)

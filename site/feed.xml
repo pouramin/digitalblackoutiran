@@ -6,6 +6,13 @@
 <description>Daily simulation of how much GDP the world and the top 10 economies would lose if their own internet were blacked out for as many days as Iran's.</description>
 
         <item>
+          <title>Internet blackout simulation update — day 33</title>
+          <link>https://digitalblackoutiran.it/posts/2026-04-01-internet-blackout-simulation-update-day-33/</link>
+          <guid>https://digitalblackoutiran.it/posts/2026-04-01-internet-blackout-simulation-update-day-33/</guid>
+          <pubDate>Wed, 01 Apr 2026 00:00:00 +0000</pubDate>
+          <description><![CDATA[2026-04-01 internet blackout simulation: day 33, world scenario $51.07B/day. United States leads at $14.93B/day.]]></description>
+        </item>
+        <item>
           <title>Internet blackout simulation update — day 22</title>
           <link>https://digitalblackoutiran.it/posts/2026-03-21-internet-blackout-simulation-update-day-22/</link>
           <guid>https://digitalblackoutiran.it/posts/2026-03-21-internet-blackout-simulation-update-day-22/</guid>
@@ -137,13 +144,6 @@
           <guid>https://digitalblackoutiran.it/posts/2026-03-03-internet-blackout-simulation-update-day-4/</guid>
           <pubDate>Tue, 03 Mar 2026 00:00:00 +0000</pubDate>
           <description><![CDATA[Internet blackout day 4: modeled daily loss reaches $32.43B worldwide, with United States and China leading the country ranking.]]></description>
-        </item>
-        <item>
-          <title>Internet blackout simulation update — day 3</title>
-          <link>https://digitalblackoutiran.it/posts/2026-03-02-internet-blackout-simulation-update-day-3/</link>
-          <guid>https://digitalblackoutiran.it/posts/2026-03-02-internet-blackout-simulation-update-day-3/</guid>
-          <pubDate>Mon, 02 Mar 2026 00:00:00 +0000</pubDate>
-          <description><![CDATA[2026-03-02 update: simulated internet blackout losses put United States first, China second, with world exposure at $30.97B/day.]]></description>
         </item>
 </channel>
 </rss>
