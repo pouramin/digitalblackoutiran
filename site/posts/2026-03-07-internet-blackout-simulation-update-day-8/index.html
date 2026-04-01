@@ -20,6 +20,7 @@
   <link rel="alternate" type="application/rss+xml" title="#DigitalBlackOutIran RSS" href="https://digitalblackoutiran.it/feed.xml">
   <link rel="stylesheet" href="/assets/css/styles.css">
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Internet blackout simulation update \u2014 day 8", "datePublished": "2026-03-07", "dateModified": "2026-03-07", "description": "Internet outage simulation day 8: world daily loss $36.26B, cumulative world loss $257.31B; United States remains the largest economy case.", "author": {"@type": "Person", "name": "Pamin"}, "image": ["https://digitalblackoutiran.it/assets/img/2026-03-07-world.png"], "mainEntityOfPage": "https://digitalblackoutiran.it/posts/2026-03-07-internet-blackout-simulation-update-day-8/"}</script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   
@@ -33,13 +34,153 @@
           <span>Reference clock: Iran blackout day 8</span>
           <span>Scenario: local internet outage in each economy</span>
         </div>
-        <img class="hero-chart" src="/assets/img/2026-03-07-world.png" alt="Internet blackout simulation update — day 8 chart">
+        
+        <section class="interactive-chart-block">
+          <div class="chart-header">
+            <h2>Interactive cumulative loss chart: World, United States, China</h2>
+            <p>Move the cursor over the chart to compare the cumulative simulated losses for the world scenario, the United States, and China on the same date.</p>
+          </div>
+          <div class="chart-summary" id="world-chart-summary-20260307">Day 8 · 2026-03-07 · World $257.31B · US $75.22B · China $40.39B</div>
+          <div class="chart-stage">
+            <canvas id="world-chart-20260307"></canvas>
+          </div>
+          <noscript><img class="hero-chart" src="/assets/img/2026-03-07-world.png" alt="Internet blackout simulation update — day 8 chart"></noscript>
+        </section>
+        <script>
+        (function() {
+          const chartPoints = [{"date": "2026-02-28", "day": 1, "world_cumulative_billions": 25.39, "world_cumulative_usd": 25393150684.93, "world_daily_billions": 25.39, "world_daily_usd": 25393150684.93, "usa_cumulative_billions": 7.42, "usa_cumulative_usd": 7423269193.15, "china_cumulative_billions": 3.99, "china_cumulative_usd": 3986008972.6}, {"date": "2026-03-01", "day": 2, "world_cumulative_billions": 54.31, "world_cumulative_usd": 54306539530.42, "world_daily_billions": 28.91, "world_daily_usd": 28913388845.49, "usa_cumulative_billions": 15.88, "usa_cumulative_usd": 15875622008.66, "china_cumulative_billions": 8.52, "china_cumulative_usd": 8524596121.41}, {"date": "2026-03-02", "day": 3, "world_cumulative_billions": 85.28, "world_cumulative_usd": 85279135693.45, "world_daily_billions": 30.97, "world_daily_usd": 30972596163.02, "usa_cumulative_billions": 24.93, "usa_cumulative_usd": 24929950153.34, "china_cumulative_billions": 13.39, "china_cumulative_usd": 13386420782.03}, {"date": "2026-03-03", "day": 4, "world_cumulative_billions": 117.71, "world_cumulative_usd": 117712762699.5, "world_daily_billions": 32.43, "world_daily_usd": 32433627006.05, "usa_cumulative_billions": 34.41, "usa_cumulative_usd": 34411386591.2, "china_cumulative_billions": 18.48, "china_cumulative_usd": 18477586107.05}, {"date": "2026-03-04", "day": 5, "world_cumulative_billions": 151.28, "world_cumulative_usd": 151279653270.12, "world_daily_billions": 33.57, "world_daily_usd": 33566890570.63, "usa_cumulative_billions": 44.22, "usa_cumulative_usd": 44224113959.08, "china_cumulative_billions": 23.75, "china_cumulative_usd": 23746641871.61}, {"date": "2026-03-05", "day": 6, "world_cumulative_billions": 185.77, "world_cumulative_usd": 185772487593.71, "world_daily_billions": 34.49, "world_daily_usd": 34492834323.58, "usa_cumulative_billions": 54.31, "usa_cumulative_usd": 54307525726.13, "china_cumulative_billions": 29.16, "china_cumulative_usd": 29161044708.43}, {"date": "2026-03-06", "day": 7, "world_cumulative_billions": 221.05, "world_cumulative_usd": 221048196205.5, "world_daily_billions": 35.28, "world_daily_usd": 35275708611.79, "usa_cumulative_billions": 64.62, "usa_cumulative_usd": 64619797891.7, "china_cumulative_billions": 34.7, "china_cumulative_usd": 34698336743.84}, {"date": "2026-03-07", "day": 8, "world_cumulative_billions": 257.31, "world_cumulative_usd": 257306779180.33, "world_daily_billions": 36.26, "world_daily_usd": 36258582974.83, "usa_cumulative_billions": 75.22, "usa_cumulative_usd": 75219397182.23, "china_cumulative_billions": 40.39, "china_cumulative_usd": 40389912352.74}];
+          const labels = ["2026-02-28", "2026-03-01", "2026-03-02", "2026-03-03", "2026-03-04", "2026-03-05", "2026-03-06", "2026-03-07"];
+          const worldValues = [25.39, 54.31, 85.28, 117.71, 151.28, 185.77, 221.05, 257.31];
+          const usaValues = [7.42, 15.88, 24.93, 34.41, 44.22, 54.31, 64.62, 75.22];
+          const chinaValues = [3.99, 8.52, 13.39, 18.48, 23.75, 29.16, 34.7, 40.39];
+          const canvas = document.getElementById("world-chart-20260307");
+          const summary = document.getElementById("world-chart-summary-20260307");
+          if (!canvas || typeof Chart === 'undefined') return;
+
+          const formatUSD = (value) => {
+            const abs = Math.abs(value);
+            if (abs >= 1e12) return '$' + (value / 1e12).toFixed(2) + 'T';
+            if (abs >= 1e9) return '$' + (value / 1e9).toFixed(2) + 'B';
+            if (abs >= 1e6) return '$' + (value / 1e6).toFixed(2) + 'M';
+            return '$' + Math.round(value).toLocaleString();
+          };
+          const formatAxis = (billions) => billions >= 1000 ? '$' + (billions / 1000).toFixed(2) + 'T' : '$' + Math.round(billions) + 'B';
+          const updateSummary = (point) => {
+            summary.textContent =
+              'Day ' + point.day + ' · ' + point.date +
+              ' · World ' + formatUSD(point.world_cumulative_usd) +
+              ' · US ' + formatUSD(point.usa_cumulative_usd) +
+              ' · China ' + formatUSD(point.china_cumulative_usd);
+          };
+          const chart = new Chart(canvas, {
+            type: 'line',
+            data: {
+              labels,
+              datasets: [
+                {
+                  label: 'World',
+                  data: worldValues,
+                  borderColor: '#98d08b',
+                  backgroundColor: 'rgba(152, 208, 139, 0.14)',
+                  fill: true,
+                  borderWidth: 3,
+                  tension: 0.28,
+                  pointRadius: 0,
+                  pointHoverRadius: 5,
+                  pointHitRadius: 20,
+                },
+                {
+                  label: 'United States',
+                  data: usaValues,
+                  borderColor: '#60a5fa',
+                  backgroundColor: 'rgba(96, 165, 250, 0)',
+                  fill: false,
+                  borderWidth: 2.4,
+                  tension: 0.28,
+                  pointRadius: 0,
+                  pointHoverRadius: 5,
+                  pointHitRadius: 20,
+                },
+                {
+                  label: 'China',
+                  data: chinaValues,
+                  borderColor: '#f59e0b',
+                  backgroundColor: 'rgba(245, 158, 11, 0)',
+                  fill: false,
+                  borderWidth: 2.4,
+                  tension: 0.28,
+                  pointRadius: 0,
+                  pointHoverRadius: 5,
+                  pointHitRadius: 20,
+                }
+              ]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              interaction: { mode: 'index', intersect: false },
+              plugins: {
+                legend: {
+                  display: true,
+                  position: 'bottom',
+                  labels: {
+                    color: '#cbd5e1',
+                    usePointStyle: true,
+                    boxWidth: 10,
+                    boxHeight: 10
+                  }
+                },
+                tooltip: {
+                  backgroundColor: '#111827',
+                  titleColor: '#f9fafb',
+                  bodyColor: '#f9fafb',
+                  borderColor: 'rgba(255,255,255,0.14)',
+                  borderWidth: 1,
+                  displayColors: true,
+                  callbacks: {
+                    title: (items) => items[0] ? items[0].label : '',
+                    label: (context) => {
+                      const point = chartPoints[context.dataIndex];
+                      if (context.dataset.label === 'World') {
+                        return 'World · Day ' + point.day + ' · ' + formatUSD(point.world_cumulative_usd);
+                      }
+                      if (context.dataset.label === 'United States') {
+                        return 'United States · Day ' + point.day + ' · ' + formatUSD(point.usa_cumulative_usd);
+                      }
+                      return 'China · Day ' + point.day + ' · ' + formatUSD(point.china_cumulative_usd);
+                    }
+                  }
+                }
+              },
+              scales: {
+                x: {
+                  ticks: { color: '#cbd5e1', maxRotation: 0, autoSkip: true, maxTicksLimit: 7 },
+                  grid: { color: 'rgba(255,255,255,0.10)' }
+                },
+                y: {
+                  beginAtZero: true,
+                  ticks: { color: '#cbd5e1', callback: (value) => formatAxis(value) },
+                  grid: { color: 'rgba(255,255,255,0.10)' }
+                }
+              },
+              onHover: (_event, activeEls) => {
+                if (!activeEls.length) return;
+                const index = activeEls[0].index;
+                updateSummary(chartPoints[index]);
+              }
+            }
+          });
+          const lastPoint = chartPoints[chartPoints.length - 1];
+          if (lastPoint) updateSummary(lastPoint);
+        })();
+        </script>
+    
         <div class="stat-grid">
           <section class="stat stat-primary"><span>World scenario cumulative loss</span><strong>$257.31B</strong></section>
           <section class="stat"><span>World scenario daily loss</span><strong>$36.26B/day</strong></section>
           <section class="stat"><span>Reference outage day</span><strong>8</strong></section>
         </div>
-        <div class="prose"><p>This post does not say these economies are currently losing money because Iran is offline. It uses Iran's blackout duration as a time clock and simulates what a same-length domestic internet blackout would cost each economy on day 8.</p><p>Under the world scenario, a blackout of this length implies $36.26B in daily GDP loss and $257.31B in cumulative loss since day 1.</p><p>For the large-economy scenarios, the biggest simulated daily losses today are: United States: $10.60B/day; China: $5.69B/day; Germany: $1.54B/day.</p><p>Method: 2025 nominal GDP baseline × country-specific digital sensitivity coefficient × an outage-duration escalation curve that gets harsher as the blackout continues.</p></div>
+        <div class="prose"><p>This post does not say these economies are currently losing money because Iran is offline. It uses Iran&#x27;s blackout duration as a time clock and simulates what a same-length domestic internet blackout would cost each economy on day 8.</p><p>Under the world scenario, a blackout of this length implies $36.26B in daily GDP loss and $257.31B in cumulative loss since day 1.</p><p>For the large-economy scenarios, the biggest simulated daily losses today are: United States: $10.60B/day; China: $5.69B/day; Germany: $1.54B/day.</p><p>Method: 2025 nominal GDP baseline × country-specific digital sensitivity coefficient × an outage-duration escalation curve that gets harsher as the blackout continues.</p></div>
         <section class="table-wrap">
           <h2>Top 10 economy simulations</h2>
           <table>
@@ -50,7 +191,7 @@
         <section class="note">
           <h2>Method note</h2>
           <p>This is a simulation, not a claim that these losses are happening right now. The model uses the length of Iran's blackout as a day counter, then asks what the same-duration domestic internet blackout would cost for the world scenario and the top 10 economies by 2025 GDP.</p>
-          <p>This package does not estimate how much Iran's blackout is hurting other economies right now. Instead, it uses Iran's outage duration as the clock and simulates what a same-length local internet blackout would cost for the world scenario and for each top-10 economy using a 2025 GDP baseline plus a day-by-day escalation curve.</p>
+          <p>This package does not estimate how much Iran&#x27;s blackout is hurting other economies right now. Instead, it uses Iran&#x27;s outage duration as the clock and simulates what a same-length local internet blackout would cost for the world scenario and for each top-10 economy using a 2025 GDP baseline plus a day-by-day escalation curve.</p>
           <p>Signal summary: Fallback signal used because no live signal source was available during build.</p>
         </section>
       </article>
