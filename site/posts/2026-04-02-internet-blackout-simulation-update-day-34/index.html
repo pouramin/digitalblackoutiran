@@ -37,19 +37,11 @@
         
         <section class="interactive-chart-block">
           <div class="chart-header">
-<<<<<<< HEAD
             <h2>Interactive cumulative loss chart</h2>
             <p>The main chart shows world cumulative loss, world cumulative + accumulated shock, the United States, and China. The red mini-chart below isolates the daily shock premium so it does not distort the cumulative view.</p>
           </div>
           <div class="chart-summary" id="world-chart-summary-20260402">Day 34 · 2026-04-02 · World $1.43T · World + shock $1.59T · US $417.57B · China $224.22B · Shock $2.76B/day · Shock added $163.59B</div>
           <div class="chart-stage chart-stage-main">
-=======
-            <h2>Interactive cumulative loss chart + shock overlay</h2>
-            <p>Move the cursor over the chart to compare world cumulative loss, world cumulative + shock, the United States, China, and the modeled daily world shock premium on the same date.</p>
-          </div>
-          <div class="chart-summary" id="world-chart-summary-20260402">Day 34 · 2026-04-02 · World $1.43T · World + shock $1.59T · US $417.57B · China $224.22B · Shock $2.76B/day</div>
-          <div class="chart-stage">
->>>>>>> 8e0272911e77cd845b6c4b608e28a3e8f355a2f3
             <canvas id="world-chart-20260402"></canvas>
           </div>
           <div class="chart-stage chart-stage-mini">
@@ -181,12 +173,7 @@
                       if (context.dataset.label === 'World cumulative') return 'World · Day ' + point.day + ' · ' + formatUSD(point.world_cumulative_usd);
                       if (context.dataset.label === 'World cumulative + shock') return 'World + shock · Day ' + point.day + ' · ' + formatUSD(point.world_total_cumulative_usd);
                       if (context.dataset.label === 'United States cumulative') return 'United States · Day ' + point.day + ' · ' + formatUSD(point.usa_cumulative_usd);
-<<<<<<< HEAD
                       return 'China · Day ' + point.day + ' · ' + formatUSD(point.china_cumulative_usd);
-=======
-                      if (context.dataset.label === 'China cumulative') return 'China · Day ' + point.day + ' · ' + formatUSD(point.china_cumulative_usd);
-                      return 'Shock premium · Day ' + point.day + ' · ' + formatUSD(point.world_shock_usd) + '/day';
->>>>>>> 8e0272911e77cd845b6c4b608e28a3e8f355a2f3
                     }
                   }
                 }
@@ -301,13 +288,8 @@
         <section class="note">
           <h2>Method note</h2>
           <p>This is a simulation, not a claim that these losses are happening right now. The model uses the length of Iran's blackout as a day counter, then asks what the same-duration domestic internet blackout would cost for the world scenario and the top 10 economies by 2025 GDP.</p>
-<<<<<<< HEAD
           <p>The red mini-chart isolates the modeled world shock premium: a separate first-wave disruption layer that starts high, then decays over time as markets partially adapt.</p>
           <p>The pink line in the main chart is the cumulative total after adding that shock layer to the world cumulative loss. The shaded band between pink and green shows how much of the total burden comes from accumulated shock rather than the direct blackout-loss model alone.</p>
-=======
-          <p>The red line is a modeled world shock premium: a separate first-wave disruption layer that starts high, then decays over time as markets partially adapt.</p>
-          <p>The pink line is the cumulative total after adding that shock layer to the world cumulative loss, so it shows the combined simulated burden more clearly.</p>
->>>>>>> 8e0272911e77cd845b6c4b608e28a3e8f355a2f3
           <p>This package does not estimate how much Iran&#x27;s blackout is hurting other economies right now. Instead, it uses Iran&#x27;s outage duration as the clock and simulates what a same-length local internet blackout would cost for the world scenario and for each top-10 economy using a 2025 GDP baseline plus a day-by-day escalation curve. A second shock overlay models the first-wave disruption premium caused by the outage itself; it starts large, then decays with time.</p>
           <p>Signal summary: Fallback signal used because no live signal source was available during build.</p>
         </section>
