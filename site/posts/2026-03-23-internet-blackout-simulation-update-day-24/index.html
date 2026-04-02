@@ -37,12 +37,15 @@
         
         <section class="interactive-chart-block">
           <div class="chart-header">
-            <h2>Interactive cumulative loss chart + shock overlay</h2>
-            <p>Move the cursor over the chart to compare world cumulative loss, world cumulative + shock, the United States, China, and the modeled daily world shock premium on the same date.</p>
+            <h2>Interactive cumulative loss chart</h2>
+            <p>The main chart shows world cumulative loss, world cumulative + accumulated shock, the United States, and China. The red mini-chart below isolates the daily shock premium so it does not distort the cumulative view.</p>
           </div>
-          <div class="chart-summary" id="world-chart-summary-20260323">Day 24 · 2026-03-23 · World $934.29B · World + shock $1.07T · US $273.12B · China $146.66B · Shock $3.01B/day</div>
-          <div class="chart-stage">
+          <div class="chart-summary" id="world-chart-summary-20260323">Day 24 · 2026-03-23 · World $934.29B · World + shock $1.07T · US $273.12B · China $146.66B · Shock $3.01B/day · Shock added $135.33B</div>
+          <div class="chart-stage chart-stage-main">
             <canvas id="world-chart-20260323"></canvas>
+          </div>
+          <div class="chart-stage chart-stage-mini">
+            <canvas id="world-shock-chart-20260323"></canvas>
           </div>
           <noscript><img class="hero-chart" src="/assets/img/2026-03-23-world.png" alt="Internet blackout simulation update — day 24 chart"></noscript>
         </section>
@@ -56,8 +59,9 @@
           const chinaValues = [3.99, 8.52, 13.39, 18.48, 23.75, 29.16, 34.7, 40.39, 46.22, 52.19, 58.28, 64.48, 70.8, 77.23, 83.75, 90.38, 97.1, 103.92, 110.83, 117.82, 124.91, 132.07, 139.32, 146.66];
           const shockValues = [10.16, 10.26, 9.76, 9.11, 8.43, 7.76, 7.14, 6.62, 6.15, 5.72, 5.33, 4.99, 4.68, 4.41, 4.17, 3.96, 3.77, 3.61, 3.47, 3.35, 3.24, 3.15, 3.08, 3.01];
           const canvas = document.getElementById("world-chart-20260323");
+          const shockCanvas = document.getElementById("world-shock-chart-20260323");
           const summary = document.getElementById("world-chart-summary-20260323");
-          if (!canvas || typeof Chart === 'undefined') return;
+          if (!canvas || !shockCanvas || typeof Chart === 'undefined') return;
 
           const formatUSD = (value) => {
             const abs = Math.abs(value);
@@ -74,9 +78,10 @@
               ' · World + shock ' + formatUSD(point.world_total_cumulative_usd) +
               ' · US ' + formatUSD(point.usa_cumulative_usd) +
               ' · China ' + formatUSD(point.china_cumulative_usd) +
-              ' · Shock ' + formatUSD(point.world_shock_usd) + '/day';
+              ' · Shock ' + formatUSD(point.world_shock_usd) + '/day' +
+              ' · Shock added ' + formatUSD(point.world_cumulative_shock_usd);
           };
-          const chart = new Chart(canvas, {
+          const mainChart = new Chart(canvas, {
             type: 'line',
             data: {
               labels,
@@ -93,19 +98,21 @@
                   pointRadius: 0,
                   pointHoverRadius: 5,
                   pointHitRadius: 20,
+                  order: 3
                 },
                 {
                   label: 'World cumulative + shock',
                   data: worldTotalValues,
                   yAxisID: 'y',
                   borderColor: '#e879f9',
-                  backgroundColor: 'rgba(232, 121, 249, 0)',
-                  fill: false,
+                  backgroundColor: 'rgba(251, 113, 133, 0.18)',
+                  fill: '-1',
                   borderWidth: 3.3,
                   tension: 0.28,
                   pointRadius: 0,
                   pointHoverRadius: 5,
                   pointHitRadius: 20,
+                  order: 2
                 },
                 {
                   label: 'United States cumulative',
@@ -119,6 +126,7 @@
                   pointRadius: 0,
                   pointHoverRadius: 5,
                   pointHitRadius: 20,
+                  order: 4
                 },
                 {
                   label: 'China cumulative',
@@ -132,19 +140,7 @@
                   pointRadius: 0,
                   pointHoverRadius: 5,
                   pointHitRadius: 20,
-                },
-                {
-                  label: 'World shock premium (daily)',
-                  data: shockValues,
-                  yAxisID: 'yShock',
-                  borderColor: '#ef4444',
-                  backgroundColor: 'rgba(239, 68, 68, 0)',
-                  fill: false,
-                  borderWidth: 3,
-                  tension: 0.22,
-                  pointRadius: 0,
-                  pointHoverRadius: 5,
-                  pointHitRadius: 20,
+                  order: 4
                 }
               ]
             },
@@ -177,8 +173,7 @@
                       if (context.dataset.label === 'World cumulative') return 'World · Day ' + point.day + ' · ' + formatUSD(point.world_cumulative_usd);
                       if (context.dataset.label === 'World cumulative + shock') return 'World + shock · Day ' + point.day + ' · ' + formatUSD(point.world_total_cumulative_usd);
                       if (context.dataset.label === 'United States cumulative') return 'United States · Day ' + point.day + ' · ' + formatUSD(point.usa_cumulative_usd);
-                      if (context.dataset.label === 'China cumulative') return 'China · Day ' + point.day + ' · ' + formatUSD(point.china_cumulative_usd);
-                      return 'Shock premium · Day ' + point.day + ' · ' + formatUSD(point.world_shock_usd) + '/day';
+                      return 'China · Day ' + point.day + ' · ' + formatUSD(point.china_cumulative_usd);
                     }
                   }
                 }
@@ -194,13 +189,6 @@
                   ticks: { color: '#cbd5e1', callback: (value) => formatAxis(value) },
                   title: { display: true, text: 'Cumulative loss', color: '#cbd5e1' },
                   grid: { color: 'rgba(255,255,255,0.10)' }
-                },
-                yShock: {
-                  beginAtZero: true,
-                  position: 'right',
-                  ticks: { color: '#fca5a5', callback: (value) => formatAxis(value) },
-                  title: { display: true, text: 'World shock premium / day', color: '#fca5a5' },
-                  grid: { drawOnChartArea: false }
                 }
               },
               onHover: (_event, activeEls) => {
@@ -211,6 +199,72 @@
               }
             }
           });
+
+          const shockChart = new Chart(shockCanvas, {
+            type: 'line',
+            data: {
+              labels,
+              datasets: [
+                {
+                  label: 'World shock premium (daily)',
+                  data: shockValues,
+                  borderColor: '#ef4444',
+                  backgroundColor: 'rgba(239, 68, 68, 0.18)',
+                  fill: true,
+                  borderWidth: 2.8,
+                  tension: 0.22,
+                  pointRadius: 0,
+                  pointHoverRadius: 4,
+                  pointHitRadius: 20
+                }
+              ]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              interaction: { mode: 'index', intersect: false },
+              plugins: {
+                legend: {
+                  display: true,
+                  position: 'bottom',
+                  labels: { color: '#fca5a5', usePointStyle: true, boxWidth: 10, boxHeight: 10 }
+                },
+                tooltip: {
+                  backgroundColor: '#111827',
+                  titleColor: '#f9fafb',
+                  bodyColor: '#f9fafb',
+                  borderColor: 'rgba(255,255,255,0.14)',
+                  borderWidth: 1,
+                  callbacks: {
+                    title: (items) => items[0] ? items[0].label : '',
+                    label: (context) => {
+                      const point = chartPoints[context.dataIndex];
+                      return 'Shock premium · Day ' + point.day + ' · ' + formatUSD(point.world_shock_usd) + '/day';
+                    }
+                  }
+                }
+              },
+              scales: {
+                x: {
+                  ticks: { color: '#cbd5e1', maxRotation: 0, autoSkip: true, maxTicksLimit: 7 },
+                  grid: { color: 'rgba(255,255,255,0.08)' }
+                },
+                y: {
+                  beginAtZero: true,
+                  ticks: { color: '#fca5a5', callback: (value) => formatAxis(value) },
+                  title: { display: true, text: 'World shock premium / day', color: '#fca5a5' },
+                  grid: { color: 'rgba(255,255,255,0.08)' }
+                }
+              },
+              onHover: (_event, activeEls) => {
+                if (!activeEls || !activeEls.length) return;
+                const index = activeEls[0].index;
+                const point = chartPoints[index];
+                if (point) updateSummary(point);
+              }
+            }
+          });
+
           const lastPoint = chartPoints[chartPoints.length - 1];
           if (lastPoint) updateSummary(lastPoint);
         })();
@@ -234,8 +288,8 @@
         <section class="note">
           <h2>Method note</h2>
           <p>This is a simulation, not a claim that these losses are happening right now. The model uses the length of Iran's blackout as a day counter, then asks what the same-duration domestic internet blackout would cost for the world scenario and the top 10 economies by 2025 GDP.</p>
-          <p>The red line is a modeled world shock premium: a separate first-wave disruption layer that starts high, then decays over time as markets partially adapt.</p>
-          <p>The pink line is the cumulative total after adding that shock layer to the world cumulative loss, so it shows the combined simulated burden more clearly.</p>
+          <p>The red mini-chart isolates the modeled world shock premium: a separate first-wave disruption layer that starts high, then decays over time as markets partially adapt.</p>
+          <p>The pink line in the main chart is the cumulative total after adding that shock layer to the world cumulative loss. The shaded band between pink and green shows how much of the total burden comes from accumulated shock rather than the direct blackout-loss model alone.</p>
           <p>This package does not estimate how much Iran&#x27;s blackout is hurting other economies right now. Instead, it uses Iran&#x27;s outage duration as the clock and simulates what a same-length local internet blackout would cost for the world scenario and for each top-10 economy using a 2025 GDP baseline plus a day-by-day escalation curve. A second shock overlay models the first-wave disruption premium caused by the outage itself; it starts large, then decays with time.</p>
           <p>Signal summary: Fallback signal used because no live signal source was available during build.</p>
         </section>

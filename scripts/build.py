@@ -332,28 +332,24 @@ def make_chart(simulation: Dict[str, Any], chart_path: Path, title_date_end: str
     world_total_billions = _series_in_billions(simulation['world'], 'shock_adjusted_cumulative_total_usd')
     usa_billions = _series_in_billions(usa, 'cumulative_loss_usd') if usa else []
     china_billions = _series_in_billions(china, 'cumulative_loss_usd') if china else []
-    shock_billions = [point['shock_daily_usd'] / 1_000_000_000 for point in world_series]
 
     plt.rcParams['font.family'] = 'DejaVu Sans'
     fig, ax = plt.subplots(figsize=(12, 7), dpi=150)
     fig.patch.set_facecolor('#0b0f14')
     ax.set_facecolor('#0b0f14')
-    ax2 = ax.twinx()
-    ax2.set_facecolor('none')
 
-    world_line, = ax.plot(dates, world_billions, linewidth=3.0, color='#98d08b', label='World cumulative')
-    ax.fill_between(dates, world_billions, 0, color='#98d08b', alpha=0.10)
-    world_total_line, = ax.plot(dates, world_total_billions, linewidth=3.3, color='#e879f9', label='World cumulative + shock')
-    ax.fill_between(dates, world_total_billions, world_billions, color='#e879f9', alpha=0.08)
+    world_line, = ax.plot(dates, world_billions, linewidth=3.0, color='#98d08b', label='World cumulative', zorder=3)
+    ax.fill_between(dates, world_billions, 0, color='#98d08b', alpha=0.10, zorder=1)
+
+    world_total_line, = ax.plot(dates, world_total_billions, linewidth=3.3, color='#e879f9', label='World cumulative + shock', zorder=5)
+    ax.fill_between(dates, world_total_billions, world_billions, color='#fb7185', alpha=0.16, zorder=2)
 
     usa_line = None
     china_line = None
     if usa_billions:
-        usa_line, = ax.plot(dates, usa_billions, linewidth=2.4, color='#60a5fa', label='United States cumulative')
+        usa_line, = ax.plot(dates, usa_billions, linewidth=2.4, color='#60a5fa', label='United States cumulative', zorder=4)
     if china_billions:
-        china_line, = ax.plot(dates, china_billions, linewidth=2.4, color='#f59e0b', label='China cumulative')
-
-    shock_line, = ax2.plot(dates, shock_billions, linewidth=3.2, color='#ef4444', linestyle='-', label='World shock premium (daily)')
+        china_line, = ax.plot(dates, china_billions, linewidth=2.4, color='#f59e0b', label='China cumulative', zorder=4)
 
     all_series = [world_billions, world_total_billions]
     if usa_billions:
@@ -361,15 +357,11 @@ def make_chart(simulation: Dict[str, Any], chart_path: Path, title_date_end: str
     if china_billions:
         all_series.append(china_billions)
     ymax = max(max(series) for series in all_series if series) * 1.12 if all_series else 1
-    shock_ymax = max(shock_billions) * 1.25 if shock_billions else 1
     ax.set_ylim(0, ymax)
-    ax2.set_ylim(0, shock_ymax)
 
     ax.tick_params(axis='x', colors='#cbd5e1', labelsize=10)
     ax.tick_params(axis='y', colors='#cbd5e1', labelsize=11)
-    ax2.tick_params(axis='y', colors='#fca5a5', labelsize=11)
     ax.yaxis.set_major_formatter(FuncFormatter(_fmt_billions_tick))
-    ax2.yaxis.set_major_formatter(FuncFormatter(_fmt_billions_tick))
     if len(dates) <= 4:
         ax.xaxis.set_major_locator(mdates.DayLocator(interval=1))
         if len(dates) == 1:
@@ -383,26 +375,21 @@ def make_chart(simulation: Dict[str, Any], chart_path: Path, title_date_end: str
 
     for spine in ax.spines.values():
         spine.set_visible(False)
-    for spine in ax2.spines.values():
-        spine.set_visible(False)
     ax.grid(True, axis='both', color='white', alpha=0.12, linewidth=0.8)
-    ax2.grid(False)
 
     ax.set_title(
-        f'Simulated Cumulative Blackout Loss + Shock Overlay - {dates[0].isoformat()} to {title_date_end} UTC',
+        f'Simulated Cumulative Blackout Loss - World: {dates[0].isoformat()} to {title_date_end} UTC',
         color='#e5e7eb',
         fontsize=18,
         pad=22,
     )
-    ax.set_ylabel('Cumulative loss if the local internet were blacked out', color='#cbd5e1', fontsize=13, labelpad=16)
-    ax2.set_ylabel('World daily shock premium', color='#fca5a5', fontsize=12, labelpad=16)
+    ax.set_ylabel('Cumulative loss', color='#cbd5e1', fontsize=13, labelpad=16)
 
     handles = [world_line, world_total_line]
     if usa_line:
         handles.append(usa_line)
     if china_line:
         handles.append(china_line)
-    handles.append(shock_line)
     legend = ax.legend(handles=handles, loc='upper left', facecolor='#0b0f14', edgecolor='none', framealpha=0.0, fontsize=11)
     for text_item in legend.get_texts():
         label = text_item.get_text()
@@ -414,23 +401,21 @@ def make_chart(simulation: Dict[str, Any], chart_path: Path, title_date_end: str
             text_item.set_color('#60a5fa')
         elif label == 'China cumulative':
             text_item.set_color('#f59e0b')
-        elif label == 'World shock premium (daily)':
-            text_item.set_color('#ef4444')
         else:
             text_item.set_color('#e5e7eb')
 
-    fig.text(0.53, 0.09, 'World', color='#98d08b', fontsize=11, fontweight='bold')
-    fig.text(0.575, 0.09, fmt_money(world_series[-1]['cumulative_loss_usd']) if world_series else '$0', color='#e5e7eb', fontsize=11)
-    fig.text(0.53, 0.06, 'World + shock', color='#e879f9', fontsize=11, fontweight='bold')
+    fig.text(0.52, 0.09, 'World', color='#98d08b', fontsize=11, fontweight='bold')
+    fig.text(0.565, 0.09, fmt_money(world_series[-1]['cumulative_loss_usd']) if world_series else '$0', color='#e5e7eb', fontsize=11)
+    fig.text(0.52, 0.06, 'World + shock', color='#e879f9', fontsize=11, fontweight='bold')
     fig.text(0.64, 0.06, fmt_money(world_series[-1]['shock_adjusted_cumulative_total_usd']) if world_series else '$0', color='#e5e7eb', fontsize=11)
     if usa:
-        fig.text(0.53, 0.03, 'US', color='#60a5fa', fontsize=11, fontweight='bold')
-        fig.text(0.555, 0.03, fmt_money(usa['cumulative_loss_usd']), color='#e5e7eb', fontsize=11)
+        fig.text(0.50, 0.03, 'US', color='#60a5fa', fontsize=11, fontweight='bold')
+        fig.text(0.525, 0.03, fmt_money(usa['cumulative_loss_usd']), color='#e5e7eb', fontsize=11)
     if china:
-        fig.text(0.71, 0.03, 'China', color='#f59e0b', fontsize=11, fontweight='bold')
-        fig.text(0.77, 0.03, fmt_money(china['cumulative_loss_usd']), color='#e5e7eb', fontsize=11)
-    fig.text(0.86, 0.03, 'Shock', color='#ef4444', fontsize=11, fontweight='bold')
-    fig.text(0.91, 0.03, fmt_money(simulation['world']['shock_daily_usd']) + '/day', color='#e5e7eb', fontsize=11)
+        fig.text(0.60, 0.03, 'China', color='#f59e0b', fontsize=11, fontweight='bold')
+        fig.text(0.66, 0.03, fmt_money(china['cumulative_loss_usd']), color='#e5e7eb', fontsize=11)
+    fig.text(0.80, 0.03, 'Shock added', color='#fb7185', fontsize=9.5, fontweight='bold')
+    fig.text(0.98, 0.03, fmt_money(simulation['world']['cumulative_shock_usd']), color='#e5e7eb', fontsize=11, ha='right')
 
     plt.tight_layout(rect=[0.03, 0.12, 0.98, 0.94])
     fig.savefig(chart_path, facecolor=fig.get_facecolor(), bbox_inches='tight')
@@ -650,6 +635,7 @@ def chart_data_for_post(post: Dict[str, Any]) -> List[Dict[str, Any]]:
         )
     return points
 
+
 def render_interactive_chart(post: Dict[str, Any]) -> str:
     chart_points = chart_data_for_post(post)
     labels = [p['date'] for p in chart_points]
@@ -666,6 +652,7 @@ def render_interactive_chart(post: Dict[str, Any]) -> str:
     china_json = json.dumps(china_values, ensure_ascii=False)
     shock_json = json.dumps(shock_values, ensure_ascii=False)
     chart_id = f"world-chart-{post['date'].replace('-', '')}"
+    shock_chart_id = f"world-shock-chart-{post['date'].replace('-', '')}"
     summary_id = f"world-chart-summary-{post['date'].replace('-', '')}"
 
     usa_now = next((x for x in post['simulation']['countries'] if x['code'] == 'USA'), {'cumulative_loss_usd': 0.0})
@@ -674,12 +661,15 @@ def render_interactive_chart(post: Dict[str, Any]) -> str:
     return f"""
         <section class="interactive-chart-block">
           <div class="chart-header">
-            <h2>Interactive cumulative loss chart + shock overlay</h2>
-            <p>Move the cursor over the chart to compare world cumulative loss, world cumulative + shock, the United States, China, and the modeled daily world shock premium on the same date.</p>
+            <h2>Interactive cumulative loss chart</h2>
+            <p>The main chart shows world cumulative loss, world cumulative + accumulated shock, the United States, and China. The red mini-chart below isolates the daily shock premium so it does not distort the cumulative view.</p>
           </div>
-          <div class="chart-summary" id="{summary_id}">Day {post['simulation']['reference_days']} · {post['date']} · World {fmt_money(post['simulation']['world']['cumulative_loss_usd'])} · World + shock {fmt_money(post['simulation']['world']['shock_adjusted_cumulative_total_usd'])} · US {fmt_money(usa_now['cumulative_loss_usd'])} · China {fmt_money(china_now['cumulative_loss_usd'])} · Shock {fmt_money(post['simulation']['world']['shock_daily_usd'])}/day</div>
-          <div class="chart-stage">
+          <div class="chart-summary" id="{summary_id}">Day {post['simulation']['reference_days']} · {post['date']} · World {fmt_money(post['simulation']['world']['cumulative_loss_usd'])} · World + shock {fmt_money(post['simulation']['world']['shock_adjusted_cumulative_total_usd'])} · US {fmt_money(usa_now['cumulative_loss_usd'])} · China {fmt_money(china_now['cumulative_loss_usd'])} · Shock {fmt_money(post['simulation']['world']['shock_daily_usd'])}/day · Shock added {fmt_money(post['simulation']['world']['cumulative_shock_usd'])}</div>
+          <div class="chart-stage chart-stage-main">
             <canvas id="{chart_id}"></canvas>
+          </div>
+          <div class="chart-stage chart-stage-mini">
+            <canvas id="{shock_chart_id}"></canvas>
           </div>
           <noscript><img class="hero-chart" src="{escape(post['chart_image'])}" alt="{escape(post['title'])} chart"></noscript>
         </section>
@@ -693,8 +683,9 @@ def render_interactive_chart(post: Dict[str, Any]) -> str:
           const chinaValues = {china_json};
           const shockValues = {shock_json};
           const canvas = document.getElementById({json.dumps(chart_id)});
+          const shockCanvas = document.getElementById({json.dumps(shock_chart_id)});
           const summary = document.getElementById({json.dumps(summary_id)});
-          if (!canvas || typeof Chart === 'undefined') return;
+          if (!canvas || !shockCanvas || typeof Chart === 'undefined') return;
 
           const formatUSD = (value) => {{
             const abs = Math.abs(value);
@@ -711,9 +702,10 @@ def render_interactive_chart(post: Dict[str, Any]) -> str:
               ' · World + shock ' + formatUSD(point.world_total_cumulative_usd) +
               ' · US ' + formatUSD(point.usa_cumulative_usd) +
               ' · China ' + formatUSD(point.china_cumulative_usd) +
-              ' · Shock ' + formatUSD(point.world_shock_usd) + '/day';
+              ' · Shock ' + formatUSD(point.world_shock_usd) + '/day' +
+              ' · Shock added ' + formatUSD(point.world_cumulative_shock_usd);
           }};
-          const chart = new Chart(canvas, {{
+          const mainChart = new Chart(canvas, {{
             type: 'line',
             data: {{
               labels,
@@ -730,19 +722,21 @@ def render_interactive_chart(post: Dict[str, Any]) -> str:
                   pointRadius: 0,
                   pointHoverRadius: 5,
                   pointHitRadius: 20,
+                  order: 3
                 }},
                 {{
                   label: 'World cumulative + shock',
                   data: worldTotalValues,
                   yAxisID: 'y',
                   borderColor: '#e879f9',
-                  backgroundColor: 'rgba(232, 121, 249, 0)',
-                  fill: false,
+                  backgroundColor: 'rgba(251, 113, 133, 0.18)',
+                  fill: '-1',
                   borderWidth: 3.3,
                   tension: 0.28,
                   pointRadius: 0,
                   pointHoverRadius: 5,
                   pointHitRadius: 20,
+                  order: 2
                 }},
                 {{
                   label: 'United States cumulative',
@@ -756,6 +750,7 @@ def render_interactive_chart(post: Dict[str, Any]) -> str:
                   pointRadius: 0,
                   pointHoverRadius: 5,
                   pointHitRadius: 20,
+                  order: 4
                 }},
                 {{
                   label: 'China cumulative',
@@ -769,19 +764,7 @@ def render_interactive_chart(post: Dict[str, Any]) -> str:
                   pointRadius: 0,
                   pointHoverRadius: 5,
                   pointHitRadius: 20,
-                }},
-                {{
-                  label: 'World shock premium (daily)',
-                  data: shockValues,
-                  yAxisID: 'yShock',
-                  borderColor: '#ef4444',
-                  backgroundColor: 'rgba(239, 68, 68, 0)',
-                  fill: false,
-                  borderWidth: 3,
-                  tension: 0.22,
-                  pointRadius: 0,
-                  pointHoverRadius: 5,
-                  pointHitRadius: 20,
+                  order: 4
                 }}
               ]
             }},
@@ -814,8 +797,7 @@ def render_interactive_chart(post: Dict[str, Any]) -> str:
                       if (context.dataset.label === 'World cumulative') return 'World · Day ' + point.day + ' · ' + formatUSD(point.world_cumulative_usd);
                       if (context.dataset.label === 'World cumulative + shock') return 'World + shock · Day ' + point.day + ' · ' + formatUSD(point.world_total_cumulative_usd);
                       if (context.dataset.label === 'United States cumulative') return 'United States · Day ' + point.day + ' · ' + formatUSD(point.usa_cumulative_usd);
-                      if (context.dataset.label === 'China cumulative') return 'China · Day ' + point.day + ' · ' + formatUSD(point.china_cumulative_usd);
-                      return 'Shock premium · Day ' + point.day + ' · ' + formatUSD(point.world_shock_usd) + '/day';
+                      return 'China · Day ' + point.day + ' · ' + formatUSD(point.china_cumulative_usd);
                     }}
                   }}
                 }}
@@ -831,13 +813,6 @@ def render_interactive_chart(post: Dict[str, Any]) -> str:
                   ticks: {{ color: '#cbd5e1', callback: (value) => formatAxis(value) }},
                   title: {{ display: true, text: 'Cumulative loss', color: '#cbd5e1' }},
                   grid: {{ color: 'rgba(255,255,255,0.10)' }}
-                }},
-                yShock: {{
-                  beginAtZero: true,
-                  position: 'right',
-                  ticks: {{ color: '#fca5a5', callback: (value) => formatAxis(value) }},
-                  title: {{ display: true, text: 'World shock premium / day', color: '#fca5a5' }},
-                  grid: {{ drawOnChartArea: false }}
                 }}
               }},
               onHover: (_event, activeEls) => {{
@@ -848,6 +823,72 @@ def render_interactive_chart(post: Dict[str, Any]) -> str:
               }}
             }}
           }});
+
+          const shockChart = new Chart(shockCanvas, {{
+            type: 'line',
+            data: {{
+              labels,
+              datasets: [
+                {{
+                  label: 'World shock premium (daily)',
+                  data: shockValues,
+                  borderColor: '#ef4444',
+                  backgroundColor: 'rgba(239, 68, 68, 0.18)',
+                  fill: true,
+                  borderWidth: 2.8,
+                  tension: 0.22,
+                  pointRadius: 0,
+                  pointHoverRadius: 4,
+                  pointHitRadius: 20
+                }}
+              ]
+            }},
+            options: {{
+              responsive: true,
+              maintainAspectRatio: false,
+              interaction: {{ mode: 'index', intersect: false }},
+              plugins: {{
+                legend: {{
+                  display: true,
+                  position: 'bottom',
+                  labels: {{ color: '#fca5a5', usePointStyle: true, boxWidth: 10, boxHeight: 10 }}
+                }},
+                tooltip: {{
+                  backgroundColor: '#111827',
+                  titleColor: '#f9fafb',
+                  bodyColor: '#f9fafb',
+                  borderColor: 'rgba(255,255,255,0.14)',
+                  borderWidth: 1,
+                  callbacks: {{
+                    title: (items) => items[0] ? items[0].label : '',
+                    label: (context) => {{
+                      const point = chartPoints[context.dataIndex];
+                      return 'Shock premium · Day ' + point.day + ' · ' + formatUSD(point.world_shock_usd) + '/day';
+                    }}
+                  }}
+                }}
+              }},
+              scales: {{
+                x: {{
+                  ticks: {{ color: '#cbd5e1', maxRotation: 0, autoSkip: true, maxTicksLimit: 7 }},
+                  grid: {{ color: 'rgba(255,255,255,0.08)' }}
+                }},
+                y: {{
+                  beginAtZero: true,
+                  ticks: {{ color: '#fca5a5', callback: (value) => formatAxis(value) }},
+                  title: {{ display: true, text: 'World shock premium / day', color: '#fca5a5' }},
+                  grid: {{ color: 'rgba(255,255,255,0.08)' }}
+                }}
+              }},
+              onHover: (_event, activeEls) => {{
+                if (!activeEls || !activeEls.length) return;
+                const index = activeEls[0].index;
+                const point = chartPoints[index];
+                if (point) updateSummary(point);
+              }}
+            }}
+          }});
+
           const lastPoint = chartPoints[chartPoints.length - 1];
           if (lastPoint) updateSummary(lastPoint);
         }})();
@@ -892,8 +933,8 @@ def render_post(post: Dict[str, Any], site_cfg: Dict[str, Any]) -> None:
         <section class="note">
           <h2>Method note</h2>
           <p>This is a simulation, not a claim that these losses are happening right now. The model uses the length of Iran's blackout as a day counter, then asks what the same-duration domestic internet blackout would cost for the world scenario and the top 10 economies by 2025 GDP.</p>
-          <p>The red line is a modeled world shock premium: a separate first-wave disruption layer that starts high, then decays over time as markets partially adapt.</p>
-          <p>The pink line is the cumulative total after adding that shock layer to the world cumulative loss, so it shows the combined simulated burden more clearly.</p>
+          <p>The red mini-chart isolates the modeled world shock premium: a separate first-wave disruption layer that starts high, then decays over time as markets partially adapt.</p>
+          <p>The pink line in the main chart is the cumulative total after adding that shock layer to the world cumulative loss. The shaded band between pink and green shows how much of the total burden comes from accumulated shock rather than the direct blackout-loss model alone.</p>
           <p>{escape(post['model_note'])}</p>
           <p>Signal summary: {escape(post['signal']['summary'])}</p>
         </section>
@@ -967,10 +1008,10 @@ def write_css() -> None:
 a{color:inherit;text-decoration:none}img{max-width:100%;display:block}
 .shell{max-width:1200px;margin:0 auto;padding:40px 24px 80px}.hero{padding:16px 0 24px;text-align:center}.eyebrow{letter-spacing:.18em;font-size:.78rem;font-weight:700;color:#8a93a3;margin:0 0 10px}.hero h1{font-size:clamp(2.2rem,5vw,3.6rem);margin:.1em 0}.lead{max-width:900px;margin:0 auto 12px;font-size:1.08rem;color:var(--muted);line-height:1.7}
 .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}.card{background:var(--card);border-radius:10px;padding:18px;box-shadow:0 1px 0 rgba(15,23,42,.05)}.card-head{display:flex;justify-content:space-between;gap:12px;align-items:center;font-size:.85rem;color:var(--muted);margin-bottom:12px}.badge{display:inline-flex;padding:4px 8px;border-radius:999px;background:var(--dark);color:#fff;font-size:.75rem;font-weight:600}.card h2{font-size:1.25rem;line-height:1.3;margin:0 0 10px}.card p{color:#364152;line-height:1.6;min-height:96px}.thumb-link img{border-radius:10px;border:1px solid rgba(15,23,42,.08);margin-top:10px}
-.article-shell{max-width:980px}.article{background:var(--surface);padding:28px;border-radius:18px;box-shadow:0 10px 30px rgba(15,23,42,.06)}.back-link{display:inline-block;margin-bottom:16px;color:var(--accent);font-weight:600}.article h1{font-size:clamp(2rem,4vw,3rem);line-height:1.15;margin:.1em 0 .25em}.meta-row{display:flex;flex-wrap:wrap;gap:16px;color:var(--muted);font-size:.95rem;margin-bottom:20px}.hero-chart{border-radius:16px;border:1px solid var(--stroke);margin:16px 0 20px}.interactive-chart-block{margin:18px 0 22px}.chart-header h2{margin:0 0 6px;font-size:1.2rem}.chart-header p{margin:0 0 12px;color:var(--muted);line-height:1.6}.chart-summary{margin:0 0 10px;padding:10px 14px;border-radius:12px;background:#f8fafc;border:1px solid var(--stroke);font-weight:600;color:#334155}.chart-stage{position:relative;height:520px;padding:14px 14px 6px;border-radius:18px;background:#0b0f14;border:1px solid #1f2937;overflow:hidden}.chart-stage canvas{width:100%!important;height:100%!important}
+.article-shell{max-width:980px}.article{background:var(--surface);padding:28px;border-radius:18px;box-shadow:0 10px 30px rgba(15,23,42,.06)}.back-link{display:inline-block;margin-bottom:16px;color:var(--accent);font-weight:600}.article h1{font-size:clamp(2rem,4vw,3rem);line-height:1.15;margin:.1em 0 .25em}.meta-row{display:flex;flex-wrap:wrap;gap:16px;color:var(--muted);font-size:.95rem;margin-bottom:20px}.hero-chart{border-radius:16px;border:1px solid var(--stroke);margin:16px 0 20px}.interactive-chart-block{margin:18px 0 22px}.chart-header h2{margin:0 0 6px;font-size:1.2rem}.chart-header p{margin:0 0 12px;color:var(--muted);line-height:1.6}.chart-summary{margin:0 0 10px;padding:10px 14px;border-radius:12px;background:#f8fafc;border:1px solid var(--stroke);font-weight:600;color:#334155}.chart-stage{position:relative;padding:14px 14px 6px;border-radius:18px;background:#0b0f14;border:1px solid #1f2937;overflow:hidden}.chart-stage-main{height:520px}.chart-stage-mini{height:220px;margin-top:12px}.chart-stage canvas{width:100%!important;height:100%!important}
 .stat-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:18px 0 24px}.stat{background:#f8fafc;border:1px solid var(--stroke);border-radius:16px;padding:16px}.stat-primary{background:#eef6ff;border-color:#bfd7ff}.stat-danger{background:#fff1f2;border-color:#fecdd3}.stat span{display:block;color:var(--muted);font-size:.9rem;margin-bottom:6px}.stat strong{font-size:1.25rem}.prose p,.note p{line-height:1.8;color:#344054}.table-wrap{margin-top:28px}.table-wrap h2,.note h2{font-size:1.3rem}table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--stroke);border-radius:12px;overflow:hidden}th,td{text-align:left;padding:14px;border-bottom:1px solid var(--stroke)}th{background:#f8fafc;font-size:.92rem}.note{margin-top:28px;padding:18px;border-radius:16px;background:#fafbfc;border:1px solid var(--stroke)}
 .site-footer{display:flex;justify-content:center;padding:0 0 34px}.x-link{display:inline-flex;align-items:center;justify-content:center;width:52px;height:52px;border-radius:999px;background:#111827;box-shadow:0 10px 24px rgba(15,23,42,.14)}.x-link svg{width:22px;height:22px;fill:#fff}
-@media (max-width: 960px){.grid{grid-template-columns:1fr 1fr}.stat-grid{grid-template-columns:1fr}.chart-stage{height:420px}}@media (max-width: 680px){.grid{grid-template-columns:1fr}.shell{padding:24px 16px 60px}.article{padding:20px}.card p{min-height:auto}.chart-stage{height:320px}}
+@media (max-width: 960px){.grid{grid-template-columns:1fr 1fr}.stat-grid{grid-template-columns:1fr}.chart-stage-main{height:420px}.chart-stage-mini{height:190px}}@media (max-width: 680px){.grid{grid-template-columns:1fr}.shell{padding:24px 16px 60px}.article{padding:20px}.card p{min-height:auto}.chart-stage-main{height:320px}.chart-stage-mini{height:170px}}
         """.strip(),
         encoding='utf-8',
     )
