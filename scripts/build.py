@@ -329,6 +329,7 @@ def make_chart(simulation: Dict[str, Any], chart_path: Path, title_date_end: str
 
     dates = [datetime.fromisoformat(x['date']).date() for x in world_series]
     world_billions = _series_in_billions(simulation['world'], 'cumulative_loss_usd')
+    world_total_billions = _series_in_billions(simulation['world'], 'shock_adjusted_cumulative_total_usd')
     usa_billions = _series_in_billions(usa, 'cumulative_loss_usd') if usa else []
     china_billions = _series_in_billions(china, 'cumulative_loss_usd') if china else []
     shock_billions = [point['shock_daily_usd'] / 1_000_000_000 for point in world_series]
@@ -341,7 +342,9 @@ def make_chart(simulation: Dict[str, Any], chart_path: Path, title_date_end: str
     ax2.set_facecolor('none')
 
     world_line, = ax.plot(dates, world_billions, linewidth=3.0, color='#98d08b', label='World cumulative')
-    ax.fill_between(dates, world_billions, 0, color='#98d08b', alpha=0.14)
+    ax.fill_between(dates, world_billions, 0, color='#98d08b', alpha=0.10)
+    world_total_line, = ax.plot(dates, world_total_billions, linewidth=3.3, color='#e879f9', label='World cumulative + shock')
+    ax.fill_between(dates, world_total_billions, world_billions, color='#e879f9', alpha=0.08)
 
     usa_line = None
     china_line = None
@@ -352,12 +355,12 @@ def make_chart(simulation: Dict[str, Any], chart_path: Path, title_date_end: str
 
     shock_line, = ax2.plot(dates, shock_billions, linewidth=3.2, color='#ef4444', linestyle='-', label='World shock premium (daily)')
 
-    all_series = [world_billions]
+    all_series = [world_billions, world_total_billions]
     if usa_billions:
         all_series.append(usa_billions)
     if china_billions:
         all_series.append(china_billions)
-    ymax = max(max(series) for series in all_series if series) * 1.14 if all_series else 1
+    ymax = max(max(series) for series in all_series if series) * 1.12 if all_series else 1
     shock_ymax = max(shock_billions) * 1.25 if shock_billions else 1
     ax.set_ylim(0, ymax)
     ax2.set_ylim(0, shock_ymax)
@@ -386,7 +389,7 @@ def make_chart(simulation: Dict[str, Any], chart_path: Path, title_date_end: str
     ax2.grid(False)
 
     ax.set_title(
-        f'Simulated Cumulative Blackout Loss + World Shock - {dates[0].isoformat()} to {title_date_end} UTC',
+        f'Simulated Cumulative Blackout Loss + Shock Overlay - {dates[0].isoformat()} to {title_date_end} UTC',
         color='#e5e7eb',
         fontsize=18,
         pad=22,
@@ -394,7 +397,7 @@ def make_chart(simulation: Dict[str, Any], chart_path: Path, title_date_end: str
     ax.set_ylabel('Cumulative loss if the local internet were blacked out', color='#cbd5e1', fontsize=13, labelpad=16)
     ax2.set_ylabel('World daily shock premium', color='#fca5a5', fontsize=12, labelpad=16)
 
-    handles = [world_line]
+    handles = [world_line, world_total_line]
     if usa_line:
         handles.append(usa_line)
     if china_line:
@@ -405,6 +408,8 @@ def make_chart(simulation: Dict[str, Any], chart_path: Path, title_date_end: str
         label = text_item.get_text()
         if label == 'World cumulative':
             text_item.set_color('#98d08b')
+        elif label == 'World cumulative + shock':
+            text_item.set_color('#e879f9')
         elif label == 'United States cumulative':
             text_item.set_color('#60a5fa')
         elif label == 'China cumulative':
@@ -414,21 +419,22 @@ def make_chart(simulation: Dict[str, Any], chart_path: Path, title_date_end: str
         else:
             text_item.set_color('#e5e7eb')
 
-    fig.text(0.58, 0.09, 'World', color='#98d08b', fontsize=11, fontweight='bold')
-    fig.text(0.635, 0.09, fmt_money(world_series[-1]['cumulative_loss_usd']) if world_series else '$0', color='#e5e7eb', fontsize=11)
+    fig.text(0.53, 0.09, 'World', color='#98d08b', fontsize=11, fontweight='bold')
+    fig.text(0.575, 0.09, fmt_money(world_series[-1]['cumulative_loss_usd']) if world_series else '$0', color='#e5e7eb', fontsize=11)
+    fig.text(0.53, 0.06, 'World + shock', color='#e879f9', fontsize=11, fontweight='bold')
+    fig.text(0.64, 0.06, fmt_money(world_series[-1]['shock_adjusted_cumulative_total_usd']) if world_series else '$0', color='#e5e7eb', fontsize=11)
     if usa:
-        fig.text(0.58, 0.06, 'US', color='#60a5fa', fontsize=11, fontweight='bold')
-        fig.text(0.61, 0.06, fmt_money(usa['cumulative_loss_usd']), color='#e5e7eb', fontsize=11)
+        fig.text(0.53, 0.03, 'US', color='#60a5fa', fontsize=11, fontweight='bold')
+        fig.text(0.555, 0.03, fmt_money(usa['cumulative_loss_usd']), color='#e5e7eb', fontsize=11)
     if china:
-        fig.text(0.74, 0.06, 'China', color='#f59e0b', fontsize=11, fontweight='bold')
-        fig.text(0.80, 0.06, fmt_money(china['cumulative_loss_usd']), color='#e5e7eb', fontsize=11)
-    fig.text(0.58, 0.03, 'Shock today', color='#ef4444', fontsize=11, fontweight='bold')
-    fig.text(0.68, 0.03, fmt_money(simulation['world']['shock_daily_usd']) + '/day', color='#e5e7eb', fontsize=11)
+        fig.text(0.71, 0.03, 'China', color='#f59e0b', fontsize=11, fontweight='bold')
+        fig.text(0.77, 0.03, fmt_money(china['cumulative_loss_usd']), color='#e5e7eb', fontsize=11)
+    fig.text(0.86, 0.03, 'Shock', color='#ef4444', fontsize=11, fontweight='bold')
+    fig.text(0.91, 0.03, fmt_money(simulation['world']['shock_daily_usd']) + '/day', color='#e5e7eb', fontsize=11)
 
     plt.tight_layout(rect=[0.03, 0.12, 0.98, 0.94])
     fig.savefig(chart_path, facecolor=fig.get_facecolor(), bbox_inches='tight')
     plt.close(fig)
-
 
 def trim_meta_description(text: str, limit: int = 158) -> str:
     text = re.sub(r'\s+', ' ', text).strip()
@@ -628,6 +634,10 @@ def chart_data_for_post(post: Dict[str, Any]) -> List[Dict[str, Any]]:
                 'day': item['day'],
                 'world_cumulative_billions': round(item['cumulative_loss_usd'] / 1_000_000_000, 2),
                 'world_cumulative_usd': round(item['cumulative_loss_usd'], 2),
+                'world_total_cumulative_billions': round(item['shock_adjusted_cumulative_total_usd'] / 1_000_000_000, 2),
+                'world_total_cumulative_usd': round(item['shock_adjusted_cumulative_total_usd'], 2),
+                'world_cumulative_shock_billions': round(item['cumulative_shock_usd'] / 1_000_000_000, 2),
+                'world_cumulative_shock_usd': round(item['cumulative_shock_usd'], 2),
                 'world_daily_billions': round(item['daily_loss_usd'] / 1_000_000_000, 2),
                 'world_daily_usd': round(item['daily_loss_usd'], 2),
                 'world_shock_billions': round(item['shock_daily_usd'] / 1_000_000_000, 2),
@@ -640,17 +650,18 @@ def chart_data_for_post(post: Dict[str, Any]) -> List[Dict[str, Any]]:
         )
     return points
 
-
 def render_interactive_chart(post: Dict[str, Any]) -> str:
     chart_points = chart_data_for_post(post)
     labels = [p['date'] for p in chart_points]
     world_values = [p['world_cumulative_billions'] for p in chart_points]
+    world_total_values = [p['world_total_cumulative_billions'] for p in chart_points]
     usa_values = [p['usa_cumulative_billions'] for p in chart_points]
     china_values = [p['china_cumulative_billions'] for p in chart_points]
     shock_values = [p['world_shock_billions'] for p in chart_points]
     payload = json.dumps(chart_points, ensure_ascii=False)
     labels_json = json.dumps(labels, ensure_ascii=False)
     world_json = json.dumps(world_values, ensure_ascii=False)
+    world_total_json = json.dumps(world_total_values, ensure_ascii=False)
     usa_json = json.dumps(usa_values, ensure_ascii=False)
     china_json = json.dumps(china_values, ensure_ascii=False)
     shock_json = json.dumps(shock_values, ensure_ascii=False)
@@ -664,9 +675,9 @@ def render_interactive_chart(post: Dict[str, Any]) -> str:
         <section class="interactive-chart-block">
           <div class="chart-header">
             <h2>Interactive cumulative loss chart + shock overlay</h2>
-            <p>Move the cursor over the chart to compare cumulative simulated losses for the world scenario, the United States, and China, plus the modeled world shock premium on the same date.</p>
+            <p>Move the cursor over the chart to compare world cumulative loss, world cumulative + shock, the United States, China, and the modeled daily world shock premium on the same date.</p>
           </div>
-          <div class="chart-summary" id="{summary_id}">Day {post['simulation']['reference_days']} · {post['date']} · World {fmt_money(post['simulation']['world']['cumulative_loss_usd'])} · US {fmt_money(usa_now['cumulative_loss_usd'])} · China {fmt_money(china_now['cumulative_loss_usd'])} · Shock {fmt_money(post['simulation']['world']['shock_daily_usd'])}/day</div>
+          <div class="chart-summary" id="{summary_id}">Day {post['simulation']['reference_days']} · {post['date']} · World {fmt_money(post['simulation']['world']['cumulative_loss_usd'])} · World + shock {fmt_money(post['simulation']['world']['shock_adjusted_cumulative_total_usd'])} · US {fmt_money(usa_now['cumulative_loss_usd'])} · China {fmt_money(china_now['cumulative_loss_usd'])} · Shock {fmt_money(post['simulation']['world']['shock_daily_usd'])}/day</div>
           <div class="chart-stage">
             <canvas id="{chart_id}"></canvas>
           </div>
@@ -677,6 +688,7 @@ def render_interactive_chart(post: Dict[str, Any]) -> str:
           const chartPoints = {payload};
           const labels = {labels_json};
           const worldValues = {world_json};
+          const worldTotalValues = {world_total_json};
           const usaValues = {usa_json};
           const chinaValues = {china_json};
           const shockValues = {shock_json};
@@ -696,6 +708,7 @@ def render_interactive_chart(post: Dict[str, Any]) -> str:
             summary.textContent =
               'Day ' + point.day + ' · ' + point.date +
               ' · World ' + formatUSD(point.world_cumulative_usd) +
+              ' · World + shock ' + formatUSD(point.world_total_cumulative_usd) +
               ' · US ' + formatUSD(point.usa_cumulative_usd) +
               ' · China ' + formatUSD(point.china_cumulative_usd) +
               ' · Shock ' + formatUSD(point.world_shock_usd) + '/day';
@@ -710,9 +723,22 @@ def render_interactive_chart(post: Dict[str, Any]) -> str:
                   data: worldValues,
                   yAxisID: 'y',
                   borderColor: '#98d08b',
-                  backgroundColor: 'rgba(152, 208, 139, 0.14)',
+                  backgroundColor: 'rgba(152, 208, 139, 0.10)',
                   fill: true,
                   borderWidth: 3,
+                  tension: 0.28,
+                  pointRadius: 0,
+                  pointHoverRadius: 5,
+                  pointHitRadius: 20,
+                }},
+                {{
+                  label: 'World cumulative + shock',
+                  data: worldTotalValues,
+                  yAxisID: 'y',
+                  borderColor: '#e879f9',
+                  backgroundColor: 'rgba(232, 121, 249, 0)',
+                  fill: false,
+                  borderWidth: 3.3,
                   tension: 0.28,
                   pointRadius: 0,
                   pointHoverRadius: 5,
@@ -785,15 +811,10 @@ def render_interactive_chart(post: Dict[str, Any]) -> str:
                     title: (items) => items[0] ? items[0].label : '',
                     label: (context) => {{
                       const point = chartPoints[context.dataIndex];
-                      if (context.dataset.label === 'World cumulative') {{
-                        return 'World · Day ' + point.day + ' · ' + formatUSD(point.world_cumulative_usd);
-                      }}
-                      if (context.dataset.label === 'United States cumulative') {{
-                        return 'United States · Day ' + point.day + ' · ' + formatUSD(point.usa_cumulative_usd);
-                      }}
-                      if (context.dataset.label === 'China cumulative') {{
-                        return 'China · Day ' + point.day + ' · ' + formatUSD(point.china_cumulative_usd);
-                      }}
+                      if (context.dataset.label === 'World cumulative') return 'World · Day ' + point.day + ' · ' + formatUSD(point.world_cumulative_usd);
+                      if (context.dataset.label === 'World cumulative + shock') return 'World + shock · Day ' + point.day + ' · ' + formatUSD(point.world_total_cumulative_usd);
+                      if (context.dataset.label === 'United States cumulative') return 'United States · Day ' + point.day + ' · ' + formatUSD(point.usa_cumulative_usd);
+                      if (context.dataset.label === 'China cumulative') return 'China · Day ' + point.day + ' · ' + formatUSD(point.china_cumulative_usd);
                       return 'Shock premium · Day ' + point.day + ' · ' + formatUSD(point.world_shock_usd) + '/day';
                     }}
                   }}
@@ -833,7 +854,6 @@ def render_interactive_chart(post: Dict[str, Any]) -> str:
         </script>
     """
 
-
 def render_post(post: Dict[str, Any], site_cfg: Dict[str, Any]) -> None:
     top_rows = []
     for c in post['simulation']['countries'][:10]:
@@ -843,34 +863,37 @@ def render_post(post: Dict[str, Any], site_cfg: Dict[str, Any]) -> None:
     paras = ''.join(f'<p>{escape(p)}</p>' for p in post['body_paragraphs'])
     interactive_chart = render_interactive_chart(post)
     body = f"""
-    <main class=\"shell article-shell\">
-      <article class=\"article\">
-        <a class=\"back-link\" href=\"/\">← Back to archive</a>
-        <p class=\"eyebrow\">DAILY BLACKOUT SIMULATION</p>
+    <main class="shell article-shell">
+      <article class="article">
+        <a class="back-link" href="/">← Back to archive</a>
+        <p class="eyebrow">DAILY BLACKOUT SIMULATION</p>
         <h1>{escape(post['title'])}</h1>
-        <div class=\"meta-row\">
-          <time datetime=\"{escape(post['date'])}\">{escape(post['date'])}</time>
+        <div class="meta-row">
+          <time datetime="{escape(post['date'])}">{escape(post['date'])}</time>
           <span>Reference clock: Iran blackout day {post['simulation']['reference_days']}</span>
           <span>Scenario: local internet outage in each economy</span>
         </div>
         {interactive_chart}
-        <div class=\"stat-grid\">
-          <section class=\"stat stat-primary\"><span>World scenario cumulative loss</span><strong>{fmt_money(post['simulation']['world']['cumulative_loss_usd'])}</strong></section>
-          <section class=\"stat\"><span>World scenario daily loss</span><strong>{fmt_money(post['simulation']['world']['daily_loss_usd'])}/day</strong></section>
-          <section class=\"stat\"><span>Reference outage day</span><strong>{post['simulation']['reference_days']}</strong></section>
+        <div class="stat-grid">
+          <section class="stat stat-primary"><span>World scenario cumulative loss</span><strong>{fmt_money(post['simulation']['world']['cumulative_loss_usd'])}</strong></section>
+          <section class="stat stat-primary"><span>World cumulative + shock</span><strong>{fmt_money(post['simulation']['world']['shock_adjusted_cumulative_total_usd'])}</strong></section>
+          <section class="stat"><span>World scenario daily loss</span><strong>{fmt_money(post['simulation']['world']['daily_loss_usd'])}/day</strong></section>
+          <section class="stat stat-danger"><span>World shock premium today</span><strong>{fmt_money(post['simulation']['world']['shock_daily_usd'])}/day</strong></section>
+          <section class="stat"><span>Reference outage day</span><strong>{post['simulation']['reference_days']}</strong></section>
         </div>
-        <div class=\"prose\">{paras}</div>
-        <section class=\"table-wrap\">
+        <div class="prose">{paras}</div>
+        <section class="table-wrap">
           <h2>Top 10 economy simulations</h2>
           <table>
             <thead><tr><th>Economy</th><th>Simulated loss today</th><th>Cumulative simulated loss</th><th>Loss vs 2025 GDP</th></tr></thead>
             <tbody>{''.join(top_rows)}</tbody>
           </table>
         </section>
-        <section class=\"note\">
+        <section class="note">
           <h2>Method note</h2>
           <p>This is a simulation, not a claim that these losses are happening right now. The model uses the length of Iran's blackout as a day counter, then asks what the same-duration domestic internet blackout would cost for the world scenario and the top 10 economies by 2025 GDP.</p>
           <p>The red line is a modeled world shock premium: a separate first-wave disruption layer that starts high, then decays over time as markets partially adapt.</p>
+          <p>The pink line is the cumulative total after adding that shock layer to the world cumulative loss, so it shows the combined simulated burden more clearly.</p>
           <p>{escape(post['model_note'])}</p>
           <p>Signal summary: {escape(post['signal']['summary'])}</p>
         </section>
@@ -901,7 +924,6 @@ def render_post(post: Dict[str, Any], site_cfg: Dict[str, Any]) -> None:
     out_dir = SITE / 'posts' / post['slug']
     out_dir.mkdir(parents=True, exist_ok=True)
     (out_dir / 'index.html').write_text(html, encoding='utf-8')
-
 
 def render_feed(posts: List[Dict[str, Any]], site_cfg: Dict[str, Any]) -> None:
     items = []

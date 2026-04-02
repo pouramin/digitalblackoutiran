@@ -38,9 +38,9 @@
         <section class="interactive-chart-block">
           <div class="chart-header">
             <h2>Interactive cumulative loss chart + shock overlay</h2>
-            <p>Move the cursor over the chart to compare cumulative simulated losses for the world scenario, the United States, and China, plus the modeled world shock premium on the same date.</p>
+            <p>Move the cursor over the chart to compare world cumulative loss, world cumulative + shock, the United States, China, and the modeled daily world shock premium on the same date.</p>
           </div>
-          <div class="chart-summary" id="world-chart-summary-20260301">Day 2 · 2026-03-01 · World $54.31B · US $15.88B · China $8.52B · Shock $10.26B/day</div>
+          <div class="chart-summary" id="world-chart-summary-20260301">Day 2 · 2026-03-01 · World $54.31B · World + shock $74.72B · US $15.88B · China $8.52B · Shock $10.26B/day</div>
           <div class="chart-stage">
             <canvas id="world-chart-20260301"></canvas>
           </div>
@@ -48,9 +48,10 @@
         </section>
         <script>
         (function() {
-          const chartPoints = [{"date": "2026-02-28", "day": 1, "world_cumulative_billions": 25.39, "world_cumulative_usd": 25393150684.93, "world_daily_billions": 25.39, "world_daily_usd": 25393150684.93, "world_shock_billions": 10.16, "world_shock_usd": 10157260273.97, "usa_cumulative_billions": 7.42, "usa_cumulative_usd": 7423269193.15, "china_cumulative_billions": 3.99, "china_cumulative_usd": 3986008972.6}, {"date": "2026-03-01", "day": 2, "world_cumulative_billions": 54.31, "world_cumulative_usd": 54306539530.42, "world_daily_billions": 28.91, "world_daily_usd": 28913388845.49, "world_shock_billions": 10.26, "world_shock_usd": 10255367873.46, "usa_cumulative_billions": 15.88, "usa_cumulative_usd": 15875622008.66, "china_cumulative_billions": 8.52, "china_cumulative_usd": 8524596121.41}];
+          const chartPoints = [{"date": "2026-02-28", "day": 1, "world_cumulative_billions": 25.39, "world_cumulative_usd": 25393150684.93, "world_total_cumulative_billions": 35.55, "world_total_cumulative_usd": 35550410958.9, "world_cumulative_shock_billions": 10.16, "world_cumulative_shock_usd": 10157260273.97, "world_daily_billions": 25.39, "world_daily_usd": 25393150684.93, "world_shock_billions": 10.16, "world_shock_usd": 10157260273.97, "usa_cumulative_billions": 7.42, "usa_cumulative_usd": 7423269193.15, "china_cumulative_billions": 3.99, "china_cumulative_usd": 3986008972.6}, {"date": "2026-03-01", "day": 2, "world_cumulative_billions": 54.31, "world_cumulative_usd": 54306539530.42, "world_total_cumulative_billions": 74.72, "world_total_cumulative_usd": 74719167677.85, "world_cumulative_shock_billions": 20.41, "world_cumulative_shock_usd": 20412628147.43, "world_daily_billions": 28.91, "world_daily_usd": 28913388845.49, "world_shock_billions": 10.26, "world_shock_usd": 10255367873.46, "usa_cumulative_billions": 15.88, "usa_cumulative_usd": 15875622008.66, "china_cumulative_billions": 8.52, "china_cumulative_usd": 8524596121.41}];
           const labels = ["2026-02-28", "2026-03-01"];
           const worldValues = [25.39, 54.31];
+          const worldTotalValues = [35.55, 74.72];
           const usaValues = [7.42, 15.88];
           const chinaValues = [3.99, 8.52];
           const shockValues = [10.16, 10.26];
@@ -70,6 +71,7 @@
             summary.textContent =
               'Day ' + point.day + ' · ' + point.date +
               ' · World ' + formatUSD(point.world_cumulative_usd) +
+              ' · World + shock ' + formatUSD(point.world_total_cumulative_usd) +
               ' · US ' + formatUSD(point.usa_cumulative_usd) +
               ' · China ' + formatUSD(point.china_cumulative_usd) +
               ' · Shock ' + formatUSD(point.world_shock_usd) + '/day';
@@ -84,9 +86,22 @@
                   data: worldValues,
                   yAxisID: 'y',
                   borderColor: '#98d08b',
-                  backgroundColor: 'rgba(152, 208, 139, 0.14)',
+                  backgroundColor: 'rgba(152, 208, 139, 0.10)',
                   fill: true,
                   borderWidth: 3,
+                  tension: 0.28,
+                  pointRadius: 0,
+                  pointHoverRadius: 5,
+                  pointHitRadius: 20,
+                },
+                {
+                  label: 'World cumulative + shock',
+                  data: worldTotalValues,
+                  yAxisID: 'y',
+                  borderColor: '#e879f9',
+                  backgroundColor: 'rgba(232, 121, 249, 0)',
+                  fill: false,
+                  borderWidth: 3.3,
                   tension: 0.28,
                   pointRadius: 0,
                   pointHoverRadius: 5,
@@ -159,15 +174,10 @@
                     title: (items) => items[0] ? items[0].label : '',
                     label: (context) => {
                       const point = chartPoints[context.dataIndex];
-                      if (context.dataset.label === 'World cumulative') {
-                        return 'World · Day ' + point.day + ' · ' + formatUSD(point.world_cumulative_usd);
-                      }
-                      if (context.dataset.label === 'United States cumulative') {
-                        return 'United States · Day ' + point.day + ' · ' + formatUSD(point.usa_cumulative_usd);
-                      }
-                      if (context.dataset.label === 'China cumulative') {
-                        return 'China · Day ' + point.day + ' · ' + formatUSD(point.china_cumulative_usd);
-                      }
+                      if (context.dataset.label === 'World cumulative') return 'World · Day ' + point.day + ' · ' + formatUSD(point.world_cumulative_usd);
+                      if (context.dataset.label === 'World cumulative + shock') return 'World + shock · Day ' + point.day + ' · ' + formatUSD(point.world_total_cumulative_usd);
+                      if (context.dataset.label === 'United States cumulative') return 'United States · Day ' + point.day + ' · ' + formatUSD(point.usa_cumulative_usd);
+                      if (context.dataset.label === 'China cumulative') return 'China · Day ' + point.day + ' · ' + formatUSD(point.china_cumulative_usd);
                       return 'Shock premium · Day ' + point.day + ' · ' + formatUSD(point.world_shock_usd) + '/day';
                     }
                   }
@@ -208,7 +218,9 @@
     
         <div class="stat-grid">
           <section class="stat stat-primary"><span>World scenario cumulative loss</span><strong>$54.31B</strong></section>
+          <section class="stat stat-primary"><span>World cumulative + shock</span><strong>$74.72B</strong></section>
           <section class="stat"><span>World scenario daily loss</span><strong>$28.91B/day</strong></section>
+          <section class="stat stat-danger"><span>World shock premium today</span><strong>$10.26B/day</strong></section>
           <section class="stat"><span>Reference outage day</span><strong>2</strong></section>
         </div>
         <div class="prose"><p>This post does not say these economies are currently losing money because Iran is offline. It uses Iran&#x27;s blackout duration as a time clock and simulates what a same-length domestic internet blackout would cost each economy on day 2.</p><p>Under the world scenario, a blackout of this length implies $28.91B in daily GDP loss and $54.31B in cumulative loss since day 1.</p><p>For the large-economy scenarios, the biggest simulated daily losses today are: United States: $8.45B/day; China: $4.54B/day; Germany: $1.23B/day.</p><p>Method: 2025 nominal GDP baseline × country-specific digital sensitivity coefficient × an outage-duration escalation curve that gets harsher as the blackout continues.</p></div>
@@ -223,6 +235,7 @@
           <h2>Method note</h2>
           <p>This is a simulation, not a claim that these losses are happening right now. The model uses the length of Iran's blackout as a day counter, then asks what the same-duration domestic internet blackout would cost for the world scenario and the top 10 economies by 2025 GDP.</p>
           <p>The red line is a modeled world shock premium: a separate first-wave disruption layer that starts high, then decays over time as markets partially adapt.</p>
+          <p>The pink line is the cumulative total after adding that shock layer to the world cumulative loss, so it shows the combined simulated burden more clearly.</p>
           <p>This package does not estimate how much Iran&#x27;s blackout is hurting other economies right now. Instead, it uses Iran&#x27;s outage duration as the clock and simulates what a same-length local internet blackout would cost for the world scenario and for each top-10 economy using a 2025 GDP baseline plus a day-by-day escalation curve. A second shock overlay models the first-wave disruption premium caused by the outage itself; it starts large, then decays with time.</p>
           <p>Signal summary: Fallback signal used because no live signal source was available during build.</p>
         </section>
