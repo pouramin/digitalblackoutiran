@@ -6,6 +6,13 @@
 <description>Daily simulation of how much GDP the world and the top 10 economies would lose if their own internet were blacked out for as many days as Iran&#x27;s.</description>
 
         <item>
+          <title>Internet blackout simulation update — day 43</title>
+          <link>https://digitalblackoutiran.it/posts/2026-04-11-internet-blackout-simulation-update-day-43/</link>
+          <guid>https://digitalblackoutiran.it/posts/2026-04-11-internet-blackout-simulation-update-day-43/</guid>
+          <pubDate>Sat, 11 Apr 2026 00:00:00 +0000</pubDate>
+          <description><![CDATA[2026-04-11 update: simulated internet blackout losses put United States first, China second, with world exposure at $55.46B/day.]]></description>
+        </item>
+        <item>
           <title>Internet blackout simulation update — day 42</title>
           <link>https://digitalblackoutiran.it/posts/2026-04-10-internet-blackout-simulation-update-day-42/</link>
           <guid>https://digitalblackoutiran.it/posts/2026-04-10-internet-blackout-simulation-update-day-42/</guid>
@@ -137,13 +144,6 @@
           <guid>https://digitalblackoutiran.it/posts/2026-03-23-internet-blackout-simulation-update-day-24/</guid>
           <pubDate>Mon, 23 Mar 2026 00:00:00 +0000</pubDate>
           <description><![CDATA[Internet outage simulation day 24: world daily loss $46.71B, cumulative world loss $934.29B; United States remains the largest economy case.]]></description>
-        </item>
-        <item>
-          <title>Internet blackout simulation update — day 23</title>
-          <link>https://digitalblackoutiran.it/posts/2026-03-22-internet-blackout-simulation-update-day-23/</link>
-          <guid>https://digitalblackoutiran.it/posts/2026-03-22-internet-blackout-simulation-update-day-23/</guid>
-          <pubDate>Sun, 22 Mar 2026 00:00:00 +0000</pubDate>
-          <description><![CDATA[2026-03-22 blackout simulation archive: United States, China and Germany top the loss table; world scenario totals $46.19B/day.]]></description>
         </item>
 </channel>
 </rss>
