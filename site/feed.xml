@@ -6,6 +6,13 @@
 <description>Daily simulation of how much GDP the world and the top 10 economies would lose if their own internet were blacked out for as many days as Iran&#x27;s.</description>
 
         <item>
+          <title>Internet blackout simulation update — day 52</title>
+          <link>https://digitalblackoutiran.it/posts/2026-04-20-internet-blackout-simulation-update-day-52/</link>
+          <guid>https://digitalblackoutiran.it/posts/2026-04-20-internet-blackout-simulation-update-day-52/</guid>
+          <pubDate>Mon, 20 Apr 2026 00:00:00 +0000</pubDate>
+          <description><![CDATA[Internet blackout day 52: modeled daily loss reaches $59.17B worldwide, with United States and China leading the country ranking.]]></description>
+        </item>
+        <item>
           <title>Internet blackout simulation update — day 51</title>
           <link>https://digitalblackoutiran.it/posts/2026-04-19-internet-blackout-simulation-update-day-51/</link>
           <guid>https://digitalblackoutiran.it/posts/2026-04-19-internet-blackout-simulation-update-day-51/</guid>
@@ -137,13 +144,6 @@
           <guid>https://digitalblackoutiran.it/posts/2026-04-01-internet-blackout-simulation-update-day-33/</guid>
           <pubDate>Wed, 01 Apr 2026 00:00:00 +0000</pubDate>
           <description><![CDATA[2026-04-01 internet blackout simulation: day 33, world scenario $51.07B/day. United States leads at $14.93B/day.]]></description>
-        </item>
-        <item>
-          <title>Internet blackout simulation update — day 32</title>
-          <link>https://digitalblackoutiran.it/posts/2026-03-31-internet-blackout-simulation-update-day-32/</link>
-          <guid>https://digitalblackoutiran.it/posts/2026-03-31-internet-blackout-simulation-update-day-32/</guid>
-          <pubDate>Tue, 31 Mar 2026 00:00:00 +0000</pubDate>
-          <description><![CDATA[Internet outage simulation day 32: world daily loss $50.61B, cumulative world loss $1.33T; United States remains the largest economy case.]]></description>
         </item>
 </channel>
 </rss>
