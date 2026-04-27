@@ -6,6 +6,13 @@
 <description>Daily simulation of how much GDP the world and the top 10 economies would lose if their own internet were blacked out for as many days as Iran&#x27;s.</description>
 
         <item>
+          <title>Internet blackout simulation update — day 59</title>
+          <link>https://digitalblackoutiran.it/posts/2026-04-27-internet-blackout-simulation-update-day-59/</link>
+          <guid>https://digitalblackoutiran.it/posts/2026-04-27-internet-blackout-simulation-update-day-59/</guid>
+          <pubDate>Mon, 27 Apr 2026 00:00:00 +0000</pubDate>
+          <description><![CDATA[2026-04-27 update: simulated internet blackout losses put United States first, China second, with world exposure at $61.95B/day.]]></description>
+        </item>
+        <item>
           <title>Internet blackout simulation update — day 58</title>
           <link>https://digitalblackoutiran.it/posts/2026-04-26-internet-blackout-simulation-update-day-58/</link>
           <guid>https://digitalblackoutiran.it/posts/2026-04-26-internet-blackout-simulation-update-day-58/</guid>
@@ -137,13 +144,6 @@
           <guid>https://digitalblackoutiran.it/posts/2026-04-08-internet-blackout-simulation-update-day-40/</guid>
           <pubDate>Wed, 08 Apr 2026 00:00:00 +0000</pubDate>
           <description><![CDATA[Internet outage simulation day 40: world daily loss $54.18B, cumulative world loss $1.75T; United States remains the largest economy case.]]></description>
-        </item>
-        <item>
-          <title>Internet blackout simulation update — day 39</title>
-          <link>https://digitalblackoutiran.it/posts/2026-04-07-internet-blackout-simulation-update-day-39/</link>
-          <guid>https://digitalblackoutiran.it/posts/2026-04-07-internet-blackout-simulation-update-day-39/</guid>
-          <pubDate>Tue, 07 Apr 2026 00:00:00 +0000</pubDate>
-          <description><![CDATA[2026-04-07 blackout simulation archive: United States, China and Germany top the loss table; world scenario totals $53.75B/day.]]></description>
         </item>
 </channel>
 </rss>
