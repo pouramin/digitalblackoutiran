@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Internet blackout simulation update — day 62 | #DigitalBlackOutIran</title>
+  <meta name="description" content="Day 62 blackout simulation report: United States $18.45B/day, China $9.91B/day, world $63.11B/day.">
+  <link rel="canonical" href="https://digitalblackoutiran.it/posts/2026-04-30-internet-blackout-simulation-update-day-62/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Internet blackout simulation update — day 62 | #DigitalBlackOutIran">
+  <meta property="og:description" content="Day 62 blackout simulation report: United States $18.45B/day, China $9.91B/day, world $63.11B/day.">
+  <meta property="og:url" content="https://digitalblackoutiran.it/posts/2026-04-30-internet-blackout-simulation-update-day-62/">
+  <meta property="og:image" content="https://digitalblackoutiran.it/assets/img/2026-04-30-world.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Internet blackout simulation update — day 62 | #DigitalBlackOutIran">
+  <meta name="twitter:description" content="Day 62 blackout simulation report: United States $18.45B/day, China $9.91B/day, world $63.11B/day.">
+  <meta name="twitter:image" content="https://digitalblackoutiran.it/assets/img/2026-04-30-world.png">
+  <meta name="twitter:site" content="@pouraminam">
+  <meta name="twitter:creator" content="@pouraminam">
+  <link rel="alternate" type="application/rss+xml" title="#DigitalBlackOutIran RSS" href="https://digitalblackoutiran.it/feed.xml">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Internet blackout simulation update \u2014 day 62", "datePublished": "2026-04-30", "dateModified": "2026-04-30", "description": "Day 62 blackout simulation report: United States $18.45B/day, China $9.91B/day, world $63.11B/day.", "author": {"@type": "Person", "name": "Pamin"}, "image": ["https://digitalblackoutiran.it/assets/img/2026-04-30-world.png"], "mainEntityOfPage": "https://digitalblackoutiran.it/posts/2026-04-30-internet-blackout-simulation-update-day-62/"}</script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  
+    <main class="shell article-shell">
+      <article class="article">
+        <a class="back-link" href="/">← Back to archive</a>
+        <p class="eyebrow">DAILY BLACKOUT SIMULATION</p>
+        <h1>Internet blackout simulation update — day 62</h1>
+        <div class="meta-row">
+          <time datetime="2026-04-30">2026-04-30</time>
+          <span>Reference clock: Iran blackout day 62</span>
+          <span>Scenario: local internet outage in each economy</span>
+        </div>
+        
+        <section class="interactive-chart-block">
+          <div class="chart-header">
+            <h2>Interactive cumulative loss chart</h2>
+            <p>The main chart shows world cumulative loss, world cumulative + accumulated shock, the United States, and China. The red mini-chart below isolates the daily shock premium so it does not distort the cumulative view.</p>
+          </div>
+          <div class="chart-summary" id="world-chart-summary-20260430">Day 62 · 2026-04-30 · World $3.04T · World + shock $3.29T · US $889.70B · China $477.74B · Shock $3.16B/day · Shock added $245.64B</div>
+          <div class="chart-stage chart-stage-main">
+            <canvas id="world-chart-20260430"></canvas>
+          </div>
+          <div class="chart-stage chart-stage-mini">
+            <canvas id="world-shock-chart-20260430"></canvas>
+          </div>
+          <noscript><img class="hero-chart" src="/assets/img/2026-04-30-world.png" alt="Internet blackout simulation update — day 62 chart"></noscript>
+        </section>
+        <script>
+        (function() {
+          const chartPoints = [{"date": "2026-02-28", "day": 1, "world_cumulative_billions": 25.39, "world_cumulative_usd": 25393150684.93, "world_total_cumulative_billions": 35.55, "world_total_cumulative_usd": 35550410958.9, "world_cumulative_shock_billions": 10.16, "world_cumulative_shock_usd": 10157260273.97, "world_daily_billions": 25.39, "world_daily_usd": 25393150684.93, "world_shock_billions": 10.16, "world_shock_usd": 10157260273.97, "usa_cumulative_billions": 7.42, "usa_cumulative_usd": 7423269193.15, "china_cumulative_billions": 3.99, "china_cumulative_usd": 3986008972.6}, {"date": "2026-03-01", "day": 2, "world_cumulative_billions": 54.31, "world_cumulative_usd": 54306539530.42, "world_total_cumulative_billions": 74.72, "world_total_cumulative_usd": 74719167677.85, "world_cumulative_shock_billions": 20.41, "world_cumulative_shock_usd": 20412628147.43, "world_daily_billions": 28.91, "world_daily_usd": 28913388845.49, "world_shock_billions": 10.26, "world_shock_usd": 10255367873.46, "usa_cumulative_billions": 15.88, "usa_cumulative_usd": 15875622008.66, "china_cumulative_billions": 8.52, "china_cumulative_usd": 8524596121.41}, {"date": "2026-03-02", "day": 3, "world_cumulative_billions": 85.28, "world_cumulative_usd": 85279135693.45, "world_total_cumulative_billions": 115.46, "world_total_cumulative_usd": 115455887143.65, "world_cumulative_shock_billions": 30.18, "world_cumulative_shock_usd": 30176751450.21, "world_daily_billions": 30.97, "world_daily_usd": 30972596163.02, "world_shock_billions": 9.76, "world_shock_usd": 9764123302.77, "usa_cumulative_billions": 24.93, "usa_cumulative_usd": 24929950153.34, "china_cumulative_billions": 13.39, "china_cumulative_usd": 13386420782.03}, {"date": "2026-03-03", "day": 4, "world_cumulative_billions": 117.71, "world_cumulative_usd": 117712762699.5, "world_total_cumulative_billions": 157.0, "world_total_cumulative_usd": 157000570296.67, "world_cumulative_shock_billions": 39.29, "world_cumulative_shock_usd": 39287807597.18, "world_daily_billions": 32.43, "world_daily_usd": 32433627006.05, "world_shock_billions": 9.11, "world_shock_usd": 9111056146.97, "usa_cumulative_billions": 34.41, "usa_cumulative_usd": 34411386591.2, "china_cumulative_billions": 18.48, "china_cumulative_usd": 18477586107.05}, {"date": "2026-03-04", "day": 5, "world_cumulative_billions": 151.28, "world_cumulative_usd": 151279653270.12, "world_total_cumulative_billions": 198.99, "world_total_cumulative_usd": 198993495992.48, "world_cumulative_shock_billions": 47.71, "world_cumulative_shock_usd": 47713842722.36, "world_daily_billions": 33.57, "world_daily_usd": 33566890570.63, "world_shock_billions": 8.43, "world_shock_usd": 8426035125.18, "usa_cumulative_billions": 44.22, "usa_cumulative_usd": 44224113959.08, "china_cumulative_billions": 23.75, "china_cumulative_usd": 23746641871.61}, {"date": "2026-03-05", "day": 6, "world_cumulative_billions": 185.77, "world_cumulative_usd": 185772487593.71, "world_total_cumulative_billions": 241.25, "world_total_cumulative_usd": 241247218038.87, "world_cumulative_shock_billions": 55.47, "world_cumulative_shock_usd": 55474730445.16, "world_daily_billions": 34.49, "world_daily_usd": 34492834323.58, "world_shock_billions": 7.76, "world_shock_usd": 7760887722.81, "usa_cumulative_billions": 54.31, "usa_cumulative_usd": 54307525726.13, "china_cumulative_billions": 29.16, "china_cumulative_usd": 29161044708.43}, {"date": "2026-03-06", "day": 7, "world_cumulative_billions": 221.05, "world_cumulative_usd": 221048196205.5, "world_total_cumulative_billions": 283.66, "world_total_cumulative_usd": 283660837481.72, "world_cumulative_shock_billions": 62.61, "world_cumulative_shock_usd": 62612641276.22, "world_daily_billions": 35.28, "world_daily_usd": 35275708611.79, "world_shock_billions": 7.14, "world_shock_usd": 7137910831.06, "usa_cumulative_billions": 64.62, "usa_cumulative_usd": 64619797891.7, "china_cumulative_billions": 34.7, "china_cumulative_usd": 34698336743.84}, {"date": "2026-03-07", "day": 8, "world_cumulative_billions": 257.31, "world_cumulative_usd": 257306779180.33, "world_total_cumulative_billions": 326.54, "world_total_cumulative_usd": 326541151408.44, "world_cumulative_shock_billions": 69.23, "world_cumulative_shock_usd": 69234372228.11, "world_daily_billions": 36.26, "world_daily_usd": 36258582974.83, "world_shock_billions": 6.62, "world_shock_usd": 6621730951.89, "usa_cumulative_billions": 75.22, "usa_cumulative_usd": 75219397182.23, "china_cumulative_billions": 40.39, "china_cumulative_usd": 40389912352.74}, {"date": "2026-03-08", "day": 9, "world_cumulative_billions": 294.47, "world_cumulative_usd": 294468256437.88, "world_total_cumulative_billions": 369.85, "world_total_cumulative_usd": 369851253060.39, "world_cumulative_shock_billions": 75.38, "world_cumulative_shock_usd": 75382996622.51, "world_daily_billions": 37.16, "world_daily_usd": 37161477257.56, "world_shock_billions": 6.15, "world_shock_usd": 6148624394.4, "usa_cumulative_billions": 86.08, "usa_cumulative_usd": 86082942739.09, "china_cumulative_billions": 46.22, "china_cumulative_usd": 46223216916.7}, {"date": "2026-03-09", "day": 10, "world_cumulative_billions": 332.47, "world_cumulative_usd": 332469538593.73, "world_total_cumulative_billions": 413.57, "world_total_cumulative_usd": 413572150225.29, "world_cumulative_shock_billions": 81.1, "world_cumulative_shock_usd": 81102611631.57, "world_daily_billions": 38.0, "world_daily_usd": 38001282155.84, "world_shock_billions": 5.72, "world_shock_usd": 5719615009.06, "usa_cumulative_billions": 97.19, "usa_cumulative_usd": 97191991420.28, "china_cumulative_billions": 52.19, "china_cumulative_usd": 52188347180.49}, {"date": "2026-03-10", "day": 11, "world_cumulative_billions": 371.26, "world_cumulative_usd": 371259583709.31, "world_total_cumulative_billions": 457.7, "world_total_cumulative_usd": 457695826544.26, "world_cumulative_shock_billions": 86.44, "world_cumulative_shock_usd": 86436242834.96, "world_daily_billions": 38.79, "world_daily_usd": 38790045115.58, "world_shock_billions": 5.33, "world_shock_usd": 5333631203.39, "usa_cumulative_billions": 108.53, "usa_cumulative_usd": 108531621956.1, "china_cumulative_billions": 58.28, "china_cumulative_usd": 58277290998.32}, {"date": "2026-03-11", "day": 12, "world_cumulative_billions": 410.8, "world_cumulative_usd": 410796245234.54, "world_total_cumulative_billions": 502.22, "world_total_cumulative_usd": 502220954154.91, "world_cumulative_shock_billions": 91.42, "world_cumulative_shock_usd": 91424708920.36, "world_daily_billions": 39.54, "world_daily_usd": 39536661525.24, "world_shock_billions": 4.99, "world_shock_usd": 4988466085.41, "usa_cumulative_billions": 120.09, "usa_cumulative_usd": 120089513497.08, "china_cumulative_billions": 64.48, "china_cumulative_usd": 64483432549.71}, {"date": "2026-03-12", "day": 13, "world_cumulative_billions": 451.04, "world_cumulative_usd": 451044131875.44, "world_total_cumulative_billions": 547.15, "world_total_cumulative_usd": 547150177126.85, "world_cumulative_shock_billions": 96.11, "world_cumulative_shock_usd": 96106045251.41, "world_daily_billions": 40.25, "world_daily_usd": 40247886640.89, "world_shock_billions": 4.68, "world_shock_usd": 4681336331.05, "usa_cumulative_billions": 131.86, "usa_cumulative_usd": 131855319981.59, "china_cumulative_billions": 70.8, "china_cumulative_usd": 70801216398.96}, {"date": "2026-03-13", "day": 14, "world_cumulative_billions": 491.97, "world_cumulative_usd": 491973103305.32, "world_total_cumulative_billions": 592.49, "world_total_cumulative_usd": 592488364072.42, "world_cumulative_shock_billions": 100.52, "world_cumulative_shock_usd": 100515260767.1, "world_daily_billions": 40.93, "world_daily_usd": 40928971429.88, "world_shock_billions": 4.41, "world_shock_usd": 4409215515.69, "usa_cumulative_billions": 143.82, "usa_cumulative_usd": 143820230381.74, "china_cumulative_billions": 77.23, "china_cumulative_usd": 77225911364.28}, {"date": "2026-03-14", "day": 15, "world_cumulative_billions": 533.56, "world_cumulative_usd": 533557181819.8, "world_total_cumulative_billions": 638.24, "world_total_cumulative_usd": 638241477375.65, "world_cumulative_shock_billions": 104.68, "world_cumulative_shock_usd": 104684295555.86, "world_daily_billions": 41.58, "world_daily_usd": 41584078514.47, "world_shock_billions": 4.17, "world_shock_usd": 4169034788.76, "usa_cumulative_billions": 155.98, "usa_cumulative_usd": 155976650543.7, "china_cumulative_billions": 83.75, "china_cumulative_usd": 83753439678.22}, {"date": "2026-03-15", "day": 16, "world_cumulative_billions": 575.77, "world_cumulative_usd": 575773745420.94, "world_total_cumulative_billions": 684.42, "world_total_cumulative_usd": 684415843814.4, "world_cumulative_shock_billions": 108.64, "world_cumulative_shock_usd": 108642098393.46, "world_daily_billions": 42.22, "world_daily_usd": 42216563601.14, "world_shock_billions": 3.96, "world_shock_usd": 3957802837.61, "usa_cumulative_billions": 168.32, "usa_cumulative_usd": 168317967299.13, "china_cumulative_billions": 90.38, "china_cumulative_usd": 90380250324.7}, {"date": "2026-03-16", "day": 17, "world_cumulative_billions": 618.6, "world_cumulative_usd": 618602916861.7, "world_total_cumulative_billions": 731.02, "world_total_cumulative_usd": 731017690797.59, "world_cumulative_shock_billions": 112.41, "world_cumulative_shock_usd": 112414773935.89, "world_daily_billions": 42.83, "world_daily_usd": 42829171440.76, "world_shock_billions": 3.77, "world_shock_usd": 3772675542.43, "usa_cumulative_billions": 180.84, "usa_cumulative_usd": 180838369862.37, "china_cumulative_billions": 97.1, "china_cumulative_usd": 97103223136.16}, {"date": "2026-03-17", "day": 18, "world_cumulative_billions": 662.03, "world_cumulative_usd": 662027092553.78, "world_total_cumulative_billions": 778.05, "world_total_cumulative_usd": 778052860266.11, "world_cumulative_shock_billions": 116.03, "world_cumulative_shock_usd": 116025767712.33, "world_daily_billions": 43.42, "world_daily_usd": 43424175692.09, "world_shock_billions": 3.61, "world_shock_usd": 3610993776.43, "usa_cumulative_billions": 193.53, "usa_cumulative_usd": 193532712114.45, "china_cumulative_billions": 103.92, "china_cumulative_usd": 103919594845.37}, {"date": "2026-03-18", "day": 19, "world_cumulative_billions": 706.03, "world_cumulative_usd": 706030573473.46, "world_total_cumulative_billions": 825.53, "world_total_cumulative_usd": 825526642069.97, "world_cumulative_shock_billions": 119.5, "world_cumulative_shock_usd": 119496068596.51, "world_daily_billions": 44.0, "world_daily_usd": 44003480919.67, "world_shock_billions": 3.47, "world_shock_usd": 3470300884.19, "usa_cumulative_billions": 206.4, "usa_cumulative_usd": 206396404704.44, "china_cumulative_billions": 110.83, "china_cumulative_usd": 110826901148.07}, {"date": "2026-03-19", "day": 20, "world_cumulative_billions": 750.6, "world_cumulative_usd": 750599271872.05, "world_total_cumulative_billions": 873.44, "world_total_cumulative_usd": 873443687681.44, "world_cumulative_shock_billions": 122.84, "world_cumulative_shock_usd": 122844415809.39, "world_daily_billions": 44.57, "world_daily_usd": 44568698398.59, "world_shock_billions": 3.35, "world_shock_usd": 3348347212.88, "usa_cumulative_billions": 219.43, "usa_cumulative_usd": 219425329311.17, "china_cumulative_billions": 117.82, "china_cumulative_usd": 117822930664.78}, {"date": "2026-03-20", "day": 21, "world_cumulative_billions": 795.72, "world_cumulative_usd": 795720475277.0, "world_total_cumulative_billions": 921.81, "world_total_cumulative_usd": 921807977581.13, "world_cumulative_shock_billions": 126.09, "world_cumulative_shock_usd": 126087502304.12, "world_daily_billions": 45.12, "world_daily_usd": 45121203404.95, "world_shock_billions": 3.24, "world_shock_usd": 3243086494.73, "usa_cumulative_billions": 232.62, "usa_cumulative_usd": 232615769652.73, "china_cumulative_billions": 124.91, "china_cumulative_usd": 124905687895.59}, {"date": "2026-03-21", "day": 22, "world_cumulative_billions": 841.38, "world_cumulative_usd": 841382654443.55, "world_total_cumulative_billions": 970.62, "world_total_cumulative_usd": 970622823989.01, "world_cumulative_shock_billions": 129.24, "world_cumulative_shock_usd": 129240169545.46, "world_daily_billions": 45.66, "world_daily_usd": 45662179166.55, "world_shock_billions": 3.15, "world_shock_usd": 3152667241.34, "usa_cumulative_billions": 245.96, "usa_cumulative_usd": 245964355344.39, "china_cumulative_billions": 132.07, "china_cumulative_usd": 132073363074.02}, {"date": "2026-03-22", "day": 23, "world_cumulative_billions": 887.58, "world_cumulative_usd": 887575305479.36, "world_total_cumulative_billions": 1019.89, "world_total_cumulative_usd": 1019890896271.89, "world_cumulative_shock_billions": 132.32, "world_cumulative_shock_usd": 132315590792.54, "world_daily_billions": 46.19, "world_daily_usd": 46192651035.8, "world_shock_billions": 3.08, "world_shock_usd": 3075421247.07, "usa_cumulative_billions": 259.47, "usa_cumulative_usd": 259468015746.31, "china_cumulative_billions": 139.32, "china_cumulative_usd": 139324307385.01}, {"date": "2026-03-23", "day": 24, "world_cumulative_billions": 934.29, "world_cumulative_usd": 934288818863.78, "world_total_cumulative_billions": 1069.61, "world_total_cumulative_usd": 1069614260252.35, "world_cumulative_shock_billions": 135.33, "world_cumulative_shock_usd": 135325441388.56, "world_daily_billions": 46.71, "world_daily_usd": 46713513384.43, "world_shock_billions": 3.01, "world_shock_usd": 3009850596.03, "usa_cumulative_billions": 273.12, "usa_cumulative_usd": 273123941673.46, "china_cumulative_billions": 146.66, "china_cumulative_usd": 146657012404.66}, {"date": "2026-03-24", "day": 25, "world_cumulative_billions": 981.51, "world_cumulative_usd": 981514369868.05, "world_total_cumulative_billions": 1119.79, "world_total_cumulative_usd": 1119794425352.56, "world_cumulative_shock_billions": 138.28, "world_cumulative_shock_usd": 138280055484.51, "world_daily_billions": 47.23, "world_daily_usd": 47225551004.27, "world_shock_billions": 2.95, "world_shock_usd": 2954614095.94, "usa_cumulative_billions": 286.93, "usa_cumulative_usd": 286929553361.8, "china_cumulative_billions": 154.07, "china_cumulative_usd": 154070092899.27}, {"date": "2026-03-25", "day": 26, "world_cumulative_billions": 1029.24, "world_cumulative_usd": 1029243826176.35, "world_total_cumulative_billions": 1170.43, "world_total_cumulative_usd": 1170432395404.65, "world_cumulative_shock_billions": 141.19, "world_cumulative_shock_usd": 141188569228.29, "world_daily_billions": 47.73, "world_daily_usd": 47729456308.3, "world_shock_billions": 2.91, "world_shock_usd": 2908513743.79, "usa_cumulative_billions": 300.88, "usa_cumulative_usd": 300882473462.79, "china_cumulative_billions": 161.56, "china_cumulative_usd": 161562272324.46}, {"date": "2026-03-26", "day": 27, "world_cumulative_billions": 1077.47, "world_cumulative_usd": 1077469669459.95, "world_total_cumulative_billions": 1221.53, "world_total_cumulative_usd": 1221528720298.13, "world_cumulative_shock_billions": 144.06, "world_cumulative_shock_usd": 144059050838.18, "world_daily_billions": 48.23, "world_daily_usd": 48225843283.6, "world_shock_billions": 2.87, "world_shock_usd": 2870481609.89, "usa_cumulative_billions": 314.98, "usa_cumulative_usd": 314980504116.91, "china_cumulative_billions": 169.13, "china_cumulative_usd": 169132370514.51}, {"date": "2026-03-27", "day": 28, "world_cumulative_billions": 1126.18, "world_cumulative_usd": 1126184928365.46, "world_total_cumulative_billions": 1273.08, "world_total_cumulative_usd": 1273083546582.32, "world_cumulative_shock_billions": 146.9, "world_cumulative_shock_usd": 146898618216.86, "world_daily_billions": 48.72, "world_daily_usd": 48715258905.51, "world_shock_billions": 2.84, "world_shock_usd": 2839567378.68, "usa_cumulative_billions": 329.22, "usa_cumulative_usd": 329221607363.86, "china_cumulative_billions": 176.78, "china_cumulative_usd": 176779293163.43}, {"date": "2026-03-28", "day": 29, "world_cumulative_billions": 1175.38, "world_cumulative_usd": 1175383120913.53, "world_total_cumulative_billions": 1325.1, "world_total_cumulative_usd": 1325096665812.35, "world_cumulative_shock_billions": 149.71, "world_cumulative_shock_usd": 149713544898.82, "world_daily_billions": 49.2, "world_daily_usd": 49198192548.07, "world_shock_billions": 2.81, "world_shock_usd": 2814926681.97, "usa_cumulative_billions": 343.6, "usa_cumulative_usd": 343603888303.8, "china_cumulative_billions": 184.5, "china_cumulative_usd": 184502022783.15}, {"date": "2026-03-29", "day": 30, "world_cumulative_billions": 1225.06, "world_cumulative_usd": 1225058204711.85, "world_total_cumulative_billions": 1377.57, "world_total_cumulative_usd": 1377567559901.61, "world_cumulative_shock_billions": 152.51, "world_cumulative_shock_usd": 152509355189.76, "world_daily_billions": 49.68, "world_daily_usd": 49675083798.32, "world_shock_billions": 2.8, "world_shock_usd": 2795810290.94, "usa_cumulative_billions": 358.13, "usa_cumulative_usd": 358125580542.88, "china_cumulative_billions": 192.3, "china_cumulative_usd": 192299610888.37}, {"date": "2026-03-30", "day": 31, "world_cumulative_billions": 1275.2, "world_cumulative_usd": 1275204533700.77, "world_total_cumulative_billions": 1430.5, "world_total_cumulative_usd": 1430495443076.63, "world_cumulative_shock_billions": 155.29, "world_cumulative_shock_usd": 155290909375.86, "world_daily_billions": 50.15, "world_daily_usd": 50146328988.92, "world_shock_billions": 2.78, "world_shock_usd": 2781554186.1, "usa_cumulative_billions": 372.79, "usa_cumulative_usd": 372785033548.61, "china_cumulative_billions": 200.17, "china_cumulative_usd": 200171171206.86}, {"date": "2026-03-31", "day": 32, "world_cumulative_billions": 1325.82, "world_cumulative_usd": 1325816820393.97, "world_total_cumulative_billions": 1483.88, "world_total_cumulative_usd": 1483879300262.96, "world_cumulative_shock_billions": 158.06, "world_cumulative_shock_usd": 158062479868.98, "world_daily_billions": 50.61, "world_daily_usd": 50612286693.21, "world_shock_billions": 2.77, "world_shock_usd": 2771570493.12, "usa_cumulative_billions": 387.58, "usa_cumulative_usd": 387580701611.47, "china_cumulative_billions": 208.12, "china_cumulative_usd": 208115873752.29}, {"date": "2026-04-01", "day": 33, "world_cumulative_billions": 1376.89, "world_cumulative_usd": 1376890102768.47, "world_total_cumulative_billions": 1537.72, "world_total_cumulative_usd": 1537717921889.54, "world_cumulative_shock_billions": 160.83, "world_cumulative_shock_usd": 160827819121.07, "world_daily_billions": 51.07, "world_daily_usd": 51073282374.49, "world_shock_billions": 2.77, "world_shock_usd": 2765339252.09, "usa_cumulative_billions": 402.51, "usa_cumulative_usd": 402511134165.82, "china_cumulative_billions": 216.13, "china_cumulative_usd": 216132939626.9}, {"date": "2026-04-02", "day": 34, "world_cumulative_billions": 1428.42, "world_cumulative_usd": 1428419715109.51, "world_total_cumulative_billions": 1592.01, "world_total_cumulative_usd": 1592009935206.18, "world_cumulative_shock_billions": 163.59, "world_cumulative_shock_usd": 163590220096.66, "world_daily_billions": 51.53, "world_daily_usd": 51529612341.04, "world_shock_billions": 2.76, "world_shock_usd": 2762400975.59, "usa_cumulative_billions": 417.57, "usa_cumulative_usd": 417574967266.81, "china_cumulative_billions": 224.22, "china_cumulative_usd": 224221636444.97}, {"date": "2026-04-03", "day": 35, "world_cumulative_billions": 1480.4, "world_cumulative_usd": 1480401262237.14, "world_total_cumulative_billions": 1646.75, "world_total_cumulative_usd": 1646753832277.58, "world_cumulative_shock_billions": 166.35, "world_cumulative_shock_usd": 166352570040.44, "world_daily_billions": 51.98, "world_daily_usd": 51981547127.62, "world_shock_billions": 2.76, "world_shock_usd": 2762349943.78, "usa_cumulative_billions": 432.77, "usa_cumulative_usd": 432770916056.02, "china_cumulative_billions": 232.38, "china_cumulative_usd": 232381274287.14}, {"date": "2026-04-04", "day": 36, "world_cumulative_billions": 1532.83, "world_cumulative_usd": 1532830596637.73, "world_total_cumulative_billions": 1701.95, "world_total_cumulative_usd": 1701947994859.45, "world_cumulative_shock_billions": 169.12, "world_cumulative_shock_usd": 169117398221.72, "world_daily_billions": 52.43, "world_daily_usd": 52429334400.59, "world_shock_billions": 2.76, "world_shock_usd": 2764828181.28, "usa_cumulative_billions": 448.1, "usa_cumulative_usd": 448097768076.17, "china_cumulative_billions": 240.61, "china_cumulative_usd": 240611202110.64}, {"date": "2026-04-05", "day": 37, "world_cumulative_billions": 1585.7, "world_cumulative_usd": 1585703798102.57, "world_total_cumulative_billions": 1757.59, "world_total_cumulative_usd": 1757590716384.74, "world_cumulative_shock_billions": 171.89, "world_cumulative_shock_usd": 171886918282.16, "world_daily_billions": 52.87, "world_daily_usd": 52873201464.85, "world_shock_billions": 2.77, "world_shock_usd": 2769520060.44, "usa_cumulative_billions": 463.55, "usa_cumulative_usd": 463554377318.84, "china_cumulative_billions": 248.91, "china_cumulative_usd": 248910804553.21}, {"date": "2026-04-06", "day": 38, "world_cumulative_billions": 1639.02, "world_cumulative_usd": 1639017155538.97, "world_total_cumulative_billions": 1813.68, "world_total_cumulative_usd": 1813680221297.17, "world_cumulative_shock_billions": 174.66, "world_cumulative_shock_usd": 174663065758.2, "world_daily_billions": 53.31, "world_daily_usd": 53313357436.4, "world_shock_billions": 2.78, "world_shock_usd": 2776147476.03, "usa_cumulative_billions": 479.14, "usa_cumulative_usd": 479139658907.23, "china_cumulative_billions": 257.28, "china_cumulative_usd": 257279499077.87}, {"date": "2026-04-07", "day": 39, "world_cumulative_billions": 1692.77, "world_cumulative_usd": 1692767150671.66, "world_total_cumulative_billions": 1870.21, "world_total_cumulative_usd": 1870214681969.0, "world_cumulative_shock_billions": 177.45, "world_cumulative_shock_usd": 177447531297.34, "world_daily_billions": 53.75, "world_daily_usd": 53749995132.69, "world_shock_billions": 2.78, "world_shock_usd": 2784465539.15, "usa_cumulative_billions": 494.85, "usa_cumulative_usd": 494852584331.53, "china_cumulative_billions": 265.72, "china_cumulative_usd": 265716733414.59}, {"date": "2026-04-08", "day": 40, "world_cumulative_billions": 1746.95, "world_cumulative_usd": 1746950443395.19, "world_total_cumulative_billions": 1927.19, "world_total_cumulative_usd": 1927192233433.12, "world_cumulative_shock_billions": 180.24, "world_cumulative_shock_usd": 180241790037.92, "world_daily_billions": 54.18, "world_daily_usd": 54183292723.54, "world_shock_billions": 2.79, "world_shock_usd": 2794258740.58, "usa_cumulative_billions": 510.69, "usa_cumulative_usd": 510692177166.96, "china_cumulative_billions": 274.22, "china_cumulative_usd": 274221983260.93}, {"date": "2026-04-09", "day": 41, "world_cumulative_billions": 1801.56, "world_cumulative_usd": 1801563858573.41, "world_total_cumulative_billions": 1984.61, "world_total_cumulative_usd": 1984610986148.81, "world_cumulative_shock_billions": 183.05, "world_cumulative_shock_usd": 183047127575.4, "world_daily_billions": 54.61, "world_daily_usd": 54613415178.22, "world_shock_billions": 2.81, "world_shock_usd": 2805337537.47, "usa_cumulative_billions": 526.66, "usa_cumulative_usd": 526657509214.78, "china_cumulative_billions": 282.79, "china_cumulative_usd": 282794750210.01}, {"date": "2026-04-10", "day": 42, "world_cumulative_billions": 1856.6, "world_cumulative_usd": 1856604374111.53, "world_total_cumulative_billions": 2042.47, "world_total_cumulative_usd": 2042469037007.32, "world_cumulative_shock_billions": 185.86, "world_cumulative_shock_usd": 185864662895.79, "world_daily_billions": 55.04, "world_daily_usd": 55040515538.11, "world_shock_billions": 2.82, "world_shock_usd": 2817535320.39, "usa_cumulative_billions": 542.75, "usa_cumulative_usd": 542747697015.37, "china_cumulative_billions": 291.43, "china_cumulative_usd": 291434559878.13}, {"date": "2026-04-11", "day": 43, "world_cumulative_billions": 1912.07, "world_cumulative_usd": 1912069110151.15, "world_total_cumulative_billions": 2100.76, "world_total_cumulative_usd": 2100764478768.34, "world_cumulative_shock_billions": 188.7, "world_cumulative_shock_usd": 188695368617.19, "world_daily_billions": 55.46, "world_daily_usd": 55464736039.62, "world_shock_billions": 2.83, "world_shock_usd": 2830705721.41, "usa_cumulative_billions": 558.96, "usa_cumulative_usd": 558961898689.58, "china_cumulative_billions": 300.14, "china_cumulative_usd": 300140960208.68}, {"date": "2026-04-12", "day": 44, "world_cumulative_billions": 1967.96, "world_cumulative_usd": 1967955319259.08, "world_total_cumulative_billions": 2159.5, "world_total_cumulative_usd": 2159495408103.65, "world_cumulative_shock_billions": 191.54, "world_cumulative_shock_usd": 191540088844.58, "world_daily_billions": 55.89, "world_daily_usd": 55886209107.93, "world_shock_billions": 2.84, "world_shock_usd": 2844720227.38, "usa_cumulative_billions": 575.3, "usa_cumulative_usd": 575299311070.6, "china_cumulative_billions": 308.91, "china_cumulative_usd": 308913519932.08}, {"date": "2026-04-13", "day": 45, "world_cumulative_billions": 2024.26, "world_cumulative_usd": 2024260377498.22, "world_total_cumulative_billions": 2218.66, "world_total_cumulative_usd": 2218659932408.51, "world_cumulative_shock_billions": 194.4, "world_cumulative_shock_usd": 194399554910.29, "world_daily_billions": 56.31, "world_daily_usd": 56305058239.14, "world_shock_billions": 2.86, "world_shock_usd": 2859466065.71, "usa_cumulative_billions": 591.76, "usa_cumulative_usd": 591759167093.63, "china_cumulative_billions": 317.75, "china_cumulative_usd": 317751827164.17}, {"date": "2026-04-14", "day": 46, "world_cumulative_billions": 2080.98, "world_cumulative_usd": 2080981776283.62, "world_total_cumulative_billions": 2278.26, "world_total_cumulative_usd": 2278256175526.88, "world_cumulative_shock_billions": 197.27, "world_cumulative_shock_usd": 197274399243.26, "world_daily_billions": 56.72, "world_daily_usd": 56721398785.4, "world_shock_billions": 2.87, "world_shock_usd": 2874844332.97, "usa_cumulative_billions": 608.34, "usa_cumulative_usd": 608340733415.21, "china_cumulative_billions": 326.66, "china_cumulative_usd": 326655488127.81}, {"date": "2026-04-15", "day": 47, "world_cumulative_billions": 2138.12, "world_cumulative_usd": 2138117114939.21, "world_total_cumulative_billions": 2338.28, "world_total_cumulative_usd": 2338282282522.35, "world_cumulative_shock_billions": 200.17, "world_cumulative_shock_usd": 200165167583.14, "world_daily_billions": 57.14, "world_daily_usd": 57135338655.59, "world_shock_billions": 2.89, "world_shock_usd": 2890768339.88, "usa_cumulative_billions": 625.04, "usa_cumulative_usd": 625043308237.25, "china_cumulative_billions": 335.62, "china_cumulative_usd": 335624125984.51}, {"date": "2026-04-16", "day": 48, "world_cumulative_billions": 2195.66, "world_cumulative_usd": 2195664093881.46, "world_total_cumulative_billions": 2398.74, "world_total_cumulative_usd": 2398736423613.15, "world_cumulative_shock_billions": 203.07, "world_cumulative_shock_usd": 203072329731.69, "world_daily_billions": 57.55, "world_daily_usd": 57546978942.25, "world_shock_billions": 2.91, "world_shock_usd": 2907162148.55, "usa_cumulative_billions": 641.87, "usa_cumulative_usd": 641866219314.38, "china_cumulative_billions": 344.66, "china_cumulative_usd": 344657379764.48}, {"date": "2026-04-17", "day": 49, "world_cumulative_billions": 2253.62, "world_cumulative_usd": 2253620508365.31, "world_total_cumulative_billions": 2459.62, "world_total_cumulative_usd": 2459616797377.43, "world_cumulative_shock_billions": 206.0, "world_cumulative_shock_usd": 205996289012.12, "world_daily_billions": 57.96, "world_daily_usd": 57956414483.86, "world_shock_billions": 2.92, "world_shock_usd": 2923959280.43, "usa_cumulative_billions": 658.81, "usa_cumulative_usd": 658808822125.73, "china_cumulative_billions": 353.75, "china_cumulative_usd": 353754903384.88}, {"date": "2026-04-18", "day": 50, "world_cumulative_billions": 2311.98, "world_cumulative_usd": 2311984242735.62, "world_total_cumulative_billions": 2520.92, "world_total_cumulative_usd": 2520921633323.66, "world_cumulative_shock_billions": 208.94, "world_cumulative_shock_usd": 208937390588.04, "world_daily_billions": 58.36, "world_daily_usd": 58363734370.31, "world_shock_billions": 2.94, "world_shock_usd": 2941101575.92, "usa_cumulative_billions": 675.87, "usa_cumulative_usd": 675870498194.36, "china_cumulative_billions": 362.92, "china_cumulative_usd": 362916364747.48}, {"date": "2026-04-19", "day": 51, "world_cumulative_billions": 2370.75, "world_cumulative_usd": 2370753265133.92, "world_total_cumulative_billions": 2582.65, "world_total_cumulative_usd": 2582649193910.08, "world_cumulative_shock_billions": 211.9, "world_cumulative_shock_usd": 211895928776.16, "world_daily_billions": 58.77, "world_daily_usd": 58769022398.3, "world_shock_billions": 2.96, "world_shock_usd": 2958538188.12, "usa_cumulative_billions": 693.05, "usa_cumulative_usd": 693050653539.94, "china_cumulative_billions": 372.14, "china_cumulative_usd": 372141444907.77}, {"date": "2026-04-20", "day": 52, "world_cumulative_billions": 2429.93, "world_cumulative_usd": 2429925622616.48, "world_total_cumulative_billions": 2644.8, "world_total_cumulative_usd": 2644797776088.25, "world_cumulative_shock_billions": 214.87, "world_cumulative_shock_usd": 214872153471.77, "world_daily_billions": 59.17, "world_daily_usd": 59172357482.56, "world_shock_billions": 2.98, "world_shock_usd": 2976224695.61, "usa_cumulative_billions": 710.35, "usa_cumulative_usd": 710348717251.55, "china_cumulative_billions": 381.43, "china_cumulative_usd": 381429837308.62}, {"date": "2026-04-21", "day": 53, "world_cumulative_billions": 2489.5, "world_cumulative_usd": 2489499436644.3, "world_total_cumulative_billions": 2707.37, "world_total_cumulative_usd": 2707365712436.55, "world_cumulative_shock_billions": 217.87, "world_cumulative_shock_usd": 217866275792.25, "world_daily_billions": 59.57, "world_daily_usd": 59573814027.81, "world_shock_billions": 2.99, "world_shock_usd": 2994122320.48, "usa_cumulative_billions": 727.76, "usa_cumulative_usd": 727764140169.26, "china_cumulative_billions": 390.78, "china_cumulative_usd": 390781247072.35}, {"date": "2026-04-22", "day": 54, "world_cumulative_billions": 2549.47, "world_cumulative_usd": 2549472898910.37, "world_total_cumulative_billions": 2770.35, "world_total_cumulative_usd": 2770351371942.03, "world_cumulative_shock_billions": 220.88, "world_cumulative_shock_usd": 220878473031.66, "world_daily_billions": 59.97, "world_daily_usd": 59973462266.07, "world_shock_billions": 3.01, "world_shock_usd": 3012197239.41, "usa_cumulative_billions": 745.3, "usa_cumulative_usd": 745296393664.31, "china_cumulative_billions": 400.2, "china_cumulative_usd": 400195390345.74}, {"date": "2026-04-23", "day": 55, "world_cumulative_billions": 2609.84, "world_cumulative_usd": 2609844267473.29, "world_total_cumulative_billions": 2833.75, "world_total_cumulative_usd": 2833753160481.98, "world_cumulative_shock_billions": 223.91, "world_cumulative_shock_usd": 223908893008.69, "world_daily_billions": 60.37, "world_daily_usd": 60371368562.92, "world_shock_billions": 3.03, "world_shock_usd": 3030419977.03, "usa_cumulative_billions": 762.94, "usa_cumulative_usd": 762944968508.84, "china_cumulative_billions": 409.67, "china_cumulative_usd": 409671993693.07}, {"date": "2026-04-24", "day": 56, "world_cumulative_billions": 2670.61, "world_cumulative_usd": 2670611863169.5, "world_total_cumulative_billions": 2897.57, "world_total_cumulative_usd": 2897569521050.15, "world_cumulative_shock_billions": 226.96, "world_cumulative_shock_usd": 226957657880.65, "world_daily_billions": 60.77, "world_daily_usd": 60767595696.21, "world_shock_billions": 3.05, "world_shock_usd": 3048764871.97, "usa_cumulative_billions": 780.71, "usa_cumulative_usd": 780709373827.05, "china_cumulative_billions": 419.21, "china_cumulative_usd": 419210793532.99}, {"date": "2026-04-25", "day": 57, "world_cumulative_billions": 2731.77, "world_cumulative_usd": 2731774066279.59, "world_total_cumulative_billions": 2961.8, "world_total_cumulative_usd": 2961798933767.23, "world_cumulative_shock_billions": 230.02, "world_cumulative_shock_usd": 230024867487.64, "world_daily_billions": 61.16, "world_daily_usd": 61162203110.1, "world_shock_billions": 3.07, "world_shock_usd": 3067209606.98, "usa_cumulative_billions": 798.59, "usa_cumulative_usd": 798589136120.66, "china_cumulative_billions": 428.81, "china_cumulative_usd": 428811535615.21}, {"date": "2026-04-26", "day": 58, "world_cumulative_billions": 2793.33, "world_cumulative_usd": 2793329313426.58, "world_total_cumulative_billions": 3026.44, "world_total_cumulative_usd": 3026439915709.98, "world_cumulative_shock_billions": 233.11, "world_cumulative_shock_usd": 233110602283.4, "world_daily_billions": 61.56, "world_daily_usd": 61555247146.99, "world_shock_billions": 3.09, "world_shock_usd": 3085734795.76, "usa_cumulative_billions": 816.58, "usa_cumulative_usd": 816583798362.17, "china_cumulative_billions": 438.47, "china_cumulative_usd": 438473974533.6}, {"date": "2026-04-27", "day": 59, "world_cumulative_billions": 2855.28, "world_cumulative_usd": 2855276094686.22, "world_total_cumulative_billions": 3091.49, "world_total_cumulative_usd": 3091491020589.19, "world_cumulative_shock_billions": 236.21, "world_cumulative_shock_usd": 236214925902.97, "world_daily_billions": 61.95, "world_daily_usd": 61946781259.64, "world_shock_billions": 3.1, "world_shock_usd": 3104323619.57, "usa_cumulative_billions": 834.69, "usa_cumulative_usd": 834692919150.1, "china_cumulative_billions": 448.2, "china_cumulative_usd": 448197873272.62}, {"date": "2026-04-28", "day": 60, "world_cumulative_billions": 2917.61, "world_cumulative_usd": 2917612950891.67, "world_total_cumulative_billions": 3156.95, "world_total_cumulative_usd": 3156950838302.54, "world_cumulative_shock_billions": 239.34, "world_cumulative_shock_usd": 239337887410.87, "world_daily_billions": 62.34, "world_daily_usd": 62336856205.46, "world_shock_billions": 3.12, "world_shock_usd": 3122961507.9, "usa_cumulative_billions": 852.92, "usa_cumulative_usd": 852916071921.07, "china_cumulative_billions": 457.98, "china_cumulative_usd": 457983002784.18}, {"date": "2026-04-29", "day": 61, "world_cumulative_billions": 2980.34, "world_cumulative_usd": 2980338471116.38, "world_total_cumulative_billions": 3222.82, "world_total_cumulative_usd": 3222817994385.18, "world_cumulative_shock_billions": 242.48, "world_cumulative_shock_usd": 242479523268.8, "world_daily_billions": 62.73, "world_daily_usd": 62725520224.71, "world_shock_billions": 3.14, "world_shock_usd": 3141635857.93, "usa_cumulative_billions": 871.25, "usa_cumulative_usd": 871252844213.95, "china_cumulative_billions": 467.83, "china_cumulative_usd": 467829141592.6}, {"date": "2026-04-30", "day": 62, "world_cumulative_billions": 3043.45, "world_cumulative_usd": 3043451290320.65, "world_total_cumulative_billions": 3289.09, "world_total_cumulative_usd": 3289091149377.57, "world_cumulative_shock_billions": 245.64, "world_cumulative_shock_usd": 245639859056.92, "world_daily_billions": 63.11, "world_daily_usd": 63112819204.27, "world_shock_billions": 3.16, "world_shock_usd": 3160335788.12, "usa_cumulative_billions": 889.7, "usa_cumulative_usd": 889702836981.88, "china_cumulative_billions": 477.74, "china_cumulative_usd": 477736075425.1}];
+          const labels = ["2026-02-28", "2026-03-01", "2026-03-02", "2026-03-03", "2026-03-04", "2026-03-05", "2026-03-06", "2026-03-07", "2026-03-08", "2026-03-09", "2026-03-10", "2026-03-11", "2026-03-12", "2026-03-13", "2026-03-14", "2026-03-15", "2026-03-16", "2026-03-17", "2026-03-18", "2026-03-19", "2026-03-20", "2026-03-21", "2026-03-22", "2026-03-23", "2026-03-24", "2026-03-25", "2026-03-26", "2026-03-27", "2026-03-28", "2026-03-29", "2026-03-30", "2026-03-31", "2026-04-01", "2026-04-02", "2026-04-03", "2026-04-04", "2026-04-05", "2026-04-06", "2026-04-07", "2026-04-08", "2026-04-09", "2026-04-10", "2026-04-11", "2026-04-12", "2026-04-13", "2026-04-14", "2026-04-15", "2026-04-16", "2026-04-17", "2026-04-18", "2026-04-19", "2026-04-20", "2026-04-21", "2026-04-22", "2026-04-23", "2026-04-24", "2026-04-25", "2026-04-26", "2026-04-27", "2026-04-28", "2026-04-29", "2026-04-30"];
+          const worldValues = [25.39, 54.31, 85.28, 117.71, 151.28, 185.77, 221.05, 257.31, 294.47, 332.47, 371.26, 410.8, 451.04, 491.97, 533.56, 575.77, 618.6, 662.03, 706.03, 750.6, 795.72, 841.38, 887.58, 934.29, 981.51, 1029.24, 1077.47, 1126.18, 1175.38, 1225.06, 1275.2, 1325.82, 1376.89, 1428.42, 1480.4, 1532.83, 1585.7, 1639.02, 1692.77, 1746.95, 1801.56, 1856.6, 1912.07, 1967.96, 2024.26, 2080.98, 2138.12, 2195.66, 2253.62, 2311.98, 2370.75, 2429.93, 2489.5, 2549.47, 2609.84, 2670.61, 2731.77, 2793.33, 2855.28, 2917.61, 2980.34, 3043.45];
+          const worldTotalValues = [35.55, 74.72, 115.46, 157.0, 198.99, 241.25, 283.66, 326.54, 369.85, 413.57, 457.7, 502.22, 547.15, 592.49, 638.24, 684.42, 731.02, 778.05, 825.53, 873.44, 921.81, 970.62, 1019.89, 1069.61, 1119.79, 1170.43, 1221.53, 1273.08, 1325.1, 1377.57, 1430.5, 1483.88, 1537.72, 1592.01, 1646.75, 1701.95, 1757.59, 1813.68, 1870.21, 1927.19, 1984.61, 2042.47, 2100.76, 2159.5, 2218.66, 2278.26, 2338.28, 2398.74, 2459.62, 2520.92, 2582.65, 2644.8, 2707.37, 2770.35, 2833.75, 2897.57, 2961.8, 3026.44, 3091.49, 3156.95, 3222.82, 3289.09];
+          const usaValues = [7.42, 15.88, 24.93, 34.41, 44.22, 54.31, 64.62, 75.22, 86.08, 97.19, 108.53, 120.09, 131.86, 143.82, 155.98, 168.32, 180.84, 193.53, 206.4, 219.43, 232.62, 245.96, 259.47, 273.12, 286.93, 300.88, 314.98, 329.22, 343.6, 358.13, 372.79, 387.58, 402.51, 417.57, 432.77, 448.1, 463.55, 479.14, 494.85, 510.69, 526.66, 542.75, 558.96, 575.3, 591.76, 608.34, 625.04, 641.87, 658.81, 675.87, 693.05, 710.35, 727.76, 745.3, 762.94, 780.71, 798.59, 816.58, 834.69, 852.92, 871.25, 889.7];
+          const chinaValues = [3.99, 8.52, 13.39, 18.48, 23.75, 29.16, 34.7, 40.39, 46.22, 52.19, 58.28, 64.48, 70.8, 77.23, 83.75, 90.38, 97.1, 103.92, 110.83, 117.82, 124.91, 132.07, 139.32, 146.66, 154.07, 161.56, 169.13, 176.78, 184.5, 192.3, 200.17, 208.12, 216.13, 224.22, 232.38, 240.61, 248.91, 257.28, 265.72, 274.22, 282.79, 291.43, 300.14, 308.91, 317.75, 326.66, 335.62, 344.66, 353.75, 362.92, 372.14, 381.43, 390.78, 400.2, 409.67, 419.21, 428.81, 438.47, 448.2, 457.98, 467.83, 477.74];
+          const shockValues = [10.16, 10.26, 9.76, 9.11, 8.43, 7.76, 7.14, 6.62, 6.15, 5.72, 5.33, 4.99, 4.68, 4.41, 4.17, 3.96, 3.77, 3.61, 3.47, 3.35, 3.24, 3.15, 3.08, 3.01, 2.95, 2.91, 2.87, 2.84, 2.81, 2.8, 2.78, 2.77, 2.77, 2.76, 2.76, 2.76, 2.77, 2.78, 2.78, 2.79, 2.81, 2.82, 2.83, 2.84, 2.86, 2.87, 2.89, 2.91, 2.92, 2.94, 2.96, 2.98, 2.99, 3.01, 3.03, 3.05, 3.07, 3.09, 3.1, 3.12, 3.14, 3.16];
+          const canvas = document.getElementById("world-chart-20260430");
+          const shockCanvas = document.getElementById("world-shock-chart-20260430");
+          const summary = document.getElementById("world-chart-summary-20260430");
+          if (!canvas || !shockCanvas || typeof Chart === 'undefined') return;
+
+          const formatUSD = (value) => {
+            const abs = Math.abs(value);
+            if (abs >= 1e12) return '$' + (value / 1e12).toFixed(2) + 'T';
+            if (abs >= 1e9) return '$' + (value / 1e9).toFixed(2) + 'B';
+            if (abs >= 1e6) return '$' + (value / 1e6).toFixed(2) + 'M';
+            return '$' + Math.round(value).toLocaleString();
+          };
+          const formatAxis = (billions) => billions >= 1000 ? '$' + (billions / 1000).toFixed(2) + 'T' : '$' + Math.round(billions) + 'B';
+          const updateSummary = (point) => {
+            summary.textContent =
+              'Day ' + point.day + ' · ' + point.date +
+              ' · World ' + formatUSD(point.world_cumulative_usd) +
+              ' · World + shock ' + formatUSD(point.world_total_cumulative_usd) +
+              ' · US ' + formatUSD(point.usa_cumulative_usd) +
+              ' · China ' + formatUSD(point.china_cumulative_usd) +
+              ' · Shock ' + formatUSD(point.world_shock_usd) + '/day' +
+              ' · Shock added ' + formatUSD(point.world_cumulative_shock_usd);
+          };
+          const mainChart = new Chart(canvas, {
+            type: 'line',
+            data: {
+              labels,
+              datasets: [
+                {
+                  label: 'World cumulative',
+                  data: worldValues,
+                  yAxisID: 'y',
+                  borderColor: '#98d08b',
+                  backgroundColor: 'rgba(152, 208, 139, 0.10)',
+                  fill: true,
+                  borderWidth: 3,
+                  tension: 0.28,
+                  pointRadius: 0,
+                  pointHoverRadius: 5,
+                  pointHitRadius: 20,
+                  order: 3
+                },
+                {
+                  label: 'World cumulative + shock',
+                  data: worldTotalValues,
+                  yAxisID: 'y',
+                  borderColor: '#e879f9',
+                  backgroundColor: 'rgba(251, 113, 133, 0.18)',
+                  fill: '-1',
+                  borderWidth: 3.3,
+                  tension: 0.28,
+                  pointRadius: 0,
+                  pointHoverRadius: 5,
+                  pointHitRadius: 20,
+                  order: 2
+                },
+                {
+                  label: 'United States cumulative',
+                  data: usaValues,
+                  yAxisID: 'y',
+                  borderColor: '#60a5fa',
+                  backgroundColor: 'rgba(96, 165, 250, 0)',
+                  fill: false,
+                  borderWidth: 2.4,
+                  tension: 0.28,
+                  pointRadius: 0,
+                  pointHoverRadius: 5,
+                  pointHitRadius: 20,
+                  order: 4
+                },
+                {
+                  label: 'China cumulative',
+                  data: chinaValues,
+                  yAxisID: 'y',
+                  borderColor: '#f59e0b',
+                  backgroundColor: 'rgba(245, 158, 11, 0)',
+                  fill: false,
+                  borderWidth: 2.4,
+                  tension: 0.28,
+                  pointRadius: 0,
+                  pointHoverRadius: 5,
+                  pointHitRadius: 20,
+                  order: 4
+                }
+              ]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              interaction: { mode: 'index', intersect: false },
+              plugins: {
+                legend: {
+                  display: true,
+                  position: 'bottom',
+                  labels: {
+                    color: '#cbd5e1',
+                    usePointStyle: true,
+                    boxWidth: 10,
+                    boxHeight: 10
+                  }
+                },
+                tooltip: {
+                  backgroundColor: '#111827',
+                  titleColor: '#f9fafb',
+                  bodyColor: '#f9fafb',
+                  borderColor: 'rgba(255,255,255,0.14)',
+                  borderWidth: 1,
+                  displayColors: true,
+                  callbacks: {
+                    title: (items) => items[0] ? items[0].label : '',
+                    label: (context) => {
+                      const point = chartPoints[context.dataIndex];
+                      if (context.dataset.label === 'World cumulative') return 'World · Day ' + point.day + ' · ' + formatUSD(point.world_cumulative_usd);
+                      if (context.dataset.label === 'World cumulative + shock') return 'World + shock · Day ' + point.day + ' · ' + formatUSD(point.world_total_cumulative_usd);
+                      if (context.dataset.label === 'United States cumulative') return 'United States · Day ' + point.day + ' · ' + formatUSD(point.usa_cumulative_usd);
+                      return 'China · Day ' + point.day + ' · ' + formatUSD(point.china_cumulative_usd);
+                    }
+                  }
+                }
+              },
+              scales: {
+                x: {
+                  ticks: { color: '#cbd5e1', maxRotation: 0, autoSkip: true, maxTicksLimit: 7 },
+                  grid: { color: 'rgba(255,255,255,0.10)' }
+                },
+                y: {
+                  beginAtZero: true,
+                  position: 'left',
+                  ticks: { color: '#cbd5e1', callback: (value) => formatAxis(value) },
+                  title: { display: true, text: 'Cumulative loss', color: '#cbd5e1' },
+                  grid: { color: 'rgba(255,255,255,0.10)' }
+                }
+              },
+              onHover: (_event, activeEls) => {
+                if (!activeEls || !activeEls.length) return;
+                const index = activeEls[0].index;
+                const point = chartPoints[index];
+                if (point) updateSummary(point);
+              }
+            }
+          });
+
+          const shockChart = new Chart(shockCanvas, {
+            type: 'line',
+            data: {
+              labels,
+              datasets: [
+                {
+                  label: 'World shock premium (daily)',
+                  data: shockValues,
+                  borderColor: '#ef4444',
+                  backgroundColor: 'rgba(239, 68, 68, 0.18)',
+                  fill: true,
+                  borderWidth: 2.8,
+                  tension: 0.22,
+                  pointRadius: 0,
+                  pointHoverRadius: 4,
+                  pointHitRadius: 20
+                }
+              ]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              interaction: { mode: 'index', intersect: false },
+              plugins: {
+                legend: {
+                  display: true,
+                  position: 'bottom',
+                  labels: { color: '#fca5a5', usePointStyle: true, boxWidth: 10, boxHeight: 10 }
+                },
+                tooltip: {
+                  backgroundColor: '#111827',
+                  titleColor: '#f9fafb',
+                  bodyColor: '#f9fafb',
+                  borderColor: 'rgba(255,255,255,0.14)',
+                  borderWidth: 1,
+                  callbacks: {
+                    title: (items) => items[0] ? items[0].label : '',
+                    label: (context) => {
+                      const point = chartPoints[context.dataIndex];
+                      return 'Shock premium · Day ' + point.day + ' · ' + formatUSD(point.world_shock_usd) + '/day';
+                    }
+                  }
+                }
+              },
+              scales: {
+                x: {
+                  ticks: { color: '#cbd5e1', maxRotation: 0, autoSkip: true, maxTicksLimit: 7 },
+                  grid: { color: 'rgba(255,255,255,0.08)' }
+                },
+                y: {
+                  beginAtZero: true,
+                  ticks: { color: '#fca5a5', callback: (value) => formatAxis(value) },
+                  title: { display: true, text: 'World shock premium / day', color: '#fca5a5' },
+                  grid: { color: 'rgba(255,255,255,0.08)' }
+                }
+              },
+              onHover: (_event, activeEls) => {
+                if (!activeEls || !activeEls.length) return;
+                const index = activeEls[0].index;
+                const point = chartPoints[index];
+                if (point) updateSummary(point);
+              }
+            }
+          });
+
+          const lastPoint = chartPoints[chartPoints.length - 1];
+          if (lastPoint) updateSummary(lastPoint);
+        })();
+        </script>
+    
+        <div class="stat-grid">
+          <section class="stat stat-primary"><span>World scenario cumulative loss</span><strong>$3.04T</strong></section>
+          <section class="stat stat-primary"><span>World cumulative + shock</span><strong>$3.29T</strong></section>
+          <section class="stat"><span>World scenario daily loss</span><strong>$63.11B/day</strong></section>
+          <section class="stat stat-danger"><span>World shock premium today</span><strong>$3.16B/day</strong></section>
+          <section class="stat"><span>Reference outage day</span><strong>62</strong></section>
+        </div>
+        <div class="prose"><p>This post does not say these economies are currently losing money because Iran is offline. It uses Iran&#x27;s blackout duration as a time clock and simulates what a same-length domestic internet blackout would cost each economy on day 62.</p><p>Under the world scenario, a blackout of this length implies $63.11B in daily GDP loss and $3.04T in cumulative loss since day 1.</p><p>For the large-economy scenarios, the biggest simulated daily losses today are: United States: $18.45B/day; China: $9.91B/day; Germany: $2.69B/day.</p><p>Method: 2025 nominal GDP baseline × country-specific digital sensitivity coefficient × an outage-duration escalation curve that gets harsher as the blackout continues.</p></div>
+        <section class="table-wrap">
+          <h2>Top 10 economy simulations</h2>
+          <table>
+            <thead><tr><th>Economy</th><th>Simulated loss today</th><th>Cumulative simulated loss</th><th>Loss vs 2025 GDP</th></tr></thead>
+            <tbody><tr><td>United States</td><td>$18.45B/day</td><td>$889.70B</td><td>2.91%</td></tr><tr><td>China</td><td>$9.91B/day</td><td>$477.74B</td><td>2.46%</td></tr><tr><td>Germany</td><td>$2.69B/day</td><td>$129.64B</td><td>2.59%</td></tr><tr><td>Japan</td><td>$2.45B/day</td><td>$118.05B</td><td>2.76%</td></tr><tr><td>United Kingdom</td><td>$2.22B/day</td><td>$107.24B</td><td>2.71%</td></tr><tr><td>France</td><td>$1.77B/day</td><td>$85.27B</td><td>2.54%</td></tr><tr><td>India</td><td>$1.73B/day</td><td>$83.31B</td><td>2.02%</td></tr><tr><td>Italy</td><td>$1.25B/day</td><td>$60.14B</td><td>2.36%</td></tr><tr><td>Canada</td><td>$1.19B/day</td><td>$57.36B</td><td>2.51%</td></tr><tr><td>Russia</td><td>$1.01B/day</td><td>$48.80B</td><td>1.92%</td></tr></tbody>
+          </table>
+        </section>
+        <section class="note">
+          <h2>Method note</h2>
+          <p>This is a simulation, not a claim that these losses are happening right now. The model uses the length of Iran's blackout as a day counter, then asks what the same-duration domestic internet blackout would cost for the world scenario and the top 10 economies by 2025 GDP.</p>
+          <p>The red mini-chart isolates the modeled world shock premium: a separate first-wave disruption layer that starts high, then decays over time as markets partially adapt.</p>
+          <p>The pink line in the main chart is the cumulative total after adding that shock layer to the world cumulative loss. The shaded band between pink and green shows how much of the total burden comes from accumulated shock rather than the direct blackout-loss model alone.</p>
+          <p>This package does not estimate how much Iran&#x27;s blackout is hurting other economies right now. Instead, it uses Iran&#x27;s outage duration as the clock and simulates what a same-length local internet blackout would cost for the world scenario and for each top-10 economy using a 2025 GDP baseline plus a day-by-day escalation curve. A second shock overlay models the first-wave disruption premium caused by the outage itself; it starts large, then decays with time.</p>
+          <p>Signal summary: Fallback signal used because no live signal source was available during build.</p>
+        </section>
+      </article>
+    </main>
+    
+  
+    <footer class="site-footer">
+      <a class="x-link" href="https://x.com/pouraminam" target="_blank" rel="noopener noreferrer" aria-label="Follow on X">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.637 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932 6.064-6.932Zm-1.298 19.479h2.039L6.486 3.26H4.298l13.305 17.372Z"></path></svg>
+      </a>
+    </footer>
+    
+</body>
+</html>
