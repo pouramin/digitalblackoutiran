@@ -6,6 +6,13 @@
 <description>Daily simulation of how much GDP the world and the top 10 economies would lose if their own internet were blacked out for as many days as Iran&#x27;s.</description>
 
         <item>
+          <title>Internet blackout simulation update — day 102</title>
+          <link>https://digitalblackoutiran.it/posts/2026-06-09-internet-blackout-simulation-update-day-102/</link>
+          <guid>https://digitalblackoutiran.it/posts/2026-06-09-internet-blackout-simulation-update-day-102/</guid>
+          <pubDate>Tue, 09 Jun 2026 00:00:00 +0000</pubDate>
+          <description><![CDATA[Day 102 blackout simulation report: United States $20.13B/day, China $12.22B/day, world $77.83B/day.]]></description>
+        </item>
+        <item>
           <title>Internet blackout simulation update — day 101</title>
           <link>https://digitalblackoutiran.it/posts/2026-06-08-internet-blackout-simulation-update-day-101/</link>
           <guid>https://digitalblackoutiran.it/posts/2026-06-08-internet-blackout-simulation-update-day-101/</guid>
@@ -137,13 +144,6 @@
           <guid>https://digitalblackoutiran.it/posts/2026-05-21-internet-blackout-simulation-update-day-83/</guid>
           <pubDate>Thu, 21 May 2026 00:00:00 +0000</pubDate>
           <description><![CDATA[2026-05-21 update: simulated internet blackout losses put United States first, China second, with world exposure at $70.99B/day.]]></description>
-        </item>
-        <item>
-          <title>Internet blackout simulation update — day 82</title>
-          <link>https://digitalblackoutiran.it/posts/2026-05-20-internet-blackout-simulation-update-day-82/</link>
-          <guid>https://digitalblackoutiran.it/posts/2026-05-20-internet-blackout-simulation-update-day-82/</guid>
-          <pubDate>Wed, 20 May 2026 00:00:00 +0000</pubDate>
-          <description><![CDATA[Day 82 economic impact simulation: if internet went dark locally, United States would lose $20.13B/day; world $70.63B/day.]]></description>
         </item>
 </channel>
 </rss>
