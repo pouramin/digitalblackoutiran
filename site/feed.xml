@@ -6,6 +6,13 @@
 <description>Daily simulation of how much GDP the world and the top 10 economies would lose if their own internet were blacked out for as many days as Iran&#x27;s.</description>
 
         <item>
+          <title>Internet blackout simulation update — day 171</title>
+          <link>https://digitalblackoutiran.it/posts/2026-08-17-internet-blackout-simulation-update-day-171/</link>
+          <guid>https://digitalblackoutiran.it/posts/2026-08-17-internet-blackout-simulation-update-day-171/</guid>
+          <pubDate>Mon, 17 Aug 2026 00:00:00 +0000</pubDate>
+          <description><![CDATA[2026-08-17 update: simulated internet blackout losses put United States first, China second, with world exposure at $81.26B/day.]]></description>
+        </item>
+        <item>
           <title>Internet blackout simulation update — day 170</title>
           <link>https://digitalblackoutiran.it/posts/2026-08-16-internet-blackout-simulation-update-day-170/</link>
           <guid>https://digitalblackoutiran.it/posts/2026-08-16-internet-blackout-simulation-update-day-170/</guid>
@@ -137,13 +144,6 @@
           <guid>https://digitalblackoutiran.it/posts/2026-07-29-internet-blackout-simulation-update-day-152/</guid>
           <pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
           <description><![CDATA[Internet outage simulation day 152: world daily loss $81.26B, cumulative world loss $9.92T; United States remains the largest economy case.]]></description>
-        </item>
-        <item>
-          <title>Internet blackout simulation update — day 151</title>
-          <link>https://digitalblackoutiran.it/posts/2026-07-28-internet-blackout-simulation-update-day-151/</link>
-          <guid>https://digitalblackoutiran.it/posts/2026-07-28-internet-blackout-simulation-update-day-151/</guid>
-          <pubDate>Tue, 28 Jul 2026 00:00:00 +0000</pubDate>
-          <description><![CDATA[2026-07-28 blackout simulation archive: United States, China and Germany top the loss table; world scenario totals $81.26B/day.]]></description>
         </item>
 </channel>
 </rss>
