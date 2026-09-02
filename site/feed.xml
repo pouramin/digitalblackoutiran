@@ -6,6 +6,13 @@
 <description>Daily simulation of how much GDP the world and the top 10 economies would lose if their own internet were blacked out for as many days as Iran&#x27;s.</description>
 
         <item>
+          <title>Internet blackout simulation update — day 187</title>
+          <link>https://digitalblackoutiran.it/posts/2026-09-02-internet-blackout-simulation-update-day-187/</link>
+          <guid>https://digitalblackoutiran.it/posts/2026-09-02-internet-blackout-simulation-update-day-187/</guid>
+          <pubDate>Wed, 02 Sep 2026 00:00:00 +0000</pubDate>
+          <description><![CDATA[2026-09-02 update: simulated internet blackout losses put United States first, China second, with world exposure at $81.26B/day.]]></description>
+        </item>
+        <item>
           <title>Internet blackout simulation update — day 186</title>
           <link>https://digitalblackoutiran.it/posts/2026-09-01-internet-blackout-simulation-update-day-186/</link>
           <guid>https://digitalblackoutiran.it/posts/2026-09-01-internet-blackout-simulation-update-day-186/</guid>
@@ -137,13 +144,6 @@
           <guid>https://digitalblackoutiran.it/posts/2026-08-14-internet-blackout-simulation-update-day-168/</guid>
           <pubDate>Fri, 14 Aug 2026 00:00:00 +0000</pubDate>
           <description><![CDATA[Internet outage simulation day 168: world daily loss $81.26B, cumulative world loss $11.22T; United States remains the largest economy case.]]></description>
-        </item>
-        <item>
-          <title>Internet blackout simulation update — day 167</title>
-          <link>https://digitalblackoutiran.it/posts/2026-08-13-internet-blackout-simulation-update-day-167/</link>
-          <guid>https://digitalblackoutiran.it/posts/2026-08-13-internet-blackout-simulation-update-day-167/</guid>
-          <pubDate>Thu, 13 Aug 2026 00:00:00 +0000</pubDate>
-          <description><![CDATA[2026-08-13 blackout simulation archive: United States, China and Germany top the loss table; world scenario totals $81.26B/day.]]></description>
         </item>
 </channel>
 </rss>
